@@ -38,7 +38,7 @@ def extract_c_urls(url):
 
 if __name__ == "__main__":
     # Example usage
-    url = "https://cgi.cse.unsw.edu.au/~cs1521/23T3/topic/floating_point/code/"  # Replace with the actual URL
+    url = "https://cgi.cse.unsw.edu.au/~cs1521/23T3/topic/threads/code/"  # Replace with the actual URL
     c_urls = extract_c_urls(url)
 
     if c_urls:
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         if user_input.lower() == 'y':
             for url in c_urls:
                 # Download the file
-                download_file(url, "C:/Users/15617/Documents/92_MyGithub/CSAPP/wk5_float")
+                download_file(url, "C:/Users/15617/Documents/92_MyGithub/DPST1092/wk9_threads")
         else:
             print("Download cancelled by user.")
     else:
