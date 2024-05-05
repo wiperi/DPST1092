@@ -29,6 +29,12 @@ int main(int argc, char** argv) {
         strncat(file_name, argv[i], strlen(argv[i]) - 2);
         char* arg[] = {DCC_PATH, argv[i], "-o", file_name};
 
+        printf("running the command: \"");
+        for (int j = 0; j < sizeof(arg) / sizeof(arg[0]); j++) {
+            printf("%s", arg[j]);
+        }
+        printf("\"");
+
         // create process
         pid_t pid;
         if (posix_spawn(&pid, DCC_PATH, NULL, NULL, arg, environ) != 0) {
