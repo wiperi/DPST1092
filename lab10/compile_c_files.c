@@ -11,7 +11,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define DCC_PATH "/usr/local/bin/dcc"
+// #define DCC_PATH "/usr/local/bin/dcc"
+#define DCC_PATH "/usr/bin/gcc"
 
 extern char** environ;
 
@@ -26,7 +27,7 @@ int main(int argc, char** argv) {
         // build args
         char file_name[1024];
         strncat(file_name, argv[i], strlen(argv[i]) - 2);
-        char* arg[] = {argv[i], "-o", file_name};
+        char* arg[] = {DCC_PATH, argv[i], "-o", file_name};
 
         // create process
         pid_t pid;
