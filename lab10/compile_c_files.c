@@ -25,12 +25,12 @@ int main(int argc, char** argv) {
     for (int i = 1; i < argc; i++) {
         // build args
         char file_name[1024];
-        strncat(file_name, argv[i], strlen(argv[i]) - 2);
+        strncpy(file_name, argv[i], strlen(argv[i]) - 2);
         char* arg[] = {DCC_PATH, argv[i], "-o", file_name};
 
         printf("running the command: \"");
         for (int j = 0; j < sizeof(arg) / sizeof(arg[0]); j++) {
-            printf("%s", arg[j]);
+            printf("%s ", arg[j]);
         }
         printf("\"");
 
