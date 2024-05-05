@@ -8,7 +8,7 @@
 
 /// You are permitted to modify the type of
 /// this global variable (useful for atomics)
-int global_counter = 0;
+atomic_int global_counter = 0;
 
 /// You are permitted to create another global
 /// variable (useful for mutex)
