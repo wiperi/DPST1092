@@ -11,8 +11,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-// #define DCC_PATH "/usr/local/bin/dcc"
-#define DCC_PATH "/usr/bin/gcc"
+#define DCC_PATH "/usr/local/bin/dcc"
 
 extern char** environ;
 
