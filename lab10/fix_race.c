@@ -3,6 +3,7 @@
 
 /// You are permitted to add standard headers (useful for atomics)
 #include <pthread.h>
+#include <stdatomic.h>
 
 
 /// You are permitted to modify the type of
@@ -16,7 +17,7 @@ int global_counter = 0;
 /// You are permitted to modify this function
 /// (will be necessary for both mutex and atomics)
 void perform_increment(void) {
-    global_counter = global_counter + 1;
+    atomic_fetch_add(&global_counter, 1);
 }
 
 
