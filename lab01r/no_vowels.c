@@ -3,12 +3,14 @@
 int is_vowel(int ch) {
     if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
         return 1;
+    else if (ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U')
+        return 1;
     else
         return 0;
 }
 
-int main(int argc, char *argv[], char *envp[]) {
-    
+int main(int argc, char* argv[], char* envp[]) {
+
     char ch = 0;
 
     while ((scanf("%c", &ch)) == 1) {
@@ -16,5 +18,4 @@ int main(int argc, char *argv[], char *envp[]) {
             printf("%c", ch);
         }
     }
-    
 }
