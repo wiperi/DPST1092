@@ -11,7 +11,7 @@ int main(int argc, char *argv[], char *envp[]) {
     
     int ch;
 
-    while ((scanf("%c", &ch)) != 0) {
+    while ((scanf("%c", &ch)) == 1) {
         if (!is_vowel(ch)) {
             printf("%c", ch);
         }
