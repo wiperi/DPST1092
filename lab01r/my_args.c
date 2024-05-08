@@ -18,6 +18,6 @@ int main(int argc, char* argv[], char* envp[]) {
 
     printf("There are %d arguments:\n", argc);
     for (int i = 0; i < argc; i++) {
-        printf("\tArgument %d is \"%s\"\n", i + 1, argv[i]);
+        printf("\tArgument %d is \"%s\"\n", i, argv[i]);
     }
 }
