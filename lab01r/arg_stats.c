@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 	printf("MAX:  %d\n", max);
 	printf("SUM:  %d\n", sum);
 	printf("PROD: %d\n", product);
-	printf("MEAN: %.0f\n", mean);
+	printf("MEAN: %d\n", (int) mean);
 
 	return 0;
 }
