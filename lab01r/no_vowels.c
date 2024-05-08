@@ -9,7 +9,7 @@ int is_vowel(int ch) {
 
 int main(int argc, char *argv[], char *envp[]) {
     
-    char ch;
+    char ch = 0;
 
     while ((scanf("%c", &ch)) == 1) {
         if (!is_vowel(ch)) {
