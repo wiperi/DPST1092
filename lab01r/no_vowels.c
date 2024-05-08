@@ -1,3 +1,17 @@
+//
+// DPST1092 Lab 01 Exercise - no vowels
+// 
+// Introduction:
+// Don't print vowels.
+// 
+// Reference
+// 
+// 
+// Authors:
+// Tianyang Chen (z5567323@unsw.edu.au)
+// 
+// Written: 8/5/2024
+//
 #include <stdio.h>
 
 int is_vowel(int ch) {
