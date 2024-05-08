@@ -13,18 +13,16 @@
 // Written: 8/5/2024
 //
 #include <stdio.h>
-
-int is_upper(int ch) {
-    return ch >= 'A' && ch <= 'Z';
-}
+#include <ctype.h>
 
 int main(int argc, char* argv[], char* envp[]) {
 
     char ch = 0;
 
     while ((ch = getchar()) != EOF) {
-        if (is_upper(ch)) {
-            continue;
+
+        if (isupper(ch)) {
+            ch = tolower(ch);
         }
 
         putchar(ch);
