@@ -1,0 +1,35 @@
+//
+// DPST1092 Lab 01 Exercise - no uppercase
+// 
+// Introduction:
+// convert all uppercase letters to lowercase, other remain still.
+// 
+// Reference
+// 
+// 
+// Authors:
+// Tianyang Chen (z5567323@unsw.edu.au)
+// 
+// Written: 8/5/2024
+//
+#include <stdio.h>
+
+int is_upper(int ch) {
+    return ch >= 'A' && ch <= 'Z';
+}
+
+
+int main(int argc, char *argv[], char *envp[]) {
+
+    char ch = 0;
+
+    while ((ch = getchar()) != EOF)
+    {
+        if (is_upper(ch)) {
+            continue;
+        }
+        
+        putchar(ch);
+    }
+    
+}
