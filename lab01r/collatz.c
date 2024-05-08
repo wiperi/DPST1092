@@ -18,11 +18,11 @@ void collatz(int n) {
 
 int main(int argc, char* argv[]) {
 
-	if (argc < 2) {
-		return 0;
-	}
+    if (argc < 2) {
+        return 0;
+    }
 
-	collatz(atoi(argv[1]));
-	
+    collatz(atoi(argv[1]));
+
     return EXIT_SUCCESS;
 }
