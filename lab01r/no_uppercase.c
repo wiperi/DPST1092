@@ -17,7 +17,7 @@
 
 int main(int argc, char* argv[], char* envp[]) {
 
-    char ch = 0;
+    int ch = 0;
 
     while ((ch = getchar()) != EOF) {
 
