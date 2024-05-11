@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <ctype.h>
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,14 +22,6 @@ big_bcd_t* bcd_from_string(char* string);
 big_bcd_t* expression(char*** tokens);
 big_bcd_t* term(char*** tokens);
 
-int max(int a, int b) {
-    if (a > b) {
-        return a;
-    } else {
-        return b;
-    }
-}
-
 int main(int argc, char* argv[]) {
     char** tokens = argv + 1;
 
@@ -51,139 +42,22 @@ int main(int argc, char* argv[]) {
 
 big_bcd_t* bcd_add(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
-
-    // malloc res
-    big_bcd_t* res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
-    res->n_bcd = max(x->n_bcd, y->n_bcd);
-    res->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
-
-    unsigned char sum = 0, carry = 0;
-    for (int i = 0; i < res->n_bcd; i++) {
-
-        if (i < x->n_bcd && i < y->n_bcd) {
-            sum = carry + x->bcd[i] + y->bcd[i];
-        } else if (i < x->n_bcd) {
-            sum = carry + x->bcd[i];
-        } else {
-            sum = carry + y->bcd[i];
-        }
-
-        res->bcd[i] = sum % 10;
-        carry = sum / 10;
-    }
-
-    if (carry != 0) {
-        // extend res
-        res->n_bcd++;
-        res->bcd = (unsigned char*) realloc(res->bcd, res->n_bcd * sizeof(unsigned char));
-        assert(res->bcd);
-
-        res->bcd[res->n_bcd - 1] = carry;
-    }
-
-    return res;
+    return NULL;
 }
 
 big_bcd_t* bcd_subtract(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
-
-    // malloc res
-    big_bcd_t* res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
-    res->n_bcd = max(x->n_bcd, y->n_bcd);
-    res->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
-
-    int sum = 0, carry = 0;
-    for (int i = 0; i < res->n_bcd; i++) {
-
-        if (i < x->n_bcd && i < y->n_bcd) {
-            sum = carry + x->bcd[i] - y->bcd[i];
-        } else if (i < x->n_bcd) {
-            sum = carry + x->bcd[i];
-        } else {
-            sum = carry - y->bcd[i];
-        }
-
-        res->bcd[i] = (sum + 10) % 10;
-        carry = sum < 0 ? -1 : 0;
-    }
-
-    while (res->n_bcd > 1 && res->bcd[res->n_bcd - 1] == 0) {
-        // shrink res
-        res->n_bcd--;
-        res->bcd = (unsigned char*) realloc(res->bcd, res->n_bcd * sizeof(unsigned char));
-
-        if (res->n_bcd > 0) assert(res->bcd);
-    }
-
-    return res;
+    return NULL;
 }
 
 big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
-
-    // malloc res
-    big_bcd_t* res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
-    res->n_bcd = max(x->n_bcd, y->n_bcd);
-    res->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
-
-    // malloc for number 1
-    big_bcd_t* one = (big_bcd_t*) malloc(sizeof(big_bcd_t));
-    one->n_bcd = 1;
-    one->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
-    one->bcd[0] = 1;
-
-    if (x->n_bcd < y->n_bcd) {
-        // x as iterator
-        while (1) {
-            // x == 0, break;
-            if (x->n_bcd == 1 && x->bcd[0] == 0) break;
-            // x -= 1
-            bcd_subtract(x, one);
-            res = bcd_add(y, y);
-        }
-    } else {
-        // y as iterator
-        while (1) {
-            // y == 0, break;
-            if (y->n_bcd == 1 && y->bcd[0] == 0) break;
-            // y -= 1
-            bcd_subtract(y, one);
-            res = bcd_add(x, x);
-        }
-    }
-
-    bcd_free(one);
-
-    return res;
+    return NULL;
 }
 
 big_bcd_t* bcd_divide(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
-
-    // general:
-    // use substraction to implement division
-    //  5 / 3 is 5 - 3 = 2, 2 - 3 = -1, abort.
-
-    // while (x = bcd_subtract(x, y) > 0) {
-    //     res++;
-    // }
-    // return res;
-
-    // res = 0;
-    big_bcd_t* res = (big_bcd_t*) (sizeof(big_bcd_t));
-    res->n_bcd = 1;
-    res->bcd = (unsigned char*) calloc(1, sizeof(char));
-
-
-    big_bcd_t* q = bcd_subtract(x, y);
-    if (q->bcd[q->n_bcd - 1] != 0)
-
-
-
-
-
-
-
+    return NULL;
 }
 
 // DO NOT CHANGE THE CODE BELOW HERE
