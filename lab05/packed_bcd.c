@@ -26,6 +26,26 @@ uint32_t packed_bcd(uint32_t packed_bcd_value) {
 
     // PUT YOUR CODE HERE
     int res = 0;
+
+    for (int i = 0; i < (32 / 4); i++) {
+
+        int weight = 1;
+        for (int j = 0; j < i; j++) {
+            weight *= 10;
+        }
+
+        int digit = (packed_bcd_value >> (i * 4)) & 0xf;
+        res += weight * digit;
+    }
+
+    return res;
+}
+
+
+uint32_t my_packed_bcd(uint32_t packed_bcd_value) {
+
+    // PUT YOUR CODE HERE
+    int res = 0;
     int weight = 1;
 
     while (packed_bcd_value != 0) {

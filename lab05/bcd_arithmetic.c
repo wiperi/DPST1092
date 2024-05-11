@@ -196,8 +196,6 @@ big_bcd_t* bcd_divide(big_bcd_t* x, big_bcd_t* y) {
     memcpy(q->bcd, x->bcd, x->n_bcd * sizeof(unsigned char));
     q->n_bcd = x->n_bcd;
 
-    bcd_print(q);
-
     while (1) {
 
         if (bcd_compare(q, y) < 0) {
