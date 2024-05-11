@@ -31,6 +31,23 @@ int max(int a, int b) {
     }
 }
 
+int bcd_compare(big_bcd_t* x, big_bcd_t* y) {
+    if (x->n_bcd > y->n_bcd) {
+        return 1;
+    } else if (x->n_bcd < y->n_bcd) {
+        return -1;
+    } else {
+        for (int i = x->n_bcd - 1; i >= 0; i--) {
+            if (x->bcd[i] > y->bcd[i]) {
+                return 1;
+            } else if (x->bcd[i] < y->bcd[i]) {
+                return -1;
+            }
+        }
+        return 0;
+    }
+}
+
 int main(int argc, char* argv[]) {
     char** tokens = argv + 1;
 
@@ -163,27 +180,37 @@ big_bcd_t* bcd_divide(big_bcd_t* x, big_bcd_t* y) {
     // general:
     // use substraction to implement division
     //  5 / 3 is 5 - 3 = 2, 2 - 3 = -1, abort.
-
+    
+    // psuedo code:
     // while (x = bcd_subtract(x, y) > 0) {
     //     res++;
     // }
     // return res;
 
     // res = 0;
-    big_bcd_t* res = (big_bcd_t*) (sizeof(big_bcd_t));
-    res->n_bcd = 1;
-    res->bcd = (unsigned char*) calloc(1, sizeof(char));
+    big_bcd_t* res = bcd_from_string("0");
+    big_bcd_t* one = bcd_from_string("1");
+    // deep copy x to q
+    big_bcd_t* q = (big_bcd_t*) malloc(sizeof(big_bcd_t));
+    q->bcd = (unsigned char*) malloc(x->n_bcd * sizeof(unsigned char));
+    memcpy(q->bcd, x->bcd, x->n_bcd * sizeof(unsigned char));
+    q->n_bcd = x->n_bcd;
 
+    bcd_print(q);
 
-    big_bcd_t* q = bcd_subtract(x, y);
-    if (q->bcd[q->n_bcd - 1] != 0)
+    while (1) {
 
+        if (bcd_compare(q, y) < 0) {
+            break;
+        }
+        q = bcd_subtract(q, y);
 
+        res = bcd_add(res, one);
+    }
 
-
-
-
-
+    bcd_free(one);
+    bcd_free(q);
+    return res;
 }
 
 // DO NOT CHANGE THE CODE BELOW HERE
