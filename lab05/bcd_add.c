@@ -56,14 +56,17 @@ big_bcd_t* bcd_add(big_bcd_t* x, big_bcd_t* y) {
     // [3, 2, 1]
     // [4, 4, 4]
 
+    // malloc the res
     big_bcd_t* res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
     if (x->n_bcd > y->n_bcd) {
         res->n_bcd = x->n_bcd;
     } else {
         res->n_bcd = y->n_bcd;
     }
+    //// preserver the extra carry place
     res->bcd = (unsigned char*) malloc(res->n_bcd + 1);
 
+    // add the two array
     int i = 0;
     int carry = 0;
     while (i < x->n_bcd || i < y->n_bcd) {
