@@ -472,6 +472,35 @@ get_command:
 
 get_command__prologue:
 get_command__body:
+
+get_command__while_start:
+	begin 							# char input = read_char();
+	push $ra
+	jal read_char
+	pop $ra
+	end
+
+	move $t0, $v0
+
+								# if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
+								#     input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
+								#     return input;
+								# }
+	beq $t0, QUIT_KEY, get_command__while__if_then
+	beq $t0, JUMP_KEY, get_command__while__if_then
+	beq $t0, LEFT_KEY, get_command__while__if_then
+	beq $t0, CROUCH_KEY, get_command__while__if_then
+	beq $t0, RIGHT_KEY, get_command__while__if_then
+	beq $t0, TICK_KEY, get_command__while__if_then
+
+	li $v0, 4 						# printf("Invalid input!\n");
+	la $a0, get_command__invalid_input_msg
+
+	j get_command__while_start
+get_command__while__if_then:
+	move $v0, $t0
+	j get_command__epilogue
+	
 get_command__epilogue:
 	jr	$ra
 
