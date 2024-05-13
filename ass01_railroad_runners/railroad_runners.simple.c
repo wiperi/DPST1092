@@ -288,7 +288,7 @@ void print_welcome(void) {
 char get_command(void) {
 
 get_command__while:
-    char input = read_char();
+    int input = read_char();
 
     if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
         input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
