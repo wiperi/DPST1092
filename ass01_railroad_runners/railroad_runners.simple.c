@@ -269,26 +269,26 @@ void print_welcome(void) {
 // Basic logic to ensure the user input is valid.
 //
 // Returns the command the user entered as a character.
-// char get_command(void) {
-//     // Loop until the user enters a valid command
-//     while (TRUE) {
-//         // Hint: You must translate the below line as a function call,
-//         //       *not* as a syscall.
-//         char input = read_char();
-
-//         if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
-//             input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
-//             return input;
-//         }
-
-//         printf("Invalid input!\n");
-//     }
-// }
-
 char get_command(void) {
+    // Loop until the user enters a valid command
+    while (TRUE) {
+        // Hint: You must translate the below line as a function call,
+        //       *not* as a syscall.
+        char input = read_char();
+
+        if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
+            input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
+            return input;
+        }
+
+        printf("Invalid input!\n");
+    }
+}
+
+char get_command_sim(void) {
 
 get_command__while:
-    int input = read_char();
+    char input = read_char();
 
     if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
         input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {

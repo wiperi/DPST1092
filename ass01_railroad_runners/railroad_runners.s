@@ -457,17 +457,19 @@ get_command:
 	#
 	# Returns:  $v0: char
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[read_char]]
+	# Uses:     [$t0, $v0]
+	# Clobbers: [$t0, $v0]
 	#
 	# Locals:
-	#   - ...
+	#   - $t0 = char input
 	#
 	# Structure:
 	#   get_command
 	#   -> [prologue]
 	#     -> body
+	#     -> while_start
+	#     -> while__if_then
 	#   -> [epilogue]
 
 get_command__prologue:
