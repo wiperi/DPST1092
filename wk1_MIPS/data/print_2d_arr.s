@@ -16,7 +16,7 @@ loop2:
     bge     $t1,    5,      loop2_end   # if (t1 >= 5) goto loop2_end;
 
     # // loop2 body
-    li      $t2,    20
+    li      $t2,    20			# 20 = sizeof(int) * row_length
     mul     $t2,    $t2,    $t0         # int t2 = t0 * row_size
 
     li      $t3,    4
