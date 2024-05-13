@@ -495,12 +495,13 @@ get_command__while_start:
 
 	li $v0, 4 						# printf("Invalid input!\n");
 	la $a0, get_command__invalid_input_msg
+	syscall
 
 	j get_command__while_start
 get_command__while__if_then:
 	move $v0, $t0
 	j get_command__epilogue
-	
+
 get_command__epilogue:
 	jr	$ra
 
