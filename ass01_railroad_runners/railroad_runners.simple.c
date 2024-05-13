@@ -285,19 +285,19 @@ char get_command(void) {
     }
 }
 
-char get_command_sim(void) {
+// char get_command_sim(void) {
 
-get_command__while:
-    char input = read_char();
+// get_command__while:
+//     char input = read_char();
 
-    if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
-        input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
-        return input;
-    }
+//     if (input == QUIT_KEY || input == JUMP_KEY || input == LEFT_KEY ||
+//         input == CROUCH_KEY || input == RIGHT_KEY || input == TICK_KEY) {
+//         return input;
+//     }
 
-    printf("Invalid input!\n");
-    goto get_command__while;
-}
+//     printf("Invalid input!\n");
+//     goto get_command__while;
+// }
 
 // Subset 1
 // Entry point for the game, contains the main game loop.
