@@ -164,7 +164,7 @@ big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
         }
     } else {
         // y as iterator
-        res = y;
+        res = x;
         while (1) {
             // y == 0, break;
             if (y->n_bcd == 1 && y->bcd[0] == 1) break;
