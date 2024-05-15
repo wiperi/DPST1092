@@ -140,13 +140,24 @@ big_bcd_t* bcd_subtract(big_bcd_t* x, big_bcd_t* y) {
 big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
 
+    big_bcd_t* res = NULL;
+
     if (x->n_bcd == 1 && x->bcd[0] == 1) {
-        return y;
+        // deep copy y to res
+        res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
+        res->bcd = (unsigned char*) malloc(y->n_bcd * sizeof(unsigned char));
+        memcpy(res->bcd, y->bcd, y->n_bcd * sizeof(unsigned char));
+        res->n_bcd = y->n_bcd;
+        return res;
     } else if (y->n_bcd == 1 && y->bcd[0] == 1) {
-        return x;
+        // deep copy x to res
+        res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
+        res->bcd = (unsigned char*) malloc(x->n_bcd * sizeof(unsigned char));
+        memcpy(res->bcd, x->bcd, x->n_bcd * sizeof(unsigned char));
+        res->n_bcd = x->n_bcd;
+        return res;
     }
 
-    big_bcd_t* res = NULL;
 
     // malloc for number 1
     big_bcd_t* one = (big_bcd_t*) malloc(sizeof(big_bcd_t));
