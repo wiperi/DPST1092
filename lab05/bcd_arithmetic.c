@@ -92,7 +92,8 @@ big_bcd_t* bcd_add(big_bcd_t* x, big_bcd_t* y) {
     if (carry != 0) {
         // extend res
         res->n_bcd++;
-        res->bcd = (unsigned char*) realloc(res->bcd, res->n_bcd * sizeof(unsigned char));
+        res->bcd = (unsigned char*) realloc(res->bcd,
+                                            res->n_bcd * sizeof(unsigned char));
         assert(res->bcd);
 
         res->bcd[res->n_bcd - 1] = carry;
@@ -127,7 +128,8 @@ big_bcd_t* bcd_subtract(big_bcd_t* x, big_bcd_t* y) {
     while (res->n_bcd > 1 && res->bcd[res->n_bcd - 1] == 0) {
         // shrink res
         res->n_bcd--;
-        res->bcd = (unsigned char*) realloc(res->bcd, res->n_bcd * sizeof(unsigned char));
+        res->bcd = (unsigned char*) realloc(res->bcd,
+                                            res->n_bcd * sizeof(unsigned char));
 
         if (res->n_bcd > 0) assert(res->bcd);
     }
@@ -152,20 +154,29 @@ big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
     one->bcd = (unsigned char*) malloc(1 * sizeof(unsigned char));
     one->bcd[0] = 1;
 
+    int times = 0;
     if (x->n_bcd < y->n_bcd) {
         // x as iterator
         res = y;
         while (1) {
             // x == 0, break;
             if (x->n_bcd == 1 && x->bcd[0] == 1) break;
-            // x -= 1
-            big_bcd_t* prev_x = x;
-            x = bcd_subtract(x, one);
-            free(prev_x);
 
-            big_bcd_t* prev_res = res;
-            res = bcd_add(res, y);
-            free(prev_res);
+            if (times == 1) {
+                // x -= 1
+                big_bcd_t* prev_x = x;
+                x = bcd_subtract(x, one);
+                free(prev_x);
+
+                big_bcd_t* prev_res = res;
+                res = bcd_add(res, y);
+                free(prev_res);
+            } else {
+                // tiems == 0
+                x = bcd_subtract(x, one);
+                res = bcd_add(res, y);
+                times = 1;
+            }
         }
     } else {
         // y as iterator
@@ -173,14 +184,22 @@ big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
         while (1) {
             // y == 0, break;
             if (y->n_bcd == 1 && y->bcd[0] == 1) break;
-            // y -= 1
-            big_bcd_t* prev_y = y;
-            y = bcd_subtract(y, one);
-            free(prev_y);
 
-            big_bcd_t* prev_res = res;
-            res = bcd_add(res, x);
-            free(prev_res);
+            if (times == 1) {
+                // y -= 1
+                big_bcd_t* prev_y = y;
+                y = bcd_subtract(y, one);
+                free(prev_y);
+
+                big_bcd_t* prev_res = res;
+                res = bcd_add(res, x);
+                free(prev_res);
+            } else {
+                // tiems == 0
+                y = bcd_subtract(y, one);
+                res = bcd_add(res, x);
+                times = 1;
+            }
         }
     }
 
@@ -195,7 +214,7 @@ big_bcd_t* bcd_divide(big_bcd_t* x, big_bcd_t* y) {
     // general:
     // use substraction to implement division
     //  5 / 3 is 5 - 3 = 2, 2 - 3 = -1, abort.
-    
+
     // psuedo code:
     // while (x = bcd_subtract(x, y) > 0) {
     //     res++;
@@ -230,7 +249,8 @@ big_bcd_t* bcd_divide(big_bcd_t* x, big_bcd_t* y) {
 
 // print a big_bcd_t number
 void bcd_print(big_bcd_t* number) {
-    // if you get an error here your bcd_arithmetic is returning an invalid big_bcd_t
+    // if you get an error here your bcd_arithmetic is returning an invalid
+    // big_bcd_t
     assert(number->n_bcd > 0);
     for (int i = number->n_bcd - 1; i >= 0; i--) {
         putchar(number->bcd[i] + '0');
@@ -241,8 +261,8 @@ void bcd_print(big_bcd_t* number) {
 
 // free storage for big_bcd_t number
 void bcd_free(big_bcd_t* number) {
-    // if you get an error here your bcd_arithmetic is returning an invalid big_bcd_t
-    // or it is calling free for the numbers it is given
+    // if you get an error here your bcd_arithmetic is returning an invalid
+    // big_bcd_t or it is calling free for the numbers it is given
     free(number->bcd);
     free(number);
 }
