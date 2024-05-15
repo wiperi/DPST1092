@@ -138,34 +138,39 @@ big_bcd_t* bcd_subtract(big_bcd_t* x, big_bcd_t* y) {
 big_bcd_t* bcd_multiply(big_bcd_t* x, big_bcd_t* y) {
     // PUT YOUR CODE HERE
 
-    // malloc res
-    big_bcd_t* res = (big_bcd_t*) malloc(sizeof(big_bcd_t));
-    res->n_bcd = max(x->n_bcd, y->n_bcd);
-    res->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
+    if (x->n_bcd == 1 && x->bcd[0] == 1) {
+        return y;
+    } else if (y->n_bcd == 1 && y->bcd[0] == 1) {
+        return x;
+    }
+
+    big_bcd_t* res = NULL;
 
     // malloc for number 1
     big_bcd_t* one = (big_bcd_t*) malloc(sizeof(big_bcd_t));
     one->n_bcd = 1;
-    one->bcd = (unsigned char*) malloc(res->n_bcd * sizeof(unsigned char));
+    one->bcd = (unsigned char*) malloc(1 * sizeof(unsigned char));
     one->bcd[0] = 1;
 
     if (x->n_bcd < y->n_bcd) {
         // x as iterator
+        res = y;
         while (1) {
             // x == 0, break;
-            if (x->n_bcd == 1 && x->bcd[0] == 0) break;
+            if (x->n_bcd == 1 && x->bcd[0] == 1) break;
             // x -= 1
-            bcd_subtract(x, one);
-            res = bcd_add(y, y);
+            x = bcd_subtract(x, one);
+            res = bcd_add(res, y);
         }
     } else {
         // y as iterator
+        res = y;
         while (1) {
             // y == 0, break;
-            if (y->n_bcd == 1 && y->bcd[0] == 0) break;
+            if (y->n_bcd == 1 && y->bcd[0] == 1) break;
             // y -= 1
-            bcd_subtract(y, one);
-            res = bcd_add(x, x);
+            y = bcd_subtract(y, one);
+            res = bcd_add(res, x);
         }
     }
 
