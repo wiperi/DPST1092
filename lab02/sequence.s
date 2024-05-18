@@ -7,7 +7,7 @@
     # YOUR-NAME-HERE, DD/MM/YYYY
 
     #![tabsize(8)]
-
+.text
 main:                                       # int main(void)
     la      $a0,    prompt1                 # printf("Enter the starting number: ");
     li      $v0,    4
@@ -55,9 +55,15 @@ skip_loop1:
     move    $t0,    $s0
 loop2:
     bgt     $t0,    $s1,        loop2_end
+
     li      $v0,    1
     move    $a0,    $t0
     syscall 
+
+    li      $v0,    11
+    la      $a0,    '\n'
+    syscall 
+
     add     $t0,    $t0,        $s2         # i += step
     j       loop2
 loop2_end:
