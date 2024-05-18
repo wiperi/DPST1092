@@ -45,8 +45,8 @@ if_stop_lt_start:
     bge     $t2,                    $zero,      if_stop_lt_start_end    #   if (step < 0)
 
 for1_init:                                                              # for (int i = start; i >= stop; i += step) {
-    #     printf("%d\n", i);
-    # }
+    									#     printf("%d\n", i);
+    									# }
 
     move    $t3,                    $t0
 for1_condition:
@@ -76,8 +76,8 @@ if_stop_gt_start:
     ble     $t2,                    $zero,      if_stop_gt_start_end
 
 for2_init:                                                              # for (int i = start; i <= stop; i += step) {
-    #     printf("%d\n", i);
-    # }
+    									#     printf("%d\n", i);
+    									# }
 
     move    $t3,                    $t0
 for2_condition:
