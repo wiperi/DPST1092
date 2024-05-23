@@ -779,8 +779,8 @@ display_game__for2_body:
 	move $a1, $t0
 	move $a2, $t1
 	jal maybe_print_player 			# if (!maybe_print_player(player, i, j))
-	not $v0, $v0
-	andi $v0, $v0, 1
+	not $v0, $v0				# 0001 will become 1110
+	andi $v0, $v0, 1			# 1110 will become 0000
 
 	pop $t1
 	pop $t0
