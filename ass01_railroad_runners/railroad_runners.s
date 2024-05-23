@@ -875,7 +875,10 @@ maybe_print_player:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = player
+	#   - $s1 = row
+	#   - $s2 = column
+	#   - $t0 = player_column, player_state
 	#
 	# Structure:
 	#   maybe_print_player
@@ -885,7 +888,47 @@ maybe_print_player:
 
 maybe_print_player__prologue:
 maybe_print_player__body:
+        push $ra
+	push $s0
+	push $s1
+	push $s2
+	move $s0, $a0
+	move $s1, $a1
+	move $s2, $a2
+
+	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		# int column = player->column
+	bne $s1, PLAYER_ROW, maybe_print_player__return_false # if (row != PLAYER_ROW)
+	bne $s2, $t0, maybe_print_player__return_false  # if (column != player->column)
+maybe_print_player__return_false:
+	li $v0, FALSE 					# return FALSE
+	j maybe_print_player__epilogue
+
+	lw $t0, PLAYER_STATE_OFFSET($s0) 		# int state = player->state
+
+	bne $t0, PLAYER_RUNNING, not_running		# if (state == PLAYER_RUNNING)
+	li $v0, 4
+	la $a0, PLAYER_RUNNING_SPRITE
+	syscall
+not_running:
+	bne $t0, PLAYER_CROUCHING, not_crouching 	# else if (state == PLAYER_CROUCHING)
+	li $v0, 4
+	la $a0, PLAYER_CROUCHING_SPRITE
+	syscall
+not_crouching:
+	bne $t0, PLAYER_JUMPING, not_jumping 		# else if (state == PLAYER_JUMPING)
+	li $v0, 4
+	la $a0, PLAYER_JUMPING_SPRITE
+	syscall
+not_jumping:
+
+	li $v0, TRUE 					# return TRUE
+	j maybe_print_player__epilogue
+
 maybe_print_player__epilogue:
+	pop $s2
+	pop $s1
+	pop $s0
+	pop $ra
 	jr	$ra
 
 

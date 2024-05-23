@@ -416,6 +416,21 @@ int maybe_print_player(struct Player *player, int row, int column) {
     return FALSE;
 }
 
+int maybe_print_player_sim(struct Player *player, int row, int column) {
+    if (row != PLAYER_ROW || column != player->column) {
+        return FALSE;
+    }
+
+    if (player->state == PLAYER_RUNNING) {
+        printf(PLAYER_RUNNING_SPRITE);
+    } else if (player->state == PLAYER_CROUCHING) {
+        printf(PLAYER_CROUCHING_SPRITE);
+    } else if (player->state == PLAYER_JUMPING) {
+        printf(PLAYER_JUMPING_SPRITE);
+    }
+    return TRUE;
+}
+
 // Subset 2
 // Handle the user's input, moving and updating the player's state.
 //
