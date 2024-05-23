@@ -17,7 +17,5 @@ uint16_t short_swap(uint16_t value) {
     res |= ((mask << 8) & value) >> 8;
     res |= (mask & value) << 8;
 
-
-
     return res;
 }
