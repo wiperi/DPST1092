@@ -675,9 +675,9 @@ run_game:
 	#
 	# Returns:  $v0: int
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[handle_command],[handle_collision]]
+	# Uses:     [$ra, $a0, $a1, $a2, $a3, $v0]
+	# Clobbers: [$ra, $a0, $a1, $a2, $a3, $v0]
 	#
 	# Locals:
 	#   - ...
@@ -699,12 +699,15 @@ run_game__if_then:
 run_game__if_end:
 
 	push $ra
+
 	push $a0
 	push $a1
-	jal handle_command
+	jal handle_command # handle_command(map, player, block_spawner, input)
 	pop $a1
 	pop $a0
-	jal handle_collision
+	
+	jal handle_collision # handle_collision(map, player)
+	
 	pop $ra
 
 run_game__epilogue:
