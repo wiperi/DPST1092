@@ -307,11 +307,11 @@ print_welcome__body:
 	# TODO: implement `print_welcome` here!
 
 
-	li $v0, 4  #     printf("Welcome to Railroad Runners!\n");
+	li $v0, 4  # printf("Welcome to Railroad Runners!\n");
 	li $a0, print_welcome__msg_1
 	syscall
 
-	li $v0, 4 #     printf("Use the following keys to control your character: (%s):\n", PLAYER_RUNNING_SPRITE);
+	li $v0, 4 # printf("Use the following keys to control your character: (%s):\n", PLAYER_RUNNING_SPRITE);
 	li $a0, print_welcome__msg_2_1
 	syscall
 
@@ -323,7 +323,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_2_2
 	syscall
 
-	li $v0, 11 #     printf("%c: Move left\n", LEFT_KEY);
+	li $v0, 11 # printf("%c: Move left\n", LEFT_KEY);
 	li $a0, LEFT_KEY
 	syscall
 
@@ -331,7 +331,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_3
 	syscall
 
-	li $v0, 11 #     printf("%c: Move right\n", RIGHT_KEY);
+	li $v0, 11 # printf("%c: Move right\n", RIGHT_KEY);
 	li $a0, RIGHT_KEY
 	syscall
 
@@ -339,7 +339,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_4
 	syscall
 
-	li $v0, 11 #     printf("%c: Crouch (%c)\n", CROUCH_KEY, PLAYER_CROUCHING_SPRITE);
+	li $v0, 11 # printf("%c: Crouch (%c)\n", CROUCH_KEY, PLAYER_CROUCHING_SPRITE);
 	li $a0, CROUCH_KEY
 	syscall
 
@@ -355,7 +355,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_5_2
 	syscall
 
-	li $v0, 11 #     printf("%c: Jump (%c)\n", JUMP_KEY, PLAYER_JUMPING_SPRITE);
+	li $v0, 11 # printf("%c: Jump (%c)\n", JUMP_KEY, PLAYER_JUMPING_SPRITE);
 	li $a0, JUMP_KEY
 	syscall
 
@@ -371,7 +371,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_6_2
 	syscall
 
-	li $v0, 4 #     printf("or press %c to continue moving forward.\n", TICK_KEY);
+	li $v0, 4 # printf("or press %c to continue moving forward.\n", TICK_KEY);
 	li $a0, print_welcome__msg_7_1
 	syscall
 
@@ -383,7 +383,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_7_2
 	syscall
 
-	li $v0, 4 #     printf("You must crouch under barriers (%s)\n", BARRIER_SPRITE);
+	li $v0, 4 # printf("You must crouch under barriers (%s)\n", BARRIER_SPRITE);
 	li $a0, print_welcome__msg_8_1
 	syscall
 
@@ -395,7 +395,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_8_2
 	syscall
 
-	li $v0, 4 #     printf("and jump over trains (%s).\n", TRAIN_SPRITE);
+	li $v0, 4 # printf("and jump over trains (%s).\n", TRAIN_SPRITE);
 	li $a0, print_welcome__msg_9_1
 	syscall
 
@@ -407,7 +407,7 @@ print_welcome__body:
 	li $a0, print_welcome__msg_9_2
 	syscall
 
-	li $v0, 4 #     printf("You should avoid walls (%s) and collect cash (%s).\n", WALL_SPRITE, CASH_SPRITE);
+	li $v0, 4 # printf("You should avoid walls (%s) and collect cash (%s).\n", WALL_SPRITE, CASH_SPRITE);
 	li $a0, print_welcome__msg_10_1
 	syscall
 
@@ -427,11 +427,11 @@ print_welcome__body:
 	li $a0, print_welcome__msg_10_3
 	syscall
 
-	li $v0, 4 #     printf("On top of collecting cash, running on trains and going under barriers will get you extra points.\n");
+	li $v0, 4 # printf("On top of collecting cash, running on trains and going under barriers will get you extra points.\n");
 	li $a0, print_welcome__msg_11
 	syscall
 
-	li $v0, 4 #     printf("When you've had enough, press %c to quit. Have fun!\n", QUIT_KEY);
+	li $v0, 4 # printf("When you've had enough, press %c to quit. Have fun!\n", QUIT_KEY);
 	li $a0, print_welcome__msg_12_1
 	syscall
 
@@ -518,8 +518,8 @@ main:
 	#
 	# Returns:  $v0: int
 	#
-	# Frame:    [...]
-	# Uses:     [...]
+	# Frame:    [[print_welcome],[get_seed],[init_map],[display_game],[run_game]]
+	# Uses:     [$ra, $a0, $a1, $a2, $a3, $v0]
 	# Clobbers: [...]
 	#
 	# Locals:
@@ -533,14 +533,36 @@ main:
 
 main__prologue:
 main__body:
-	begin
 	push $ra
 
-	jal print_welcome
-	
-	pop $ra
-	end
+	jal print_welcome # print_welcome();
+	jal get_seed # get_seed();
+
+	la $a0, g_map # init_map(g_map);
+	jal init_map
+
+main__do_while_do:
+	la $a0, g_map # display_game(g_map, &g_player);
+	la $a1, g_player
+	jal display_game
+mani__do_while_condition:
+	la $a0, g_map # run_game(g_map, &g_player, &g_block_spawner, get_command());
+	la $a1, g_player
+	la $a2, g_block_spawner
+	jal get_command
+	move $a3, $v0
+	jal run_game
+
+	beqz $v0, main__do_while_end # while (run_game(...) == 0) {}
+	j main__do_while_do
+main__do_while_end:
+
+	li $v0, 4
+	la $a0, main__game_over_msg
+	syscall
+
 main__epilogue:
+	pop $ra
 	jr	$ra
 
 
