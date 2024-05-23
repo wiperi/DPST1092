@@ -560,7 +560,7 @@ main__do_while_end:
 
 	li $v0, 4
 	la $a0, main__game_over_msg
-	syscall
+	syscall 
 
 main__epilogue:
 	pop $ra
