@@ -289,9 +289,9 @@ print_welcome:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    []
+	# Uses:     [$v0, $a0]
+	# Clobbers: [$v0, $a0]
 	#
 	# Locals:
 	#   - ...
@@ -458,8 +458,8 @@ get_command:
 	# Returns:  $v0: char
 	#
 	# Frame:    [[read_char]]
-	# Uses:     [$t0, $v0]
-	# Clobbers: [$t0, $v0]
+	# Uses:     [$t0, $v0, $a0]
+	# Clobbers: [$t0, $v0, $a0]
 	#
 	# Locals:
 	#   - $t0 = char input
@@ -546,11 +546,11 @@ main__do_while_do:
 	la $a1, g_player
 	jal display_game
 mani__do_while_condition:
-	la $a0, g_map # run_game(g_map, &g_player, &g_block_spawner, get_command());
-	la $a1, g_player
+	la $a1, g_player # run_game(g_map, &g_player, &g_block_spawner, get_command());
 	la $a2, g_block_spawner
 	jal get_command
 	move $a3, $v0
+	la $a0, g_map # debug: get_command will clober $a0, so load $a0 after call get_command
 	jal run_game
 
 	beqz $v0, main__do_while_end # while (run_game(...) == 0) {}
