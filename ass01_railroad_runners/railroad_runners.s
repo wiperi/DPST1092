@@ -842,7 +842,7 @@ display_game__for1_end:
 	syscall
 
 	li $v0, 1
-	lw $a0, PLAYER_SCORE_OFFSET($a1)
+	lw $a0, PLAYER_SCORE_OFFSET($s1)
 	syscall
 
 	li $v0, 11
