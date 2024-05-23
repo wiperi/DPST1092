@@ -726,9 +726,9 @@ display_game:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[maybe_print_player]]
+	# Uses:     [$ra, $s0, $s1, $t0, $t1, $t2, $t3, $v0]
+	# Clobbers: [$ra, $s0, $s1, $t0, $t1, $t2, $t3, $v0]
 	#
 	# Locals:
 	#   - $t0 = int i
@@ -767,7 +767,7 @@ display_game__for2_condition:
 	blt $t1, MAP_WIDTH, display_game__for2_body
 	j display_game__for2_end
 display_game__for2_body:
-	li $v0, 11 # putchar(RAIL_EDGE)
+	li $v0, 11 				# putchar(RAIL_EDGE)
 	la $a0, RAIL_EDGE
 	syscall
 
@@ -778,7 +778,7 @@ display_game__for2_body:
 	move $a0, $s1
 	move $a1, $t0
 	move $a2, $t1
-	jal maybe_print_player # if (!maybe_print_player(player, i, j))
+	jal maybe_print_player 			# if (!maybe_print_player(player, i, j))
 	not $v0, $v0
 
 	pop $t1
@@ -788,40 +788,40 @@ display_game__for2_body:
 	beqz $v0, display_game__for2__if_end
 	j display_game__for2__if_then
 display_game__for2__if_then:
-	mul $t2, $t0, MAP_WIDTH # i * row_length
-	add $t2, $t2, $t1 # i * row_length + j
-	add $t2, $t2, $s0 # ... + map
+	mul $t2, $t0, MAP_WIDTH			 # i * row_length
+	add $t2, $t2, $t1			 # i * row_length + j
+	add $t2, $t2, $s0 			 # ... + map
 
-	lb $t3, ($t2) # map_char = map[i][j]
+	lb $t3, ($t2)				 # map_char = map[i][j]
 
-	bne $t3, EMPTY_CHAR, not_empty
+	bne $t3, EMPTY_CHAR, not_empty   # if (map_char == EMPTY_CHAR)
 	li $v0, 4
 	la $a0, EMPTY_SPRITE
 	syscall
 not_empty:
-	bne $t3, BARRIER_CHAR, not_barrier_char
+	bne $t3, BARRIER_CHAR, not_barrier_char # else if (map_char == BARRIER_CHAR)
 	li $v0, 4
 	la $a0, BARRIER_SPRITE
 	syscall
 not_barrier_char:
-	bne $t3, TRAIN_CHAR, not_train_char
+	bne $t3, TRAIN_CHAR, not_train_char # else if (map_char == TRAIN_CHAR)
 	li $v0, 4
 	la $a0, TRAIN_SPRITE
 	syscall
 not_train_char:
-	bne $t3, CASH_CHAR, not_cash_char
+	bne $t3, CASH_CHAR, not_cash_char # else if (map_char == CASH_CHAR)
 	li $v0, 4
 	la $a0, CASH_SPRITE
 	syscall
 not_cash_char:
-	bne $t3, WALL_CHAR, not_wall_char
+	bne $t3, WALL_CHAR, not_wall_char # else if (map_char == WALL_CHAR)
 	li $v0, 4
 	la $a0, WALL_SPRITE
 	syscall
 not_wall_char:
 
 display_game__for2__if_end:
-	li $v0, 11 # putchar(RAIL_EDGE)
+	li $v0, 11				 # putchar(RAIL_EDGE)
 	la $a0, RAIL_EDGE
 	syscall
 display_game__for2_iter:
@@ -829,7 +829,7 @@ display_game__for2_iter:
 	j display_game__for2_condition
 display_game__for2_end:
 
-	li $v0, 11 # putchar('\n')
+	li $v0, 11 				# putchar('\n')
 	la $a0, '\n'
 	syscall
 display_game__for1_iter:
@@ -837,7 +837,7 @@ display_game__for1_iter:
 	j display_game__for1_condition
 display_game__for1_end:
 
-	li $v0, 4 # printf("Score: %d\n", player->score);
+	li $v0, 4 				# printf("Score: %d\n", player->score);
 	la $a0, display_game__score_msg
 	syscall
 
