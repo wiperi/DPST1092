@@ -563,6 +563,7 @@ main__do_while_end:
 
 main__epilogue:
 	pop $ra
+	li $v0, 0
 	jr	$ra
 
 
