@@ -795,27 +795,27 @@ display_game__for2__if_then:
 	lb $t3, ($t2) # map_char = map[i][j]
 
 	bne $t3, EMPTY_CHAR, not_empty
-	li $v0, 11
+	li $v0, 4
 	la $a0, EMPTY_SPRITE
 	syscall
 not_empty:
 	bne $t3, BARRIER_CHAR, not_barrier_char
-	li $v0, 11
+	li $v0, 4
 	la $a0, BARRIER_SPRITE
 	syscall
 not_barrier_char:
 	bne $t3, TRAIN_CHAR, not_train_char
-	li $v0, 11
+	li $v0, 4
 	la $a0, TRAIN_SPRITE
 	syscall
 not_train_char:
 	bne $t3, CASH_CHAR, not_cash_char
-	li $v0, 11
+	li $v0, 4
 	la $a0, CASH_SPRITE
 	syscall
 not_cash_char:
 	bne $t3, WALL_CHAR, not_wall_char
-	li $v0, 11
+	li $v0, 4
 	la $a0, WALL_SPRITE
 	syscall
 not_wall_char:
