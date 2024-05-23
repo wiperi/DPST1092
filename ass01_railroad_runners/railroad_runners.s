@@ -853,6 +853,7 @@ display_game__epilogue:
 	pop $s1
 	pop $s0
 	pop $ra
+	li $v0, 0
 	jr	$ra
 
 
