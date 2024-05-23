@@ -896,6 +896,8 @@ maybe_print_player__body:
 	move $s1, $a1
 	move $s2, $a2
 
+	beq $s0, 0, maybe_print_player__if1_then 	# if (player == NULL)
+
 	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		# int column = player->column
 	bne $s1, PLAYER_ROW, maybe_print_player__if1_then # if (row != PLAYER_ROW)
 	bne $s2, $t0, maybe_print_player__if1_then  # if (column != player->column)
