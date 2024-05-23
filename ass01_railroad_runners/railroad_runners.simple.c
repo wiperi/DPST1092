@@ -420,7 +420,7 @@ int maybe_print_player_sim(struct Player *player, int row, int column) {
     if (player == NULL) {
         return FALSE;
     }
-    
+
     if (row != PLAYER_ROW || column != player->column) {
         return FALSE;
     }

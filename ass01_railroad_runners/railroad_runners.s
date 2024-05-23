@@ -780,6 +780,7 @@ display_game__for2_body:
 	move $a2, $t1
 	jal maybe_print_player 			# if (!maybe_print_player(player, i, j))
 	not $v0, $v0
+	andi $v0, $v0, 1
 
 	pop $t1
 	pop $t0
@@ -871,8 +872,8 @@ maybe_print_player:
 	# Returns:  $v0: int
 	#
 	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Uses:     [$ra, $s0, $s1, $s2, $t0]
+	# Clobbers: [$ra, $s0, $s1, $s2, $t0]
 	#
 	# Locals:
 	#   - $s0 = player
