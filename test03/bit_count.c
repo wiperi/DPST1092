@@ -8,5 +8,14 @@
 int bit_count(uint64_t value) {
     // PUT YOUR CODE HERE
 
-    return 42;
+    int res = 0;
+    for (int i = 0; i < 64; i++) {
+        int digit = (value >> i) & 1;
+
+        if (digit) {
+            res++;
+        }
+    }
+
+    return res;
 }

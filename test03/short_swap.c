@@ -8,5 +8,16 @@
 uint16_t short_swap(uint16_t value) {
     // PUT YOUR CODE HERE
 
-    return 42;
+    // 1234 to 3412
+
+    uint16_t mask = 0xff;
+
+    uint16_t res = 0;
+
+    res |= ((mask << 8) & value) >> 8;
+    res |= (mask & value) << 8;
+
+
+
+    return res;
 }
