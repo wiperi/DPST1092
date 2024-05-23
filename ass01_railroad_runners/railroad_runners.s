@@ -897,11 +897,13 @@ maybe_print_player__body:
 	move $s2, $a2
 
 	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		# int column = player->column
-	bne $s1, PLAYER_ROW, maybe_print_player__return_false # if (row != PLAYER_ROW)
-	bne $s2, $t0, maybe_print_player__return_false  # if (column != player->column)
-maybe_print_player__return_false:
+	bne $s1, PLAYER_ROW, maybe_print_player__if1_then # if (row != PLAYER_ROW)
+	bne $s2, $t0, maybe_print_player__if1_then  # if (column != player->column)
+	j maybe_print_player__if1_end
+maybe_print_player__if1_then:
 	li $v0, FALSE 					# return FALSE
 	j maybe_print_player__epilogue
+maybe_print_player__if1_end:
 
 	lw $t0, PLAYER_STATE_OFFSET($s0) 		# int state = player->state
 

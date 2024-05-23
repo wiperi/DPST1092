@@ -402,7 +402,7 @@ void display_game(char map[MAP_HEIGHT][MAP_WIDTH], struct Player *player) {
 // - column: The column the map printing is up to.
 //
 // Returns TRUE if the player was printed, FALSE otherwise.
-int maybe_print_player_sim(struct Player *player, int row, int column) {
+int maybe_print_player(struct Player *player, int row, int column) {
     if (row == PLAYER_ROW && column == player->column) {
         if (player->state == PLAYER_RUNNING) {
             printf(PLAYER_RUNNING_SPRITE);
@@ -416,7 +416,7 @@ int maybe_print_player_sim(struct Player *player, int row, int column) {
     return FALSE;
 }
 
-int maybe_print_player(struct Player *player, int row, int column) {
+int maybe_print_player_sim(struct Player *player, int row, int column) {
     if (row != PLAYER_ROW || column != player->column) {
         return FALSE;
     }
