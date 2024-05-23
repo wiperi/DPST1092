@@ -769,6 +769,8 @@ display_game__for2_body:
 
 	push $a0
 	push $a1
+	push $t0
+	push $t1
 	
 	move $a0, $a1
 	move $a1, $t0
@@ -776,6 +778,8 @@ display_game__for2_body:
 	jal maybe_print_player # if (!maybe_print_player(player, i, j))
 	not $v0, $v0
 
+	pop $t1
+	pop $t0
 	pop $a1
 	pop $a0
 
