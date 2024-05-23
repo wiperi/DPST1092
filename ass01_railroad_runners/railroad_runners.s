@@ -582,8 +582,8 @@ init_map:
 	# Returns:  None
 	#
 	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Uses:     [$t0, $t1, $t2, $t3]
+	# Clobbers: [$t0, $t1, $t2, $t3]
 	#
 	# Locals:
 	#   - $t0 = int i
