@@ -896,36 +896,36 @@ maybe_print_player__body:
 	move $s1, $a1
 	move $s2, $a2
 
-	beq $s0, 0, maybe_print_player__if1_then 	# if (player == NULL)
+	beq $s0, 0, maybe_print_player__if1_then 	 	# if (player == NULL)
 
-	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		# int column = player->column
-	bne $s1, PLAYER_ROW, maybe_print_player__if1_then # if (row != PLAYER_ROW)
-	bne $s2, $t0, maybe_print_player__if1_then  # if (column != player->column)
+	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		 	# int column = player->column
+	bne $s1, PLAYER_ROW, maybe_print_player__if1_then	# if (row != PLAYER_ROW)
+	bne $s2, $t0, maybe_print_player__if1_then  	 	# if (column != player->column)
 	j maybe_print_player__if1_end
 maybe_print_player__if1_then:
-	li $v0, FALSE 					# return FALSE
+	li $v0, FALSE 						# return FALSE
 	j maybe_print_player__epilogue
 maybe_print_player__if1_end:
 
-	lw $t0, PLAYER_STATE_OFFSET($s0) 		# int state = player->state
+	lw $t0, PLAYER_STATE_OFFSET($s0) 			# int state = player->state
 
-	bne $t0, PLAYER_RUNNING, not_running		# if (state == PLAYER_RUNNING)
+	bne $t0, PLAYER_RUNNING, not_running			# if (state == PLAYER_RUNNING)
 	li $v0, 4
 	la $a0, PLAYER_RUNNING_SPRITE
 	syscall
 not_running:
-	bne $t0, PLAYER_CROUCHING, not_crouching 	# else if (state == PLAYER_CROUCHING)
+	bne $t0, PLAYER_CROUCHING, not_crouching 		# else if (state == PLAYER_CROUCHING)
 	li $v0, 4
 	la $a0, PLAYER_CROUCHING_SPRITE
 	syscall
 not_crouching:
-	bne $t0, PLAYER_JUMPING, not_jumping 		# else if (state == PLAYER_JUMPING)
+	bne $t0, PLAYER_JUMPING, not_jumping 			# else if (state == PLAYER_JUMPING)
 	li $v0, 4
 	la $a0, PLAYER_JUMPING_SPRITE
 	syscall
 not_jumping:
 
-	li $v0, TRUE 					# return TRUE
+	li $v0, TRUE 						# return TRUE
 	j maybe_print_player__epilogue
 
 maybe_print_player__epilogue:
