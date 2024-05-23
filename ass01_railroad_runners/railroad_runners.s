@@ -603,7 +603,7 @@ init_map__body:
 init_map__for1_init:
 	li $t0, 0 				# for(int i = 0; ...)
 init_map__for1_condition:
-	blt $t0, MAP_HEIGHT, init_map__for1_iter
+	blt $t0, MAP_HEIGHT, init_map__for1_body
 	j init_map__for1_end
 init_map__for1_body:
 
@@ -632,50 +632,30 @@ init_map__for1_iter:
 	j init_map__for1_condition
 init_map__for1_end:
 
-	# map[6][0] = WALL_CHAR;
-	li $t0, 6 			# 6 * row_length * sizeof(char) + map
-	mul $t2, $t0, MAP_WIDTH
-	mul $t2, $t2, 1
-	add $t2, $a0, $t2
+        # $t0 - $t3 are free to use
+	# $t0 = row offset
+	# $t1 = overall offset
+	# $t2 = char value
 
-	li $t3, WALL_CHAR
-	sb $t3, ($t2) 			# map[6][0] = WALL_CHAR;
-
-	# map[6][1] = TRAIN_CHAR;
 	li $t0, 6 			# 6 * row_length * sizeof(char)
-	mul $t2, $t0, MAP_WIDTH
-	mul $t2, $t2, 1
-	li $t0, 1			# 1 * sizeof(char)
-	mul $t3, $t0, 1
-	add $t2, $t2, $t3		# 6 * row_length * sizeof(char) + 1 * sizeof(char)
-	add $t2, $a0, $t2		# map + ...
+	mul $t0, $t0, MAP_WIDTH
+	mul $t0, $t0, 1
 
-	li $t3, TRAIN_CHAR
-	sb $t3, ($t2) 			# map[6][1] = TRAIN_CHAR;
+	add $t1, $a0, $t0		# map[6][0] = WALL_CHAR;
+	li $t2, WALL_CHAR
+	sb $t2, ($t1)
 
-	# map[6][2] = CASH_CHAR;
-	li $t0, 6 			# 6 * row_length * sizeof(char)
-	mul $t2, $t0, MAP_WIDTH
-	mul $t2, $t2, 1
-	li $t0, 2			# 2 * sizeof(char)
-	mul $t3, $t0, 1
-	add $t2, $t2, $t3		# 6 * row_length * sizeof(char) + 2 * sizeof(char)
-	add $t2, $a0, $t2		# map + ...
+	add $t1, $t1, 1 		# map[6][1] = TRAIN_CHAR;
+	li $t2, TRAIN_CHAR
+	sb $t2, ($t1)
 
-	li $t3, CASH_CHAR
-	sb $t3, ($t2) 			# map[6][2] = CASH_CHAR;
+	add $t1, $t1, 1 		# map[6][2] = CAHS_CHAR;
+	li $t2, CASH_CHAR
+	sb $t2, ($t1)
 
-	# map[8][2] = BARRIER_CHAR;
-	li $t0, 8 			# 8 * row_length * sizeof(char)
-	mul $t2, $t0, MAP_WIDTH
-	mul $t2, $t2, 1
-	li $t0, 2			# 2 * sizeof(char)
-	mul $t3, $t0, 1
-	add $t2, $t2, $t3		# 8 * row_length * sizeof(char) + 2 * sizeof(char)
-	add $t2, $a0, $t2		# map + ...
-
-	li $t3, BARRIER_CHAR
-	sb $t3, ($t2) 			# map[8][2] = BARRIER_CHAR;
+	add $t1, $t1, 10 		# map[8][2] = BARIRER_CHAR;
+	li $t2, BARRIER_CHAR
+	sb $t2, ($t1)
 
 init_map__epilogue:
 	jr	$ra
