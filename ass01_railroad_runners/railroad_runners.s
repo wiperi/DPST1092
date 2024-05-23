@@ -690,6 +690,23 @@ run_game:
 
 run_game__prologue:
 run_game__body:
+	
+	beq $a3, QUIT_KEY, run_game__if_then # if (input == QUIT_KEY)
+	j run_game__if_end
+run_game__if_then:
+	li $v0, FALSE
+	jr $ra # return FALSE
+run_game__if_end:
+
+	push $ra
+	push $a0
+	push $a1
+	jal handle_command
+	pop $a1
+	pop $a0
+	jal handle_collision
+	pop $ra
+
 run_game__epilogue:
 	jr	$ra
 
