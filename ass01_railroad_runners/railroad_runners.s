@@ -546,11 +546,12 @@ main__do_while_do:
 	la $a1, g_player
 	jal display_game
 mani__do_while_condition:
-	la $a1, g_player # run_game(g_map, &g_player, &g_block_spawner, get_command());
-	la $a2, g_block_spawner
-	jal get_command
+	jal get_command  # run_game(g_map, &g_player, &g_block_spawner, get_command());
 	move $a3, $v0
-	la $a0, g_map # debug: get_command will clober $a0, so load $a0 after call get_command
+
+	la $a0, g_map
+	la $a1, g_player
+	la $a2, g_block_spawner
 	jal run_game
 
 	beqz $v0, main__do_while_end # while (run_game(...) == 0) {}
