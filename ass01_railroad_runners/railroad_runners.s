@@ -735,6 +735,8 @@ display_game:
 	#   - $t1 = int j
 	#   - $t2 = array offset
 	#   - $t3 = map_char
+	#   - $s0 = map
+	#   - $s1 = player
 	#
 	# Structure:
 	#   display_game
@@ -745,13 +747,17 @@ display_game:
 display_game__prologue:
 display_game__body:
 
-
+	push $ra
+	push $s0
+	push $s1
+	move $s0, $a0
+	move $s1, $a1
 
 display_game__for1_init:
 	li $t0, MAP_HEIGHT
 	addi $t0, -1
 display_game__for1_condition:
-	bge $t0, 0, display_game__for1_body
+	bge $t0, 0, display_game__for1_body # for(int i = MAP_HEIGHT - 1; ...)
 	j display_game__for1_end
 display_game__for1_body:
 
@@ -762,17 +768,14 @@ display_game__for2_condition:
 	j display_game__for2_end
 display_game__for2_body:
 	li $v0, 11 # putchar(RAIL_EDGE)
-	push $a0
 	la $a0, RAIL_EDGE
-	pop $a0
 	syscall
 
-	push $a0
-	push $a1
+
 	push $t0
 	push $t1
 	
-	move $a0, $a1
+	move $a0, $s1
 	move $a1, $t0
 	move $a2, $t1
 	jal maybe_print_player # if (!maybe_print_player(player, i, j))
@@ -780,59 +783,46 @@ display_game__for2_body:
 
 	pop $t1
 	pop $t0
-	pop $a1
-	pop $a0
+
 
 	beqz $v0, display_game__for2__if_end
 	j display_game__for2__if_then
 display_game__for2__if_then:
 	mul $t2, $t0, MAP_WIDTH # i * row_length
 	add $t2, $t2, $t1 # i * row_length + j
-	add $t2, $t2, $a0 # ... + map
+	add $t2, $t2, $s0 # ... + map
 
 	lb $t3, ($t2) # map_char = map[i][j]
 
 	bne $t3, EMPTY_CHAR, not_empty
 	li $v0, 11
-	push $a0
 	la $a0, EMPTY_SPRITE
-	pop $a0
 	syscall
 not_empty:
 	bne $t3, BARRIER_CHAR, not_barrier_char
 	li $v0, 11
-	push $a0
 	la $a0, BARRIER_SPRITE
-	pop $a0
 	syscall
 not_barrier_char:
 	bne $t3, TRAIN_CHAR, not_train_char
 	li $v0, 11
-	push $a0
 	la $a0, TRAIN_SPRITE
-	pop $a0
 	syscall
 not_train_char:
 	bne $t3, CASH_CHAR, not_cash_char
 	li $v0, 11
-	push $a0
 	la $a0, CASH_SPRITE
-	pop $a0
 	syscall
 not_cash_char:
 	bne $t3, WALL_CHAR, not_wall_char
 	li $v0, 11
-	push $a0
 	la $a0, WALL_SPRITE
-	pop $a0
 	syscall
 not_wall_char:
 
 display_game__for2__if_end:
 	li $v0, 11 # putchar(RAIL_EDGE)
-	push $a0
 	la $a0, RAIL_EDGE
-	pop $a0
 	syscall
 display_game__for2_iter:
 	add $t1, $t1, 1
@@ -840,9 +830,7 @@ display_game__for2_iter:
 display_game__for2_end:
 
 	li $v0, 11 # putchar('\n')
-	push $a0
 	la $a0, '\n'
-	pop $a0
 	syscall
 display_game__for1_iter:
 	addi $t0, -1
@@ -850,24 +838,21 @@ display_game__for1_iter:
 display_game__for1_end:
 
 	li $v0, 4 # printf("Score: %d\n", player->score);
-	push $a0
 	la $a0, display_game__score_msg
-	pop $a0
 	syscall
 
 	li $v0, 1
-	push $a0
 	lw $a0, PLAYER_SCORE_OFFSET($a1)
-	pop $a0
 	syscall
 
 	li $v0, 11
-	push $a0
 	la $a0, '\n'
-	pop $a0
 	syscall
 
 display_game__epilogue:
+	pop $s1
+	pop $s0
+	pop $ra
 	jr	$ra
 
 
