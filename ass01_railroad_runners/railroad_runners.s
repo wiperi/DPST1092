@@ -520,7 +520,7 @@ main:
 	#
 	# Frame:    [[print_welcome],[get_seed],[init_map],[display_game],[run_game]]
 	# Uses:     [$ra, $a0, $a1, $a2, $a3, $v0]
-	# Clobbers: [...]
+	# Clobbers: [$ra, $a0, $a1, $a2, $a3, $v0]
 	#
 	# Locals:
 	#   - ...
@@ -529,6 +529,8 @@ main:
 	#   main
 	#   -> [prologue]
 	#     -> body
+	#     -> do_while_do
+	#     -> do_while_condition
 	#   -> [epilogue]
 
 main__prologue:
@@ -560,7 +562,7 @@ main__do_while_end:
 
 	li $v0, 4
 	la $a0, main__game_over_msg
-	syscall 
+	syscall
 
 main__epilogue:
 	pop $ra
@@ -584,7 +586,10 @@ init_map:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
+	#   - $t0 = int i
+	#   - $t1 = int j
+	#   - $t2 = calculated offset
+	#   - $t3 = calculated offset, char value
 	#
 	# Structure:
 	#   init_map
@@ -594,6 +599,84 @@ init_map:
 
 init_map__prologue:
 init_map__body:
+
+init_map__for1_init:
+	li $t0, 0 				# for(int i = 0; ...)
+init_map__for1_condition:
+	blt $t0, MAP_HEIGHT, init_map__for1_iter
+	j init_map__for1_end
+init_map__for1_body:
+
+init_map__for2_init:
+	li $t1, 0 				# for(int j = 0; ...)
+init_map__for2_condition:
+	blt $t1, MAP_WIDTH, init_map__for2_body
+	j init_map__for2_end
+init_map__for2_body:
+	mul $t2, $t0, MAP_WIDTH 		# i * row_length
+	mul $t2, $t2, 1				# i * row_length * sizeof(char)
+	mul $t3, $t1, 1 			# j * sizeof(char)
+	add $t2, $t2, $t3 			# i * row_length * sizeof(char) + j * sizeof(char)
+	add $t2, $a0, $t2 			# map + ...
+
+	li $t3, EMPTY_CHAR
+	sb $t3, ($t2) 				# map[i][j] = EMPTY_CHAR;
+	
+init_map__for2_iter:
+	add $t1, $t1, 1
+	j init_map__for2_condition
+init_map__for2_end:
+
+init_map__for1_iter:
+	add $t0, $t0, 1
+	j init_map__for1_condition
+init_map__for1_end:
+
+	# map[6][0] = WALL_CHAR;
+	li $t0, 6 			# 6 * row_length * sizeof(char) + map
+	mul $t2, $t0, MAP_WIDTH
+	mul $t2, $t2, 1
+	add $t2, $a0, $t2
+
+	li $t3, WALL_CHAR
+	sb $t3, ($t2) 			# map[6][0] = WALL_CHAR;
+
+	# map[6][1] = TRAIN_CHAR;
+	li $t0, 6 			# 6 * row_length * sizeof(char)
+	mul $t2, $t0, MAP_WIDTH
+	mul $t2, $t2, 1
+	li $t0, 1			# 1 * sizeof(char)
+	mul $t3, $t0, 1
+	add $t2, $t2, $t3		# 6 * row_length * sizeof(char) + 1 * sizeof(char)
+	add $t2, $a0, $t2		# map + ...
+
+	li $t3, TRAIN_CHAR
+	sb $t3, ($t2) 			# map[6][1] = TRAIN_CHAR;
+
+	# map[6][2] = CASH_CHAR;
+	li $t0, 6 			# 6 * row_length * sizeof(char)
+	mul $t2, $t0, MAP_WIDTH
+	mul $t2, $t2, 1
+	li $t0, 2			# 2 * sizeof(char)
+	mul $t3, $t0, 1
+	add $t2, $t2, $t3		# 6 * row_length * sizeof(char) + 2 * sizeof(char)
+	add $t2, $a0, $t2		# map + ...
+
+	li $t3, CASH_CHAR
+	sb $t3, ($t2) 			# map[6][2] = CASH_CHAR;
+
+	# map[8][2] = BARRIER_CHAR;
+	li $t0, 8 			# 8 * row_length * sizeof(char)
+	mul $t2, $t0, MAP_WIDTH
+	mul $t2, $t2, 1
+	li $t0, 2			# 2 * sizeof(char)
+	mul $t3, $t0, 1
+	add $t2, $t2, $t3		# 8 * row_length * sizeof(char) + 2 * sizeof(char)
+	add $t2, $a0, $t2		# map + ...
+
+	li $t3, BARRIER_CHAR
+	sb $t3, ($t2) 			# map[8][2] = BARRIER_CHAR;
+
 init_map__epilogue:
 	jr	$ra
 
