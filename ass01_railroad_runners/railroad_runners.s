@@ -1189,7 +1189,10 @@ maybe_pick_new_chunk:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = block_spawner
+	#   - $t8 = new_safe_column_required
+	#   - $t7 = int column
+	#   - $t6 = char const **next_block_ptr
 	#
 	# Structure:
 	#   maybe_pick_new_chunk
@@ -1199,7 +1202,124 @@ maybe_pick_new_chunk:
 
 maybe_pick_new_chunk__prologue:
 maybe_pick_new_chunk__body:
+	push $ra
+	push $s0
+	move $s0, $a0
+
+	li $t8, FALSE
+
+m__for_init:
+	li $t7, 0
+m__for_condition:
+	blt $t7, MAP_WIDTH, m__for_body
+	j m__for_end
+m__for_body:
+
+# for body start
+	lw $t0,	BLOCK_SPAWNER_NEXT_BLOCK_OFFSET($s0) 	# block_spawner->next_block
+	li $t1, 4
+	mul $t1, $t1, $t7				# column * sizeof(char*)
+
+	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
+	move $t6, $t0
+
+	# if (*next_block_ptr && **next_block_ptr)
+	lw $t0, ($t6)
+	beqz $t0, m__for__if_not_continue
+	lw $t0, ($t0)
+	beqz $t0, m__for__if_not_continue
+m__for__if_continue:
+	j m__for_iter
+m__for__if_not_continue:
+
+	# $t0 = chunk
+	jal rng
+	remu $t0, $v0, NUM_CHUNKS
+
+	li $v0, 4
+	la $a0, maybe_pick_new_chunk__column_msg_1
+	syscall
+
+	li $v0, 1
+	move $a0, $t7
+	syscall
+
+	li $v0, 4
+	la $a0, maybe_pick_new_chunk__column_msg_2
+	syscall
+
+	li $v0, 1
+	move $a0, $t0
+	syscall
+
+	li $v0, 11
+	la $a0, '\n'
+	syscall
+
+	# $t0 free to use
+
+	mul $t0, $t0, 4 # chunk * sizeof(char*)
+	addi $t0, $t0, CHUNKS
+	lw $t1, ($t0)  # $t1 is to be saved in *next_block_ptr
+
+	lw $t0, ($t6)  # $t0 = *next_block_ptr
+	sw $t1, ($t0)  # *next_block_ptr = CHUNKS[chunk]
+
+	# if (column == block_spawner->safe_column)
+	lw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
+	beq $t7, $t0, m__for__if_is_safe_column
+	j m__for__if_not_safe_column
+m__for__if_is_safe_column:
+	li $t8, TRUE
+m__for__if_not_safe_column:
+
+# for body end
+	
+m__for_iter:
+	addi $t7, $t7, 1 # ++column
+	j m__for_condition
+m__for_end:
+
+
+	# if (new_safe_column_required)
+	beqz $t8, m__if_not_new_safe_column_required
+	j m__if_new_safe_column_required
+m__if_new_safe_column_required:
+	# $t0 = safe_column
+	jal rng
+	remu $t0, $v0, MAP_WIDTH
+
+	li $v0, 4
+	la $a0, maybe_pick_new_chunk__safe_msg
+	syscall
+
+	li $v0, 1
+	move $a0, $t0
+	syscall
+
+	li $v0, 11
+	la $a0, '\n'
+	syscall 					# printf("New safe column: %d\n", safe_column);
+
+	lw $t1, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
+	sw $t0, ($t1)
+
+
+	lw $t1, CHUNKS # $t1 = the char* tobe saved
+	lw $t2, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET($s0)
+	li $t3, 4
+	mul $t3, $t3, $t0 # safe_column * sizeof(char*)
+	add $t2, $t2, $t3 # $t2 is the address to be saved into
+
+	sw $t1, ($t2)
+
+	# $t0 free to use
+m__if_not_new_safe_column_required:
+
+
 maybe_pick_new_chunk__epilogue:
+	pop $s0
+	pop $ra
 	jr	$ra
 
 
