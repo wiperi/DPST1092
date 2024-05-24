@@ -1439,10 +1439,10 @@ do__for2_body:
 	mul $t0, $t0, MAP_WIDTH
 	add $t0, $t0, $t7
 	add $t0, $t0, $s0
-	lw $t1, ($t0)
+	lb $t1, ($t0)
 
 	addi $t0, $t0, -5
-	sw $t1, ($t0)
+	sb $t1, ($t0)
 do__for2_iter:
 	addi $t7, $t7, 1
 	j do__for2_condition
@@ -1474,7 +1474,7 @@ do__for3_body:
 	mul $t0, $t0, MAP_WIDTH
 	add $t0, $t0, $t8
 	add $t0, $s0
-	sw $t6, ($t0)
+	sb $t6, ($t0)
 
 	lw $t0, ($t7)
 	addi $t0, $t0, 4
