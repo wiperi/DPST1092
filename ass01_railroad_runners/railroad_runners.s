@@ -1216,7 +1216,9 @@ m__for_condition:
 m__for_body:
 
 # for body start
-	lw $t0,	BLOCK_SPAWNER_NEXT_BLOCK_OFFSET($s0) 	# block_spawner->next_block
+	li $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET 	# block_spawner->next_block
+	add $t0, $t0, $s0
+	
 	li $t1, 4
 	mul $t1, $t1, $t7				# column * sizeof(char*)
 
