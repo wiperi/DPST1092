@@ -1111,7 +1111,7 @@ handle_collision__is_train_char:
 	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
 	beq $t0, PLAYER_JUMPING, handle_collision__not_ran_into_a_train
 	lw $t0, PLAYER_ON_TRAIN_OFFSET($s1) 	# int on_train = player->on_train
-	beqz $t0, handle_collision__not_ran_into_a_train
+	bne $t0, 1, handle_collision__not_ran_into_a_train
 
 	li $v0, 4 				# printf("💥 You ran into a train! 😵\n");
 	la $a0, handle_collision__train_msg
