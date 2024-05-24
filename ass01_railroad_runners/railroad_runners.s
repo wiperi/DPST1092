@@ -1224,6 +1224,8 @@ m__for_body:
 	move $t6, $t0
 
 	# if (*next_block_ptr && **next_block_ptr)
+	beqz $t6, m__for__if_not_continue
+	
 	lw $t0, ($t6)
 	beqz $t0, m__for__if_not_continue
 	lw $t0, ($t0)
