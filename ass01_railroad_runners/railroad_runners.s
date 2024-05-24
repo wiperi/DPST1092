@@ -1085,9 +1085,10 @@ handle_collision__body:
 
 	lb $t0, ($s2) 				# $t0 = *map_char
 	bne $t0, BARRIER_CHAR, handle_collision__not_barrier_char # if (*map_char == BARRIER_CHAR)
+
 	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
-	bne $t0, PLAYER_CROUCHING, handle_collision__is_barrier_char__is_crouching # if (player->state != PLAYER_CROUCHING)
-	j handle_collision__is_barrier_char__is_not_crouching
+	bne $t0, PLAYER_CROUCHING, handle_collision__is_barrier_char__is_not_crouching # if (player->state != PLAYER_CROUCHING)
+	j handle_collision__is_barrier_char__is_crouching
 handle_collision__is_barrier_char__is_crouching:
 	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
 	addi $t0, $t0, BARRIER_SCORE_BONUS 	# score += BARRIER_SCORE
