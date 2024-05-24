@@ -1335,19 +1335,34 @@ m__if_new_safe_column_required:
 	la $a0, '\n'
 	syscall 					# printf("New safe column: %d\n", safe_column);
 
-	sw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
+	sw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0) 	# block_spawner->safe_column = safe_column;
 
 
-	lw $t1, CHUNKS # $t1 = the char* tobe saved
-	
-	li $t3, 4
+
+	li $t3, 4					# block_spawner->next_block[safe_column] = CHUNKS[SAFE_CHUNK_INDEX];
 	mul $t3, $t3, $t0
 	add $t3, $t3, $s0
 	add $t3, $t3, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
 
+	lw $t1, CHUNKS
 	sw $t1, ($t3)
 
 	# $t0 free to use
+
+	#debug
+	beqz $s0, error2
+	j not_error2
+error2:
+	li $v0, 1
+	move $a0, $s0
+	syscall
+	li $v0, 1
+	move $a0, $t1
+	syscall
+	j maybe_pick_new_chunk__epilogue
+not_error2:
+
+
 m__if_not_new_safe_column_required:
 
 
