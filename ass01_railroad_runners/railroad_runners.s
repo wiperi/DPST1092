@@ -1242,7 +1242,15 @@ m__for__if_continue:
 m__for__if_not_continue:
 
 	# $t0 = chunk
+	push $t0
+	push $t1
+	push $t2
+	push $a0
 	jal rng
+	pop $a0
+	pop $t2
+	pop $t1
+	pop $t0
 	remu $t0, $v0, NUM_CHUNKS
 
 	li $v0, 4
@@ -1295,7 +1303,15 @@ m__for_end:
 	j m__if_new_safe_column_required
 m__if_new_safe_column_required:
 	# $t0 = safe_column
+	push $t0
+	push $t1
+	push $t2
+	push $a0
 	jal rng
+	pop $a0
+	pop $t2
+	pop $t1
+	pop $t0
 	remu $t0, $v0, MAP_WIDTH
 
 	li $v0, 4
