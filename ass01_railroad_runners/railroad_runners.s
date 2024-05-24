@@ -986,18 +986,18 @@ handle_command__body:
 	lw $t1, PLAYER_STATE_OFFSET($s1) # int = player->state
 
 	bne $s3, LEFT_KEY, not_left_key # if (input == LEFT_KEY)
-	blez $t0, not_left_key
+	blez $t0, not_left_key # if (player->column > 0)
 
-	move $t8, $t0
+	move $t8, $t0 # --player->column
 	sub $t8, $t8, 1
 	sw $t8, PLAYER_COLUMN_OFFSET($s1)
 not_left_key:
 
-	bne $s3, RIGHT_KEY, not_right_key
-	bge $s1, MAP_WIDTH - 1, not_right_key
+	bne $s3, RIGHT_KEY, not_right_key # if (input == RIGHT_KEY)
+	bge $s1, MAP_WIDTH - 1, not_right_key # if (player->column < MAP_WIDTH - 1)
 
-	move $t8, $t0
-	add $t8, $t8, 1
+	move $t8, $t0 # ++player->column
+	addi $t8, $t8, 1
 	sw $t8, PLAYER_COLUMN_OFFSET($s1)
 not_right_key:
 
