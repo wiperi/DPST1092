@@ -951,9 +951,9 @@ handle_command:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[do_tick]]
+	# Uses:     [$ra, $s0, $s1, $s2, $s3, $t0, $t1, $t8]
+	# Clobbers: [$t0, $t1, $t8]
 	#
 	# Locals:
 	#   - $s0 = map
@@ -982,49 +982,49 @@ handle_command__body:
 	move $s2, $a2
 	move $s3, $a3
 
-	lw $t0, PLAYER_COLUMN_OFFSET($s1) # int = player->column
-	lw $t1, PLAYER_STATE_OFFSET($s1) # int = player->state
+	lw $t0, PLAYER_COLUMN_OFFSET($s1) 		# int = player->column
+	lw $t1, PLAYER_STATE_OFFSET($s1) 		# int = player->state
 
-	bne $s3, LEFT_KEY, not_left_key # if (input == LEFT_KEY)
-	blez $t0, not_left_key # if (player->column > 0)
+	bne $s3, LEFT_KEY, not_left_key 		# if (input == LEFT_KEY)
+	blez $t0, not_left_key 				# if (player->column > 0)
 
-	move $t8, $t0 # --player->column
+	move $t8, $t0 					# --player->column
 	sub $t8, $t8, 1
 	sw $t8, PLAYER_COLUMN_OFFSET($s1)
 not_left_key:
 
-	bne $s3, RIGHT_KEY, not_right_key # if (input == RIGHT_KEY)
-	bge $t0, MAP_WIDTH - 1, not_right_key # if (player->column < MAP_WIDTH - 1)
+	bne $s3, RIGHT_KEY, not_right_key 		# if (input == RIGHT_KEY)
+	bge $t0, MAP_WIDTH - 1, not_right_key 		# if (player->column < MAP_WIDTH - 1)
 
-	move $t8, $t0 # ++player->column
+	move $t8, $t0 					# ++player->column
 	addi $t8, $t8, 1
 	sw $t8, PLAYER_COLUMN_OFFSET($s1)
 not_right_key:
 
-	bne $s3, JUMP_KEY, not_jump_key
-	bne $t1, PLAYER_RUNNING, not_jump_key
+	bne $s3, JUMP_KEY, not_jump_key 		# if (input == JUMP_KEY)
+	bne $t1, PLAYER_RUNNING, not_jump_key 		# if (player->state == PLAYER_RUNNING)
 
-	li $t8, PLAYER_JUMPING
+	li $t8, PLAYER_JUMPING 				# player->state = PLAYER_JUMPING
 	sw $t8, PLAYER_STATE_OFFSET($s1)
-	li $t8, ACTION_DURATION
+	li $t8, ACTION_DURATION 			# player->action_ticks_left = ACTION_DURATION
 	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
 not_jump_key:
 
-	bne $s3, CROUCH_KEY, not_crouch_key
-	bne $t1, PLAYER_RUNNING, not_crouch_key
+	bne $s3, CROUCH_KEY, not_crouch_key 		# if (input == CROUCH_KEY)
+	bne $t1, PLAYER_RUNNING, not_crouch_key 	# if (player->state == PLAYER_RUNNING)
 
-	li $t8, PLAYER_CROUCHING
+	li $t8, PLAYER_CROUCHING 			# player->state = PLAYER_CROUCHING
 	sw $t8, PLAYER_STATE_OFFSET($s1)
-	li $t8, ACTION_DURATION
+	li $t8, ACTION_DURATION 			# player->action_ticks_left = ACTION_DURATION
 	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
 not_crouch_key:
 
-	bne $s3, TICK_KEY, not_tick_key
+	bne $s3, TICK_KEY, not_tick_key 		# if (input == TICK_KEY)
 
 	move $a0, $s0
 	move $a1, $s1
 	move $a2, $s2
-	jal do_tick
+	jal do_tick 					# do_tick(map, player, block_spawner)
 not_tick_key:
 
 handle_command__epilogue:
