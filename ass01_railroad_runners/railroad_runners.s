@@ -1049,9 +1049,9 @@ handle_collision:
 	#
 	# Returns:  $v0: int
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    []
+	# Uses:     [$ra, $s0, $s1, $s2, $a0, $t0, $t1]
+	# Clobbers: [$t0, $t1, $a0]
 	#
 	# Locals:
 	#   - $s0 = map
@@ -1090,9 +1090,9 @@ handle_collision__body:
 	bne $t0, PLAYER_CROUCHING, handle_collision__is_barrier_char__is_not_crouching # if (player->state != PLAYER_CROUCHING)
 	j handle_collision__is_barrier_char__is_crouching
 handle_collision__is_barrier_char__is_crouching:
-	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
-	addi $t0, $t0, BARRIER_SCORE_BONUS 	# score += BARRIER_SCORE
-	sw $t0, PLAYER_SCORE_OFFSET($s1)	# player->score = score
+	lw $t0, PLAYER_SCORE_OFFSET($s1)
+	addi $t0, $t0, BARRIER_SCORE_BONUS
+	sw $t0, PLAYER_SCORE_OFFSET($s1)	# player->score += score
 	j handle_collision__not_barrier_char
 handle_collision__is_barrier_char__is_not_crouching:
 	li $v0, 4 				# printf("💥 You ran into a barrier! 😵\n");
@@ -1128,22 +1128,22 @@ handle_collision__not_ran_into_a_train:
 	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
 	beq $t0, PLAYER_JUMPING, handle_collision__is_jumping
 
-	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
-	addi $t0, TRAIN_SCORE_BONUS 		# score += TRAIN_SCORE
-	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score = score
+	lw $t0, PLAYER_SCORE_OFFSET($s1)
+	addi $t0, TRAIN_SCORE_BONUS
+	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score += score
 handle_collision__is_jumping:
 	j handle_collision__is_train_char_end
 
 handle_collision__not_train_char:
-	li $t0, FALSE
+	li $t0, FALSE 				# player->on_train = FALSE
 	sw $t0, PLAYER_ON_TRAIN_OFFSET($s1)
 handle_collision__is_train_char_end:
 
 	lb $t0, ($s2) 				# $t0 = *map_char
 	bne $t0, WALL_CHAR, handle_collision__not_wall_char # if (*map_char == WALL_CHAR)
-	# is wall_char
 
-	li $v0, 4
+	# is wall_char
+	li $v0, 4 				# printf("💥 You ran into a wall! 😵\n");
 	la $a0, handle_collision__wall_msg
 	syscall
 
@@ -1155,9 +1155,9 @@ handle_collision__not_wall_char:
 	bne $t0, CASH_CHAR, handle_collision__not_cash_char # if (*map_char == CASH_CHAR)
 
 	# is cash_char
-	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
-	addi $t0, CASH_SCORE_BONUS 		# score += CASH_SCORE
-	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score = score
+	lw $t0, PLAYER_SCORE_OFFSET($s1)	 # player->score += score 	
+	addi $t0, CASH_SCORE_BONUS 		
+	sw $t0, PLAYER_SCORE_OFFSET($s1)
 
 	li $t0, EMPTY_CHAR 			# *map_char = EMPTY_CHAR
 	sb $t0, ($s2)
