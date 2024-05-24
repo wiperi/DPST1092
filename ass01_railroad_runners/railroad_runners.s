@@ -1231,6 +1231,9 @@ error:
 	li $v0, 1
 	move $a0, $t1
 	syscall
+	li $v0, 1
+	move $a0, $s0
+	syscall
 	j maybe_pick_new_chunk__epilogue
 not_error:
 
@@ -1345,21 +1348,6 @@ m__if_new_safe_column_required:
 	sw $t1, ($t3)
 
 	# $t0 free to use
-
-	#debug
-	beqz $s0, error2
-	j not_error2
-error2:
-	li $v0, 1
-	move $a0, $s0
-	syscall
-	li $v0, 1
-	move $a0, $t1
-	syscall
-	j maybe_pick_new_chunk__epilogue
-not_error2:
-
-
 m__if_not_new_safe_column_required:
 
 
