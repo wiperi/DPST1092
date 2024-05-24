@@ -1220,19 +1220,28 @@ m__for_body:
 	li $t1, 4
 	mul $t1, $t1, $t7				# column * sizeof(char*)
 
-	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
-	move $t6, $t0
-
-	# if (*next_block_ptr && **next_block_ptr)
-	beqz $t6, error
+	# debug code
+	beqz $t0, error
+	beqz $t1, error
 	j not_error
 error:
 	li $v0, 1
-	la $a0, 777
+	move $a0, $t0
+	syscall
+	li $v0, 1
+	move $a0, $t1
+	syscall
+	li $v0, 1
+	move $a0, $t6
 	syscall
 	j maybe_pick_new_chunk__epilogue
 not_error:
 
+	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
+	move $t6, $t0
+
+
+	# if (*next_block_ptr && **next_block_ptr)
 	lw $t0, ($t6)
 	beqz $t0, m__for__if_not_continue
 	lw $t0, ($t0)
