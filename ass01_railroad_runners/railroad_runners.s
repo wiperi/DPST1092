@@ -994,7 +994,7 @@ handle_command__body:
 not_left_key:
 
 	bne $s3, RIGHT_KEY, not_right_key # if (input == RIGHT_KEY)
-	bge $s1, MAP_WIDTH - 1, not_right_key # if (player->column < MAP_WIDTH - 1)
+	bge $t0, MAP_WIDTH - 1, not_right_key # if (player->column < MAP_WIDTH - 1)
 
 	move $t8, $t0 # ++player->column
 	addi $t8, $t8, 1
