@@ -1054,7 +1054,9 @@ handle_collision:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = map
+	#   - $s1 = player
+	#   - $s2 = char *map_char
 	#
 	# Structure:
 	#   handle_collision
@@ -1064,7 +1066,109 @@ handle_collision:
 
 handle_collision__prologue:
 handle_collision__body:
+	push $ra
+	push $s0
+	push $s1
+	push $s2
+	move $s0, $a0
+	move $s1, $a1
+	
+	# get player->column, player->state, player->score, player->on_train
+
+	li $t0, MAP_WIDTH
+	mul $t0, $t0, PLAYER_ROW 		# player->row * row_length
+	lw $t1, PLAYER_COLUMN_OFFSET($s1) 	# player->column
+	add $t0, $t0, $t1 			# player->row * row_length + player->column
+	add $t0, $t0, $s0 			# ... + map
+	move $s2, $t0 				# map_char = &map[PLAYER_ROW][player->column]
+
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, BARRIER_CHAR, handle_collision__not_barrier_char # if (*map_char == BARRIER_CHAR)
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	bne $t0, PLAYER_CROUCHING, handle_collision__is_barrier_char__is_crouching # if (player->state != PLAYER_CROUCHING)
+	j handle_collision__is_barrier_char__is_not_crouching
+handle_collision__is_barrier_char__is_crouching:
+	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
+	addi $t0, $t0, BARRIER_SCORE_BONUS 	# score += BARRIER_SCORE
+	sw $t0, PLAYER_SCORE_OFFSET($s1)	# player->score = score
+	j handle_collision__not_barrier_char
+handle_collision__is_barrier_char__is_not_crouching:
+	li $v0, 4 				# printf("💥 You ran into a barrier! 😵\n");
+	la $a0, handle_collision__barrier_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_barrier_char:
+
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	beq $t0, TRAIN_CHAR, handle_collision__is_train_char # if (*map_char == TRAIN_CHAR)
+	j handle_collision__not_train_char
+handle_collision__is_train_char:
+
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	beq $t0, PLAYER_JUMPING, handle_collision__not_ran_into_a_train
+	lw $t0, PLAYER_ON_TRAIN_OFFSET($s1) 	# int on_train = player->on_train
+	beqz $t0, handle_collision__not_ran_into_a_train
+
+	li $v0, 4 				# printf("💥 You ran into a train! 😵\n");
+	la $a0, handle_collision__train_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_ran_into_a_train:
+
+	li $t0, TRUE 				# player->on_train = TRUE
+	sw $t0, PLAYER_ON_TRAIN_OFFSET($s1)
+
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	beq $t0, PLAYER_JUMPING, handle_collision__is_jumping
+
+	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
+	addi $t0, TRAIN_SCORE_BONUS 		# score += TRAIN_SCORE
+	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score = score
+handle_collision__is_jumping:
+	j handle_collision__is_train_char_end
+
+handle_collision__not_train_char:
+	li $t0, FALSE
+	sw $t0, PLAYER_ON_TRAIN_OFFSET($s1)
+handle_collision__is_train_char_end:
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, WALL_CHAR, handle_collision__not_wall_char # if (*map_char == WALL_CHAR)
+	# is wall_char
+
+	li $v0, 4
+	la $a0, handle_collision__wall_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_wall_char:
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, CASH_CHAR, handle_collision__not_cash_char # if (*map_char == CASH_CHAR)
+
+	# is cash_char
+	lw $t0, PLAYER_SCORE_OFFSET($s1) 	# int score = player->score
+	addi $t0, CASH_SCORE_BONUS 		# score += CASH_SCORE
+	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score = score
+
+	li $t0, EMPTY_CHAR 			# *map_char = EMPTY_CHAR
+	sb $t0, ($s2)
+handle_collision__not_cash_char:
+
+	li $v0, TRUE 				# return TRUE
+	
 handle_collision__epilogue:
+	pop $s2
+	pop $s1
+	pop $s0
+	pop $ra
 	jr	$ra
 
 
