@@ -1223,6 +1223,7 @@ m__for_body:
 	mul $t1, $t1, $t7				# column * sizeof(char*)
 
 # 	# debug code
+        j not_error
 error:
 	li $v0, 1
 	move $a0, $t0
