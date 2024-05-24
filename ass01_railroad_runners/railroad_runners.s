@@ -1345,6 +1345,7 @@ m__if_not_new_safe_column_required:
 maybe_pick_new_chunk__epilogue:
 	pop $s0
 	pop $ra
+	li $v0, 0
 	jr	$ra
 
 
