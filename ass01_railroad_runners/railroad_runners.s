@@ -1223,21 +1223,20 @@ m__for_body:
 	mul $t1, $t1, $t7				# column * sizeof(char*)
 
 # 	# debug code
-# 	beqz $t0, error
-# 	beqz $t1, error
-# 	j not_error
-# error:
-# 	li $v0, 1
-# 	move $a0, $t0
-# 	syscall
-# 	li $v0, 1
-# 	move $a0, $t1
-# 	syscall
-# 	li $v0, 1
-# 	move $a0, $s0
-# 	syscall
-# 	j maybe_pick_new_chunk__epilogue
-# not_error:
+	beqz $t0, error
+	j not_error
+error:
+	li $v0, 1
+	move $a0, $t0
+	syscall
+	# li $v0, 1
+	# move $a0, $t1
+	# syscall
+	# li $v0, 1
+	# move $a0, $s0
+	# syscall
+	j maybe_pick_new_chunk__epilogue
+not_error:
 
 	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
 	move $t6, $t0
@@ -1291,6 +1290,10 @@ m__for__if_not_continue:
 	lw $t1, ($t0)  # $t1 is to be saved in *next_block_ptr
 
 	lw $t0, ($t6)  # $t0 = *next_block_ptr
+
+	# debug code
+	beqz $t0, error
+
 	sw $t1, ($t0)  # *next_block_ptr = CHUNKS[chunk]
 
 	# if (column == block_spawner->safe_column)
