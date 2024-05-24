@@ -1335,17 +1335,17 @@ m__if_new_safe_column_required:
 	la $a0, '\n'
 	syscall 					# printf("New safe column: %d\n", safe_column);
 
-	lw $t1, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
-	sw $t0, ($t1)
+	sw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
 
 
 	lw $t1, CHUNKS # $t1 = the char* tobe saved
-	lw $t2, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET($s0)
+	
 	li $t3, 4
-	mul $t3, $t3, $t0 # safe_column * sizeof(char*)
-	add $t2, $t2, $t3 # $t2 is the address to be saved into
+	mul $t3, $t3, $t0
+	add $t3, $t3, $s0
+	add $t3, $t3, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
 
-	sw $t1, ($t2)
+	sw $t1, ($t3)
 
 	# $t0 free to use
 m__if_not_new_safe_column_required:
