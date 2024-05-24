@@ -1231,9 +1231,6 @@ error:
 	li $v0, 1
 	move $a0, $t1
 	syscall
-	li $v0, 1
-	move $a0, $t6
-	syscall
 	j maybe_pick_new_chunk__epilogue
 not_error:
 
