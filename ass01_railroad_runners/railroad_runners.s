@@ -1390,6 +1390,7 @@ do_tick:
 
 do_tick__prologue:
 do_tick__body:
+	
 do_tick__epilogue:
 	jr	$ra
 

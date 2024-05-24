@@ -726,9 +726,9 @@ display_game:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[maybe_print_player]]
+	# Uses:     [$ra, $s0, $s1, $t0, $t1, $t2, $t3, $v0]
+	# Clobbers: [$ra, $s0, $s1, $t0, $t1, $t2, $t3, $v0]
 	#
 	# Locals:
 	#   - $t0 = int i
@@ -767,7 +767,7 @@ display_game__for2_condition:
 	blt $t1, MAP_WIDTH, display_game__for2_body
 	j display_game__for2_end
 display_game__for2_body:
-	li $v0, 11 # putchar(RAIL_EDGE)
+	li $v0, 11 				# putchar(RAIL_EDGE)
 	la $a0, RAIL_EDGE
 	syscall
 
@@ -778,8 +778,9 @@ display_game__for2_body:
 	move $a0, $s1
 	move $a1, $t0
 	move $a2, $t1
-	jal maybe_print_player # if (!maybe_print_player(player, i, j))
-	not $v0, $v0
+	jal maybe_print_player 			# if (!maybe_print_player(player, i, j))
+	not $v0, $v0				# 0001 will become 1110
+	andi $v0, $v0, 1			# 1110 will become 0000
 
 	pop $t1
 	pop $t0
@@ -788,40 +789,40 @@ display_game__for2_body:
 	beqz $v0, display_game__for2__if_end
 	j display_game__for2__if_then
 display_game__for2__if_then:
-	mul $t2, $t0, MAP_WIDTH # i * row_length
-	add $t2, $t2, $t1 # i * row_length + j
-	add $t2, $t2, $s0 # ... + map
+	mul $t2, $t0, MAP_WIDTH			 # i * row_length
+	add $t2, $t2, $t1			 # i * row_length + j
+	add $t2, $t2, $s0 			 # ... + map
 
-	lb $t3, ($t2) # map_char = map[i][j]
+	lb $t3, ($t2)				 # map_char = map[i][j]
 
-	bne $t3, EMPTY_CHAR, not_empty
+	bne $t3, EMPTY_CHAR, not_empty   # if (map_char == EMPTY_CHAR)
 	li $v0, 4
 	la $a0, EMPTY_SPRITE
 	syscall
 not_empty:
-	bne $t3, BARRIER_CHAR, not_barrier_char
+	bne $t3, BARRIER_CHAR, not_barrier_char # else if (map_char == BARRIER_CHAR)
 	li $v0, 4
 	la $a0, BARRIER_SPRITE
 	syscall
 not_barrier_char:
-	bne $t3, TRAIN_CHAR, not_train_char
+	bne $t3, TRAIN_CHAR, not_train_char # else if (map_char == TRAIN_CHAR)
 	li $v0, 4
 	la $a0, TRAIN_SPRITE
 	syscall
 not_train_char:
-	bne $t3, CASH_CHAR, not_cash_char
+	bne $t3, CASH_CHAR, not_cash_char # else if (map_char == CASH_CHAR)
 	li $v0, 4
 	la $a0, CASH_SPRITE
 	syscall
 not_cash_char:
-	bne $t3, WALL_CHAR, not_wall_char
+	bne $t3, WALL_CHAR, not_wall_char # else if (map_char == WALL_CHAR)
 	li $v0, 4
 	la $a0, WALL_SPRITE
 	syscall
 not_wall_char:
 
 display_game__for2__if_end:
-	li $v0, 11 # putchar(RAIL_EDGE)
+	li $v0, 11				 # putchar(RAIL_EDGE)
 	la $a0, RAIL_EDGE
 	syscall
 display_game__for2_iter:
@@ -829,7 +830,7 @@ display_game__for2_iter:
 	j display_game__for2_condition
 display_game__for2_end:
 
-	li $v0, 11 # putchar('\n')
+	li $v0, 11 				# putchar('\n')
 	la $a0, '\n'
 	syscall
 display_game__for1_iter:
@@ -837,7 +838,7 @@ display_game__for1_iter:
 	j display_game__for1_condition
 display_game__for1_end:
 
-	li $v0, 4 # printf("Score: %d\n", player->score);
+	li $v0, 4 				# printf("Score: %d\n", player->score);
 	la $a0, display_game__score_msg
 	syscall
 
@@ -853,6 +854,7 @@ display_game__epilogue:
 	pop $s1
 	pop $s0
 	pop $ra
+	li $v0, 0
 	jr	$ra
 
 
@@ -870,11 +872,14 @@ maybe_print_player:
 	# Returns:  $v0: int
 	#
 	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Uses:     [$ra, $s0, $s1, $s2, $t0]
+	# Clobbers: [$ra, $s0, $s1, $s2, $t0]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = player
+	#   - $s1 = row
+	#   - $s2 = column
+	#   - $t0 = player_column, player_state
 	#
 	# Structure:
 	#   maybe_print_player
@@ -884,19 +889,51 @@ maybe_print_player:
 
 maybe_print_player__prologue:
 maybe_print_player__body:
-	li $v0, 1
-	syscall
+        push $ra
+	push $s0
+	push $s1
+	push $s2
+	move $s0, $a0
+	move $s1, $a1
+	move $s2, $a2
 
-	li $v0, 1
-	move $a0, $a1
-	syscall
+	beq $s0, 0, maybe_print_player__if1_then 	 	# if (player == NULL)
 
-	li $v0, 1
-	move $a0, $a2
-	syscall
+	lw $t0, PLAYER_COLUMN_OFFSET($s0) 		 	# int column = player->column
+	bne $s1, PLAYER_ROW, maybe_print_player__if1_then	# if (row != PLAYER_ROW)
+	bne $s2, $t0, maybe_print_player__if1_then  	 	# if (column != player->column)
+	j maybe_print_player__if1_end
+maybe_print_player__if1_then:
+	li $v0, FALSE 						# return FALSE
+	j maybe_print_player__epilogue
+maybe_print_player__if1_end:
 
-	
+	lw $t0, PLAYER_STATE_OFFSET($s0) 			# int state = player->state
+
+	bne $t0, PLAYER_RUNNING, not_running			# if (state == PLAYER_RUNNING)
+	li $v0, 4
+	la $a0, PLAYER_RUNNING_SPRITE
+	syscall
+not_running:
+	bne $t0, PLAYER_CROUCHING, not_crouching 		# else if (state == PLAYER_CROUCHING)
+	li $v0, 4
+	la $a0, PLAYER_CROUCHING_SPRITE
+	syscall
+not_crouching:
+	bne $t0, PLAYER_JUMPING, not_jumping 			# else if (state == PLAYER_JUMPING)
+	li $v0, 4
+	la $a0, PLAYER_JUMPING_SPRITE
+	syscall
+not_jumping:
+
+	li $v0, TRUE 						# return TRUE
+	j maybe_print_player__epilogue
+
 maybe_print_player__epilogue:
+	pop $s2
+	pop $s1
+	pop $s0
+	pop $ra
 	jr	$ra
 
 
@@ -914,12 +951,18 @@ handle_command:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[do_tick]]
+	# Uses:     [$ra, $s0, $s1, $s2, $s3, $t0, $t1, $t8]
+	# Clobbers: [$t0, $t1, $t8]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = map
+	#   - $s1 = player
+	#   - $s2 = block_spawner
+	#   - $s3 = input
+	#   - $t0 = player->column
+	#   - $t1 = player->state
+	#   - $t8 = temporary
 	#
 	# Structure:
 	#   handle_command
@@ -929,8 +972,69 @@ handle_command:
 
 handle_command__prologue:
 handle_command__body:
+	push $s0
+	push $s1
+	push $s2
+	push $s3
+	push $ra
+	move $s0, $a0
+	move $s1, $a1
+	move $s2, $a2
+	move $s3, $a3
+
+	lw $t0, PLAYER_COLUMN_OFFSET($s1) 		# int = player->column
+	lw $t1, PLAYER_STATE_OFFSET($s1) 		# int = player->state
+
+	bne $s3, LEFT_KEY, not_left_key 		# if (input == LEFT_KEY)
+	blez $t0, not_left_key 				# if (player->column > 0)
+
+	move $t8, $t0 					# --player->column
+	sub $t8, $t8, 1
+	sw $t8, PLAYER_COLUMN_OFFSET($s1)
+not_left_key:
+
+	bne $s3, RIGHT_KEY, not_right_key 		# if (input == RIGHT_KEY)
+	bge $t0, MAP_WIDTH - 1, not_right_key 		# if (player->column < MAP_WIDTH - 1)
+
+	move $t8, $t0 					# ++player->column
+	addi $t8, $t8, 1
+	sw $t8, PLAYER_COLUMN_OFFSET($s1)
+not_right_key:
+
+	bne $s3, JUMP_KEY, not_jump_key 		# if (input == JUMP_KEY)
+	bne $t1, PLAYER_RUNNING, not_jump_key 		# if (player->state == PLAYER_RUNNING)
+
+	li $t8, PLAYER_JUMPING 				# player->state = PLAYER_JUMPING
+	sw $t8, PLAYER_STATE_OFFSET($s1)
+	li $t8, ACTION_DURATION 			# player->action_ticks_left = ACTION_DURATION
+	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
+not_jump_key:
+
+	bne $s3, CROUCH_KEY, not_crouch_key 		# if (input == CROUCH_KEY)
+	bne $t1, PLAYER_RUNNING, not_crouch_key 	# if (player->state == PLAYER_RUNNING)
+
+	li $t8, PLAYER_CROUCHING 			# player->state = PLAYER_CROUCHING
+	sw $t8, PLAYER_STATE_OFFSET($s1)
+	li $t8, ACTION_DURATION 			# player->action_ticks_left = ACTION_DURATION
+	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
+not_crouch_key:
+
+	bne $s3, TICK_KEY, not_tick_key 		# if (input == TICK_KEY)
+
+	move $a0, $s0
+	move $a1, $s1
+	move $a2, $s2
+	jal do_tick 					# do_tick(map, player, block_spawner)
+not_tick_key:
+
 handle_command__epilogue:
-	jr	$ra
+	pop $ra
+	pop $s3
+	pop $s2
+	pop $s1
+	pop $s0
+	li $v0, 0
+	jr $ra
 
 
 ################################################################################
@@ -945,12 +1049,14 @@ handle_collision:
 	#
 	# Returns:  $v0: int
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    []
+	# Uses:     [$ra, $s0, $s1, $s2, $a0, $t0, $t1]
+	# Clobbers: [$t0, $t1, $a0]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = map
+	#   - $s1 = player
+	#   - $s2 = char *map_char
 	#
 	# Structure:
 	#   handle_collision
@@ -960,7 +1066,110 @@ handle_collision:
 
 handle_collision__prologue:
 handle_collision__body:
+	push $ra
+	push $s0
+	push $s1
+	push $s2
+	move $s0, $a0
+	move $s1, $a1
+	
+	# get player->column, player->state, player->score, player->on_train
+
+	li $t0, MAP_WIDTH
+	mul $t0, $t0, PLAYER_ROW 		# player->row * row_length
+	lw $t1, PLAYER_COLUMN_OFFSET($s1) 	# player->column
+	add $t0, $t0, $t1 			# player->row * row_length + player->column
+	add $t0, $t0, $s0 			# ... + map
+	move $s2, $t0 				# map_char = &map[PLAYER_ROW][player->column]
+
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, BARRIER_CHAR, handle_collision__not_barrier_char # if (*map_char == BARRIER_CHAR)
+
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	bne $t0, PLAYER_CROUCHING, handle_collision__is_barrier_char__is_not_crouching # if (player->state != PLAYER_CROUCHING)
+	j handle_collision__is_barrier_char__is_crouching
+handle_collision__is_barrier_char__is_crouching:
+	lw $t0, PLAYER_SCORE_OFFSET($s1)
+	addi $t0, $t0, BARRIER_SCORE_BONUS
+	sw $t0, PLAYER_SCORE_OFFSET($s1)	# player->score += score
+	j handle_collision__not_barrier_char
+handle_collision__is_barrier_char__is_not_crouching:
+	li $v0, 4 				# printf("💥 You ran into a barrier! 😵\n");
+	la $a0, handle_collision__barrier_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_barrier_char:
+
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	beq $t0, TRAIN_CHAR, handle_collision__is_train_char # if (*map_char == TRAIN_CHAR)
+	j handle_collision__not_train_char
+handle_collision__is_train_char:
+
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	beq $t0, PLAYER_JUMPING, handle_collision__not_ran_into_a_train
+	lw $t0, PLAYER_ON_TRAIN_OFFSET($s1) 	# int on_train = player->on_train
+	bnez $t0, handle_collision__not_ran_into_a_train
+
+	li $v0, 4 				# printf("💥 You ran into a train! 😵\n");
+	la $a0, handle_collision__train_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_ran_into_a_train:
+
+	li $t0, TRUE 				# player->on_train = TRUE
+	sw $t0, PLAYER_ON_TRAIN_OFFSET($s1)
+
+	lw $t0, PLAYER_STATE_OFFSET($s1) 	# int state = player->state
+	beq $t0, PLAYER_JUMPING, handle_collision__is_jumping
+
+	lw $t0, PLAYER_SCORE_OFFSET($s1)
+	addi $t0, TRAIN_SCORE_BONUS
+	sw $t0, PLAYER_SCORE_OFFSET($s1) 	# player->score += score
+handle_collision__is_jumping:
+	j handle_collision__is_train_char_end
+
+handle_collision__not_train_char:
+	li $t0, FALSE 				# player->on_train = FALSE
+	sw $t0, PLAYER_ON_TRAIN_OFFSET($s1)
+handle_collision__is_train_char_end:
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, WALL_CHAR, handle_collision__not_wall_char # if (*map_char == WALL_CHAR)
+
+	# is wall_char
+	li $v0, 4 				# printf("💥 You ran into a wall! 😵\n");
+	la $a0, handle_collision__wall_msg
+	syscall
+
+	li $v0, FALSE 				# return FALSE
+	j handle_collision__epilogue
+handle_collision__not_wall_char:
+
+	lb $t0, ($s2) 				# $t0 = *map_char
+	bne $t0, CASH_CHAR, handle_collision__not_cash_char # if (*map_char == CASH_CHAR)
+
+	# is cash_char
+	lw $t0, PLAYER_SCORE_OFFSET($s1)	 # player->score += score 	
+	addi $t0, CASH_SCORE_BONUS 		
+	sw $t0, PLAYER_SCORE_OFFSET($s1)
+
+	li $t0, EMPTY_CHAR 			# *map_char = EMPTY_CHAR
+	sb $t0, ($s2)
+handle_collision__not_cash_char:
+
+	li $v0, TRUE 				# return TRUE
+	
 handle_collision__epilogue:
+	pop $s2
+	pop $s1
+	pop $s0
+	pop $ra
 	jr	$ra
 
 
@@ -980,7 +1189,6 @@ maybe_pick_new_chunk:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
 	#
 	# Structure:
 	#   maybe_pick_new_chunk
