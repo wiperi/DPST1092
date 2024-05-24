@@ -956,7 +956,13 @@ handle_command:
 	# Clobbers: [...]
 	#
 	# Locals:
-	#   - ...
+	#   - $s0 = map
+	#   - $s1 = player
+	#   - $s2 = block_spawner
+	#   - $s3 = input
+	#   - $t0 = player->column
+	#   - $t1 = player->state
+	#   - $t8 = temporary
 	#
 	# Structure:
 	#   handle_command
@@ -966,7 +972,68 @@ handle_command:
 
 handle_command__prologue:
 handle_command__body:
+	push $s0
+	push $s1
+	push $s2
+	push $s3
+	push $ra
+	move $s0, $a0
+	move $s1, $a1
+	move $s2, $a2
+	move $s3, $a3
+
+	lw $t0, PLAYER_COLUMN_OFFSET($s1) # int = player->column
+	lw $t1, PLAYER_STATE_OFFSET($s1) # int = player->state
+
+	bne $s3, LEFT_KEY, not_left_key # if (input == LEFT_KEY)
+	blez $t0, not_left_key
+
+	move $t8, $t0
+	sub $t8, $t8, 1
+	sw $t8, PLAYER_COLUMN_OFFSET($s1)
+not_left_key:
+
+	bne $s3, RIGHT_KEY, not_right_key
+	bge $s1, MAP_WIDTH - 1, not_right_key
+
+	move $t8, $t0
+	add $t8, $t8, 1
+	sw $t8, PLAYER_COLUMN_OFFSET($s1)
+not_right_key:
+
+	bne $s3, JUMP_KEY, not_jump_key
+	bne $t1, PLAYER_RUNNING, not_jump_key
+
+	li $t8, PLAYER_JUMPING
+	sw $t8, PLAYER_STATE_OFFSET($s1)
+	li $t8, ACTION_DURATION
+	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
+not_jump_key:
+
+	bne $s3, CROUCH_KEY, not_crouch_key
+	bne $t1, PLAYER_RUNNING, not_crouch_key
+
+	li $t8, PLAYER_CROUCHING
+	sw $t8, PLAYER_STATE_OFFSET($s1)
+	li $t8, ACTION_DURATION
+	sw $t8, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
+not_crouch_key:
+
+	bne $s3, TICK_KEY, not_tick_key
+
+	move $a0, $s0
+	move $a1, $s1
+	move $a2, $s2
+	jal do_tick
+not_tick_key:
+
 handle_command__epilogue:
+	pop $ra
+	pop $s3
+	pop $s2
+	pop $s1
+	pop $s0
+	li $v0, 0
 	jr	$ra
 
 
