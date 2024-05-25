@@ -1477,10 +1477,9 @@ do__for3_body:
 	sb $t6, ($t0)
 
 	lw $t0, ($t7)
-	addi $t0, $t0, 4
+	addi $t0, $t0, 1
 	
-	lw $t1, ($t7)
-	sw $t0, ($t1)
+	sw $t0, ($t7)
 do__for3_iter:
 	addi $t8, $t8, 1
 	j do__for3_condition
