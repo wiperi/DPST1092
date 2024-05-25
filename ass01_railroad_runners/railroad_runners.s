@@ -1434,7 +1434,7 @@ do__for2_condition:
 	blt $t7, MAP_WIDTH, do__for2_body
 	j do__for2_end
 do__for2_body:
-	move $t0, $8
+	move $t0, $t8
 	addi $t0, $t0, 1
 	mul $t0, $t0, MAP_WIDTH
 	add $t0, $t0, $t7

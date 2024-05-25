@@ -599,12 +599,14 @@ void do_tick(char map[MAP_HEIGHT][MAP_WIDTH], struct Player *player,
 
     // Use the block spawner to generate the next row
     for (int column = 0; column < MAP_WIDTH; ++column) {
-        char const **next_block = &block_spawner->next_block[column];
+        char const **next_block = (block_spawner->next_block) + column;
+        
 
         // Hint: The next line is equivalent to the following 2 lines:
-        // 1. map[MAP_HEIGHT - 1][column] = **next_block;
-        // 2. ++*next_block;
-        map[MAP_HEIGHT - 1][column] = *(*next_block)++;
+        map[MAP_HEIGHT - 1][column] = **next_block;
+        // ++(*next_block);
+        (*next_block) += 1;
+        // map[MAP_HEIGHT - 1][column] = *((*next_block)++);
     }
 }
 
