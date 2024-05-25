@@ -1288,12 +1288,10 @@ m__for__if_not_continue:
 	addi $t0, $t0, CHUNKS
 	lw $t1, ($t0)  # $t1 is to be saved in *next_block_ptr
 
-	lw $t0, ($t6)  # $t0 = *next_block_ptr
-
 	# debug code
 	beqz $t0, error
 
-	sw $t1, ($t0)  # *next_block_ptr = CHUNKS[chunk]
+	sw $t1, ($t6)  # *next_block_ptr = CHUNKS[chunk]
 
 	# if (column == block_spawner->safe_column)
 	lw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
