@@ -1184,9 +1184,9 @@ maybe_pick_new_chunk:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[rng]]
+	# Uses:     [$ra, $s0, $t6, $t0, $t1, $t7, $t8]
+	# Clobbers: [$t0, $t1, $t6, $t7, $t8]
 	#
 	# Locals:
 	#   - $s0 = block_spawner
@@ -1206,7 +1206,7 @@ maybe_pick_new_chunk__body:
 	push $s0
 	move $s0, $a0
 
-	li $t8, FALSE
+	li $t8, FALSE					# bool new_safe_column_required = FALSE
 
 m__for_init:
 	li $t7, 0
@@ -1214,31 +1214,14 @@ m__for_condition:
 	blt $t7, MAP_WIDTH, m__for_body
 	j m__for_end
 m__for_body:
-
-# for body start
-	li $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET 	# block_spawner->next_block
+	li $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
 	add $t0, $t0, $s0
 
 	li $t1, 4
-	mul $t1, $t1, $t7				# column * sizeof(char*)
-
-# 	# debug code
-        j not_error
-error:
-	li $v0, 1
-	move $a0, $t0
-	syscall
-	# li $v0, 1
-	# move $a0, $t1
-	# syscall
-	# li $v0, 1
-	# move $a0, $s0
-	# syscall
-	j maybe_pick_new_chunk__epilogue
-not_error:
+	mul $t1, $t1, $t7
 
 	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
-	move $t6, $t0
+	move $t6, $t0					# $t6 = next_block_ptr
 
 
 	# if (*next_block_ptr && **next_block_ptr)
@@ -1249,7 +1232,6 @@ not_error:
 m__for__if_continue:
 	j m__for_iter
 m__for__if_not_continue:
-
 	# $t0 = chunk
 	push $t0
 	push $t1
@@ -1260,7 +1242,7 @@ m__for__if_not_continue:
 	pop $t2
 	pop $t1
 	pop $t0
-	remu $t0, $v0, NUM_CHUNKS
+	remu $t0, $v0, NUM_CHUNKS			# chunk = rng() % NUM_CHUNKS
 
 	li $v0, 4
 	la $a0, maybe_pick_new_chunk__column_msg_1
@@ -1280,31 +1262,27 @@ m__for__if_not_continue:
 
 	li $v0, 11
 	la $a0, '\n'
-	syscall # printf("Column: %d, Chunk: %d\n", column, chunk);
-
+	syscall 					# printf("Column: %d, Chunk: %d\n", column, chunk);
 	# $t0 free to use
 
-	mul $t0, $t0, 4 # chunk * sizeof(char*)
+	mul $t0, $t0, 4
 	addi $t0, $t0, CHUNKS
-	lw $t1, ($t0)  # $t1 is to be saved in *next_block_ptr
+	lw $t1, ($t0) 					# $t1 is to be saved in *next_block_ptr
 
-	# debug code
-	beqz $t0, error
-
-	sw $t1, ($t6)  # *next_block_ptr = CHUNKS[chunk]
+	sw $t1, ($t6) 					# *next_block_ptr = CHUNKS[chunk]
 
 	# if (column == block_spawner->safe_column)
 	lw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
 	beq $t7, $t0, m__for__if_is_safe_column
 	j m__for__if_not_safe_column
 m__for__if_is_safe_column:
-	li $t8, TRUE
+	li $t8, TRUE					# new_safe_column_required = TRUE
 m__for__if_not_safe_column:
 
 # for body end
 	
 m__for_iter:
-	addi $t7, $t7, 1 # ++column
+	addi $t7, $t7, 1
 	j m__for_condition
 m__for_end:
 
@@ -1323,7 +1301,7 @@ m__if_new_safe_column_required:
 	pop $t2
 	pop $t1
 	pop $t0
-	remu $t0, $v0, MAP_WIDTH
+	remu $t0, $v0, MAP_WIDTH  			# safe_column = rng() % MAP_WIDTH
 
 	li $v0, 4
 	la $a0, maybe_pick_new_chunk__safe_msg
@@ -1348,7 +1326,6 @@ m__if_new_safe_column_required:
 
 	lw $t1, CHUNKS
 	sw $t1, ($t3)
-
 	# $t0 free to use
 m__if_not_new_safe_column_required:
 
