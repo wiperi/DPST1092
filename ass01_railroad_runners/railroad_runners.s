@@ -1375,9 +1375,9 @@ do_tick:
 	#
 	# Returns:  None
 	#
-	# Frame:    [...]
-	# Uses:     [...]
-	# Clobbers: [...]
+	# Frame:    [[maybe_pick_new_chunk]]
+	# Uses:     [$ra, $s0, $s1, $s2, $t0, $t1, $t6, $t7, $t8]
+	# Clobbers: [$t0 $t1, $t6, $t7, $t8]
 	#
 	# Locals:
 	#   - $s0 = map
@@ -1405,22 +1405,24 @@ do_tick__body:
 	bgtz $t0,do__if_tick_gt_0
 	j do__if_tick_not_gt_0 
 do__if_tick_gt_0:
-	addi $t0, $t0, -1
+	addi $t0, $t0, -1 				# --player->action_ticks_left
 	sw $t0, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
 	j do__if_tick_gt_0_end
 do__if_tick_not_gt_0:
-	li $t0, PLAYER_RUNNING
+	li $t0, PLAYER_RUNNING				# player->state = PLAYER_RUNNING
 	sw $t0, PLAYER_STATE_OFFSET($s1)
 do__if_tick_gt_0_end:
 
 
-	lw $t0, PLAYER_SCORE_OFFSET($s1)
+	lw $t0, PLAYER_SCORE_OFFSET($s1)		# player->score += SCROLL_SCORE_BONUS
 	addi $t0, $t0, SCROLL_SCORE_BONUS
 	sw $t0, PLAYER_SCORE_OFFSET($s1)
 
-	move $a0, $s2
+	move $a0, $s2					# maybe_pick_new_chunk(block_spawner)
 	jal maybe_pick_new_chunk
 
+	# $t8 = i
+	# $t7 = j
 do__for1_init:
 	li $t8, 0
 do__for1_condition:
@@ -1434,7 +1436,7 @@ do__for2_condition:
 	blt $t7, MAP_WIDTH, do__for2_body
 	j do__for2_end
 do__for2_body:
-	move $t0, $t8
+	move $t0, $t8				     
 	addi $t0, $t0, 1
 	mul $t0, $t0, MAP_WIDTH
 	add $t0, $t0, $t7
@@ -1442,7 +1444,7 @@ do__for2_body:
 	lb $t1, ($t0)
 
 	addi $t0, $t0, -5
-	sb $t1, ($t0)
+	sb $t1, ($t0)					# map[i][j] = map[i + 1][j]
 do__for2_iter:
 	addi $t7, $t7, 1
 	j do__for2_condition
@@ -1452,23 +1454,25 @@ do__for1_iter:
 	addi $t8, $t8, 1
 	j do__for1_condition
 do__for1_end:
+	# $t8 free to use
+	# $t7 free to use
 
 
-
+	# $t8 = i
 do__for3_init:
 	li $t8, 0
 do__for3_condition:
 	blt $t8, MAP_WIDTH, do__for3_body
 	j do__for3_end
 do__for3_body:
-	mul $t0, $t8, 4
+	mul $t0, $t8, 4					# char const **next_block = (block_spawner->next_block) + column
 	addi $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
 	add $t0, $s2
-	move $t7, $t0 # $t7 = **next_block
+	move $t7, $t0 					# $t7 = **next_block
 
 	lw $t0, ($t7)
 	lb $t0, ($t0)
-	move $t6, $t0 # $t6 = char
+	move $t6, $t0 					# $t6 = char to be saved
 
 	li $t0, 19
 	mul $t0, $t0, MAP_WIDTH
@@ -1476,7 +1480,7 @@ do__for3_body:
 	add $t0, $s0
 	sb $t6, ($t0)
 
-	lw $t0, ($t7)
+	lw $t0, ($t7)					# *next_block = *(next_block) + 1
 	addi $t0, $t0, 1
 	
 	sw $t0, ($t7)
@@ -1484,8 +1488,7 @@ do__for3_iter:
 	addi $t8, $t8, 1
 	j do__for3_condition
 do__for3_end:
-
-
+	# $t8 free to use
 
 
 do_tick__epilogue:
