@@ -1244,7 +1244,7 @@ not_error:
 	# if (*next_block_ptr && **next_block_ptr)
 	lw $t0, ($t6)
 	beqz $t0, m__for__if_not_continue
-	lw $t0, ($t0)
+	lb $t0, ($t0)
 	beqz $t0, m__for__if_not_continue
 m__for__if_continue:
 	j m__for_iter
