@@ -33,6 +33,28 @@ scan_loop__end:
 
 
 	# TODO: add your code here!
+swap_loop_init:
+	li $t0, 1
+swap_loop_cond:
+	blt $t0, ARRAY_LEN, swap_loop_body
+	j swap_loop_end
+swap_loop_body:
+	mul $t1, $t0, 4
+	lw $t2, numbers($t1)
+	addi $t1, $t1, -4
+	lw $t3, numbers($t1)
+
+	bge $t2, $t3, if_x_lt_y_end 
+	# if x < y
+	sw $t2, numbers($t1)
+	add $t1, $t1, 4
+	sw $t3, numbers($t1)
+if_x_lt_y_end:
+
+	addi $t0, $t0, 1
+
+	j swap_loop_cond
+swap_loop_end:
 
 
 print_loop__init:
