@@ -1,8 +1,9 @@
+from stat import SF_APPEND
 import requests
 import os
 
 
-def download_file(url, dest_folder):
+def download_file(url, dest_folder, extention=None):
     """Downloads a file from the specified URL and saves it in the given folder,
        preserving the original filename.
 
@@ -18,12 +19,26 @@ def download_file(url, dest_folder):
         # Extract the filename from the URL
         filename = url.split("/")[-1]
 
-        # Create the destination path if it doesn't exist
-        os.makedirs(dest_folder, exist_ok=True)
+        # Add the file extension if provided
+        if extention:
+            filename += extention
+
+        # Return if dest_folder does not exist
+        if not os.path.exists(dest_folder):
+            print(f"Destination folder does not exist: {dest_folder}")
+            return
 
         # Construct full output path with the original filename
         file_path = os.path.join(dest_folder, filename)
 
+        # Make sure the file does not already exist
+        suffix = 1
+        while os.path.exists(file_path):
+            new_filename = filename.split(".")[0] + f"_({suffix})." + filename.split(".")[1]
+            suffix += 1
+            file_path = os.path.join(dest_folder, new_filename)
+
+        # Download the file
         with open(file_path, "wb") as f:
             for chunk in response.iter_content(1024):
                 f.write(chunk)
