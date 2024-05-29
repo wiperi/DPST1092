@@ -37,7 +37,7 @@ while_body:
 	j no_break 
 break:
 	li $v0, 1
-	la $a0, res
+	lw $a0, res
 	syscall
 
 	jr $ra
