@@ -36,7 +36,7 @@ while_body:
 	bge $t8, 4, break
 	j no_break 
 break:
-	li $v0, 4
+	li $v0, 1
 	la $a0, res
 	syscall
 
