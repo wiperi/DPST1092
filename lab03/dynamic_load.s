@@ -1,7 +1,7 @@
 .data
 
 user_prompt_1:
-	.asciiz "Enter mips instructions as integers, -1 to finish:\n"
+	.ascii "Enter mips instructions as integers, -1 to finish:\n"
 	.asciiz "Starting executing instructions\n"
 
 user_prompt_2:
