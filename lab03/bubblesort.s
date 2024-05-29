@@ -56,7 +56,9 @@ inner_loop__body:
 	sw $t3, numbers($t1)
 if_x_ge_y:
 	addi $t0, $t0, 1
+	j inner_loop__cond
 inner_loop__end:
+	j swap_loop__cond
 # swap body end
 swap_loop__end:
 
