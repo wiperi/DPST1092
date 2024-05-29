@@ -54,6 +54,7 @@ inner_loop__body:
 	sw $t2, numbers($t1)
 	addi $t1, $t1, 4
 	sw $t3, numbers($t1)
+	li $t8, 1
 if_x_ge_y:
 	addi $t0, $t0, 1
 	j inner_loop__cond
