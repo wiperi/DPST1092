@@ -61,7 +61,7 @@ int main(int argc, char* argv[], char* envp[]) {
     int_to_char_arr(1481199189, m);
     int_to_char_arr(-2023406815, n);
     
-    int a = 1481199189;
+    int a = 1431193944;
     int b = -2023406815;
     nuxi(&a, &b);
 }

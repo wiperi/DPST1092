@@ -1,7 +1,7 @@
 .data
 
 res:
-	.byte 0:5
+	.word 0
 
 tar:
 	.ascii "UNIX"
@@ -14,7 +14,7 @@ n:
 
 
 .text
-# misuse lw; can not use lb load value in reg
+# misuse lw; can not use lb load value in reg; mistype $t7 to $7
 main:
 	# scanf 2 integers
 
@@ -34,6 +34,7 @@ while_cond:
 while_body:
 
 	bge $t8, 4, break
+	bge $t7, 4, break
 	j no_break 
 break:
 	li $v0, 1
@@ -44,7 +45,7 @@ break:
 no_break:
 
 while2_init:
-	li $7, 0
+	li $t7, 0
 while2_cond:
 	lb $t0, m($t7)
 	lb $t1, tar($t8)
