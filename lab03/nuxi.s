@@ -41,6 +41,10 @@ break:
 	lw $a0, res
 	syscall
 
+	li $v0, 11
+	la $a0, '\n'
+	syscall
+
 	jr $ra
 no_break:
 
