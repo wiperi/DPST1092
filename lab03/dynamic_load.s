@@ -15,7 +15,7 @@ main:
 	syscall
 
 while_init:
-	li $t8, 0  # $t8 = i = 0
+	li $t8, 0 # $t8 = i = 0
 while_cond:
 while_body:
 	li $v0, 5
