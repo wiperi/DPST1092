@@ -30,7 +30,7 @@ scan_loop__body:
 	b	scan_loop__cond			# }
 scan_loop__end:
 
-	# TODO: add your code here!
+	# TODO: add your code here! bug1: forget to jump to condition. bug2: miss one direction
 swap_loop__init:
 	li	$t8, 1				# $t8 = swapped = 1
 swap_loop__cond:
@@ -39,24 +39,24 @@ swap_loop__cond:
 swap_loop__body:
 # swap body begin
 inner_loop__init:
-	li $t8, 0
-	li $t0, 1	# $t0 = i = 1
+	li $t8, 0				# swapped = 0
+	li $t0, 1				# $t0 = i = 1
 inner_loop__cond:
 	blt $t0, ARRAY_LEN, inner_loop__body
 	j inner_loop__end
 inner_loop__body:
 	mul $t1, $t0, 4
-	lw $t2, numbers($t1) # $t2 = numbers[i]
+	lw $t2, numbers($t1) 			# $t2 = numbers[i]
 	addi $t1, $t1, -4
-	lw $t3, numbers($t1) # $t3 = numbers[i-1]
+	lw $t3, numbers($t1) 			# $t3 = numbers[i-1]
 
 	bge $t2, $t3, if_x_ge_y
 	sw $t2, numbers($t1)
 	addi $t1, $t1, 4
 	sw $t3, numbers($t1)
-	li $t8, 1
+	li $t8, 1				# swapped = 1
 if_x_ge_y:
-	addi $t0, $t0, 1
+	addi $t0, $t0, 1			# i++
 	j inner_loop__cond
 inner_loop__end:
 	j swap_loop__cond

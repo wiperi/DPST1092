@@ -1,0 +1,22 @@
+
+
+int i = 0
+while (1) {
+    scan(input)
+
+    if (input == -1) {
+        break;
+    }
+
+    sw input, label + (i * 4)
+
+    i++;
+}
+
+jal label
+
+
+jr $ra
+
+// a label in .text area
+label:
