@@ -14,7 +14,7 @@ n:
 
 
 .text
-# misuse lw; can not use lb load value in reg; mistype $t7 to $7
+# debug log: misuse lw; can not use lb load value in reg; mistype $t7 to $7; forget to add '\n' at last
 main:
 	# scanf 2 integers
 
@@ -25,11 +25,10 @@ main:
 	li $v0, 5
 	syscall
 	sw $v0, n
-	# read m and n
 
 while_init:
-	li $t8, 0 # $t8 = target_index
-	li $t7, 0 # $t7 = i
+	li $t8, 0 			# $t8 = target_index
+	li $t7, 0 			# $t7 = i
 while_cond:
 while_body:
 
@@ -57,7 +56,7 @@ while2_cond:
 	bne $t0, $t1, while2_body
 	j while2_end
 while2_body:
-	addi $t7, $t7, 1 # i++
+	addi $t7, $t7, 1 		# i++
 	j while2_cond
 while2_end:
 
