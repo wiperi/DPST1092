@@ -100,6 +100,15 @@ find_student_by_id__loop__cond:
 	bge	$t0, CLASS_SIZE, find_student_by_id__loop__end	# while (i < CLASS_SIZE) {
 find_student_by_id__loop__body:
 	# TODO: implement the body of this loop
+	mul $t8, $t0, SIZEOF_STRUCT_STUDENT
+	addi $t8, $t8, STRUCT_STUDENT_ID_OFFSET
+	lw $t8, students($t8)
+	
+	bne $t8, $a0, if_neq_id 
+	# id == id
+	addi $t8, $t0, students
+	j find_student_by_id__epilogue
+if_neq_id:
 
 find_student_by_id__loop__step:
 	addi	$t0, 1						#  i++;
@@ -130,11 +139,41 @@ update_student_mark:
 	#	-> [epilogue]
 update_student_mark__prologue:
 	begin
+	push $ra
 update_student_mark__body:
 	# TODO: complete this function
 	# You may need to modify the prologue and epilogue of this function.
+	li $v0, 4
+	la $a0, update_student_mark__id_prompt
+	syscall
+
+	li $v0, 5
+	syscall
+	move $s0, $v0				# $s0 = int id
+
+	move $a0, $s0
+	jal find_student_by_id
+	move $s1, $v0 				# $s1 = *student
+
+	bne $s1, NULL, if_student_neq_null
+	li $v0, 4
+	la $a0, update_student_mark__invalid_id
+	syscall
+
+	j update_student_mark__epilogue
+if_student_neq_null:
+
+	li $v0, 4
+	la $a0, update_student_mark__mark_prompt
+	syscall
+
+	li $v0, 5
+	syscall
+
+	sw $v0, STRUCT_STUDENT_MARK_OFFSET($s1)
 
 update_student_mark__epilogue:
+	pop $ra
 	end
 	jr	$ra
 
@@ -176,6 +215,40 @@ print_report__loop__cond:
 	bge	$t0, CLASS_SIZE, print_report__loop__end	# while (i < CLASS_SIZE) {
 print_report__loop__body:
 	# TODO: implement the body of this loop
+	mul $t8, $t0, SIZEOF_STRUCT_STUDENT
+	addi $t8, $t8, STRUCT_STUDENT_ID_OFFSET
+	lw $t8, students($t8)
+
+	li $v0, 1
+	move $a0, $t8
+	syscall
+
+	li $v0, 11
+	la $a0, '\t'
+	syscall
+
+	mul $t8, $t0, SIZEOF_STRUCT_STUDENT
+	addi $t8, $t8, STRUCT_STUDENT_MARK_OFFSET
+	lw $t8, students($t8)
+
+	beq $t8, UNKNOWN_MARK, mark_unknown
+	j mark_known
+mark_unknown:
+	li $v0, 4
+	la $a0, print_report__unknown_mark
+	syscall
+
+	j if_end
+mark_known:
+	li $v0, 1
+	move $a0, $t8
+	syscall
+
+	li $v0, 11
+	la $a0, '\n'
+	syscall
+if_end:
+
 
 print_report__loop__step:
 	addi	$t0, 1						#  i++;
