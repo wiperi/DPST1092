@@ -1,0 +1,1 @@
+/import/reed/A/dp1092/public_html/24T2/activities/min/files.ln/min.c
