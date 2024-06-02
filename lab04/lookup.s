@@ -33,19 +33,27 @@ main:
 	# TODO: add your code here!
 
 	# array[row][col] = array + row * row_size * int_size + col * int_size
+	li $v0, 4
+	la $a0, prompt_row
+	syscall
+
+	li $v0, 4
+	la $a0, prompt_col
+	syscall
+
 	mul $t2, $t0, N_COLS
-	mul $t2, 4 # $t2 = row * row_size * int_size
+	mul $t2, 4 				# $t2 = row * row_size * int_size
 	
-	mul $t3, $t1, 4 # $t3, col * int_size
+	mul $t3, $t1, 4 			# $t3, col * int_size
 	add $t2, $t2, $t3
 	addi $t2, $t2, array
 	
-	li	$v0, 1		# syscall 1: print_int
-	lw  $a0, ($t2)  # 
+	li	$v0, 1
+	lw  $a0, ($t2)
 	syscall			# printf("%d", array[row][col]);
 
-	li	$v0, 11		# syscall 11: print_char
-	li	$a0, '\n'	# 
+	li	$v0, 11
+	li	$a0, '\n'
 	syscall			# printf("%c", '\n');
 
 	li	$v0, 0
