@@ -55,17 +55,37 @@ main__body:
 
 	move $s0, $v0 # $s0 = value
 
+	# debug
+	li $v0, 1
+	move $a0, $s0
+	syscall
+
 	move $a0, $s0
 	jal add_rand
 	move $s0, $v0
+
+	# debug
+	li $v0, 1
+	move $a0, $s0
+	syscall
 
 	move $a0, $s0
 	jal sub_rand
 	move $s0, $v0
 
+	# debug
+	li $v0, 1
+	move $a0, $s0
+	syscall
+
 	move $a0, $s0
 	jal seq_rand
 	move $s0, $v0
+
+	# debug
+	li $v0, 1
+	move $a0, $s0
+	syscall
 
 	li $v0, 4
 	la $a0, result_str
@@ -216,17 +236,18 @@ seq_rand__body:
 	li $a0, 100
 	jal rand
 	pop $a0
-
-	move $t0, $v0 # $t0 = limit
+	move $s0, $v0 # $t0 = limit
 
 for_init:
 	li $t8, 0
 for_cond:
-	blt $t8, $t0, for_body
+	blt $t8, $s0, for_body
 	j for_end
 for_body:
 	push $a0
+	push $t8
 	jal add_rand
+	pop $t8
 	pop $a0
 
 	move $a0, $v0
