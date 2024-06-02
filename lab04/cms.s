@@ -144,6 +144,8 @@ update_student_mark:
 update_student_mark__prologue:
 	begin
 	push $ra
+	push $s0
+	push $s1
 update_student_mark__body:
 	# TODO: complete this function
 	# You may need to modify the prologue and epilogue of this function.
@@ -177,6 +179,8 @@ if_student_neq_null:
 	sw $v0, STRUCT_STUDENT_MARK_OFFSET($s1)
 
 update_student_mark__epilogue:
+	pop $s1
+	pop $s0
 	pop $ra
 	end
 	jr	$ra
