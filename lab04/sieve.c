@@ -10,9 +10,6 @@ char prime[ARRAY_LEN];
 int simplified();
 
 int main(void) {
-    simplified();
-    return 0;
-
     // Sets every element in the array to 1.
     // This has already been done for you
     // in the data segment of the provided MIPS code.
