@@ -53,9 +53,9 @@ main:
 
 	.data
 prompt_row:
-	.asciiz	"Enter row: "
+	.asciiz	"Enter x: "
 prompt_col:
-	.asciiz	"Enter col: "
+	.asciiz	"Enter y: "
 array:
 	.word	9, 4, 3, 2, 5, 1, 1, 4, 3, 1, 2, 6, 7, 5, 6, 2, 8, 1, 8, 3, 4, 1, 1, 1
 	.word	7, 3, 9, 6, 6, 2, 4, 8, 6, 8, 1, 9, 8, 2, 9, 5, 9, 8, 9, 9, 2, 3, 1, 1
