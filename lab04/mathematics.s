@@ -55,37 +55,18 @@ main__body:
 
 	move $s0, $v0 # $s0 = value
 
-	# debug
-	li $v0, 1
-	move $a0, $s0
-	syscall
-
 	move $a0, $s0
 	jal add_rand
 	move $s0, $v0
-
-	# debug
-	li $v0, 1
-	move $a0, $s0
-	syscall
 
 	move $a0, $s0
 	jal sub_rand
 	move $s0, $v0
 
-	# debug
-	li $v0, 1
-	move $a0, $s0
-	syscall
-
 	move $a0, $s0
 	jal seq_rand
 	move $s0, $v0
 
-	# debug
-	li $v0, 1
-	move $a0, $s0
-	syscall
 
 	li $v0, 4
 	la $a0, result_str
