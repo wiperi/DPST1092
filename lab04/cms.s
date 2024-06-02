@@ -106,7 +106,8 @@ find_student_by_id__loop__body:
 	
 	bne $t8, $a0, if_neq_id 
 	# id == id
-	addi $t8, $t0, students
+	mul $t8, $t0, SIZEOF_STRUCT_STUDENT
+	addi $t8, $t8, students
 	move $v0, $t8
 	j find_student_by_id__epilogue
 if_neq_id:
