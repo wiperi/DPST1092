@@ -33,14 +33,6 @@ main:
 	# TODO: add your code here!
 
 	# array[row][col] = array + row * row_size * int_size + col * int_size
-	li $v0, 4
-	la $a0, prompt_row
-	syscall
-
-	li $v0, 4
-	la $a0, prompt_col
-	syscall
-
 	mul $t2, $t0, N_COLS
 	mul $t2, 4 				# $t2 = row * row_size * int_size
 	
