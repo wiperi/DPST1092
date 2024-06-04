@@ -131,18 +131,17 @@ ackermann__body:
 	move $s0, $a0 # $s0 = m
 	move $s1, $a1 # $s1 = n
 
-	bne $a0, $zero, ackermann_m_not_zero
+	bne $s0, $zero, ackermann_m_not_zero
 	# m == 0
 	addi $v0, $s1, 1
 	j ackermann__epilogue # return n + 1
 ackermann_m_not_zero:
 
-	bne $a1, $zero, ackermann_n_not_zero
+	bne $s1, $zero, ackermann_n_not_zero
 	# n == 0
 	addi $a0, $s0, -1
 	move $a1, $s1
 	jal ackermann # ackermann(m - 1, n)
-
 ackermann_n_not_zero:
 
 	move $a0, $s0
