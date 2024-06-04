@@ -33,6 +33,8 @@ main__prologue:
 
 	# TODO: set up your stack frame
 	push $ra
+	push $s0
+	push $s1
 
 main__body:
 
@@ -43,7 +45,7 @@ main__body:
 
 	li $v0, 5
 	syscall
-	move $a0, $v0 # $a0 = m
+	move $s0, $v0 # $s0 = m
 
 	li $v0, 4
 	la $a0, prompt_n_str
@@ -51,24 +53,20 @@ main__body:
 
 	li $v0, 5
 	syscall
-	move $a1, $v0 # $a1 = n
+	move $s1, $v0 # $s1 = n
 
-	push $a0
-	push $a1
+	move $a0, $s0
+	move $a1, $s1
 	jal ackermann # ackermann(m, n)
-	pop $a1
-	pop $a0
 
 	move $t0, $v0 # $t0 = f
-	move $t1, $a0 # $t1 = m
-	move $t2, $a1 # $t2 = n
 
 	li $v0, 4
 	la $a0, result_str_1
 	syscall
 
 	li $v0, 1
-	move $a0, $t1
+	move $a0, $s0
 	syscall
 
 	li $v0, 4
@@ -76,7 +74,7 @@ main__body:
 	syscall
 
 	li $v0, 1
-	move $a0, $t2
+	move $a0, $s1
 	syscall
 
 	li $v0, 4
@@ -90,6 +88,8 @@ main__body:
 main__epilogue:
 
 	# TODO: clean up your stack frame
+	pop $s1
+	pop $s0
 	pop $ra
 
 	li	$v0, 0
@@ -140,8 +140,10 @@ ackermann_m_not_zero:
 	bne $s1, $zero, ackermann_n_not_zero
 	# n == 0
 	addi $a0, $s0, -1
-	move $a1, $s1
+	li $a1, 1
 	jal ackermann # ackermann(m - 1, n)
+
+	j ackermann__epilogue
 ackermann_n_not_zero:
 
 	move $a0, $s0
