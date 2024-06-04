@@ -85,6 +85,10 @@ main__body:
 	move $a0, $t0
 	syscall
 
+	li $v0, 11
+	la $a0, '\n'
+	syscall
+
 main__epilogue:
 
 	# TODO: clean up your stack frame
