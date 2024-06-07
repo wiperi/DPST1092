@@ -102,8 +102,8 @@ uint32_t float_2048(uint32_t f) {
 
             // before building bitpattern it is important to first reset the previous pattern
             f &= ~(0xff << EXPONENT_LOW_BIT);
-            
             f |= (fl.exponent << EXPONENT_LOW_BIT);
+
             return f;
         } else {
             // fl.exp + 11 overflow
@@ -116,7 +116,7 @@ uint32_t float_2048(uint32_t f) {
         return f;
     }
 
-    return 42;
+    return -1;
 }
 
 int main(int argc, char* argv[]) {
