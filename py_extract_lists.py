@@ -30,7 +30,7 @@ def extract_urls(url):
         for link in links:
             # Extract the href attribute (URL)
             href = link.get("href")
-            if href and (href.endswith("slides")):  # Check if it ends with ".c"
+            if href and (href.endswith("pdf")):  # Check if it ends with ".c"
 
                 if href not in hash:
                     # href not in hash, add it to the list
@@ -49,8 +49,8 @@ def extract_urls(url):
 
 if __name__ == "__main__":
     # Example usage
-    url = "https://cgi.cse.unsw.edu.au/~cs1521/23T3/"  # Replace with the actual URL
-    tar_dir = "C:/Users/15617/OneDrive/13 UNSW Y1T1/27 Computer System Fundamental/ppt"
+    url = "https://webcms3.cse.unsw.edu.au/COMP2521/24T1/resources/94742"  # Replace with the actual URL
+    tar_dir = "C:/Users/15617/Downloads"
 
     urls = extract_urls(url)
 

@@ -1,0 +1,25 @@
+# Define the compiler
+CC = gcc
+
+# Define the compiler flags
+CFLAGS = 
+
+# Define the target executable
+TARGET = float_print
+
+# Define the source file
+SRC = float_print.c test_float_print.c
+
+# Default target
+all: $(TARGET)
+
+# Rule for building the target executable
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+
+# Rule for cleaning up generated files
+clean:
+	rm -f $(TARGET)
+
+# Phony targets
+.PHONY: all clean
