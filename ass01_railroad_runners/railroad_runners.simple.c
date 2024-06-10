@@ -416,6 +416,25 @@ int maybe_print_player(struct Player *player, int row, int column) {
     return FALSE;
 }
 
+int maybe_print_player_sim(struct Player *player, int row, int column) {
+    if (player == NULL) {
+        return FALSE;
+    }
+
+    if (row != PLAYER_ROW || column != player->column) {
+        return FALSE;
+    }
+
+    if (player->state == PLAYER_RUNNING) {
+        printf(PLAYER_RUNNING_SPRITE);
+    } else if (player->state == PLAYER_CROUCHING) {
+        printf(PLAYER_CROUCHING_SPRITE);
+    } else if (player->state == PLAYER_JUMPING) {
+        printf(PLAYER_JUMPING_SPRITE);
+    }
+    return TRUE;
+}
+
 // Subset 2
 // Handle the user's input, moving and updating the player's state.
 //
@@ -580,12 +599,14 @@ void do_tick(char map[MAP_HEIGHT][MAP_WIDTH], struct Player *player,
 
     // Use the block spawner to generate the next row
     for (int column = 0; column < MAP_WIDTH; ++column) {
-        char const **next_block = &block_spawner->next_block[column];
+        char const **next_block = (block_spawner->next_block) + column;
+        
 
         // Hint: The next line is equivalent to the following 2 lines:
-        // 1. map[MAP_HEIGHT - 1][column] = **next_block;
-        // 2. ++*next_block;
-        map[MAP_HEIGHT - 1][column] = *(*next_block)++;
+        map[MAP_HEIGHT - 1][column] = **next_block;
+        // ++(*next_block);
+        (*next_block) += 1;
+        // map[MAP_HEIGHT - 1][column] = *((*next_block)++);
     }
 }
 

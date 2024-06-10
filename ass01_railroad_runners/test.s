@@ -1184,15 +1184,11 @@ maybe_pick_new_chunk:
 	#
 	# Returns:  None
 	#
-	# Frame:    [[rng]]
-	# Uses:     [$ra, $s0, $t6, $t0, $t1, $t7, $t8]
-	# Clobbers: [$t0, $t1, $t6, $t7, $t8]
+	# Frame:    [...]
+	# Uses:     [...]
+	# Clobbers: [...]
 	#
 	# Locals:
-	#   - $s0 = block_spawner
-	#   - $t8 = new_safe_column_required
-	#   - $t7 = int column
-	#   - $t6 = char const **next_block_ptr
 	#
 	# Structure:
 	#   maybe_pick_new_chunk
@@ -1202,122 +1198,7 @@ maybe_pick_new_chunk:
 
 maybe_pick_new_chunk__prologue:
 maybe_pick_new_chunk__body:
-	push $ra
-	push $s0
-	move $s0, $a0
-
-	li $t8, FALSE					# bool new_safe_column_required = FALSE
-
-m__for_init:
-	li $t7, 0
-m__for_condition:
-	blt $t7, MAP_WIDTH, m__for_body
-	j m__for_end
-m__for_body:
-	li $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
-	add $t0, $t0, $s0
-
-	li $t1, 4
-	mul $t1, $t1, $t7
-
-	add $t0, $t0, $t1 				# block_spawner->next_block + column * sizeof(char*)
-	move $t6, $t0					# $t6 = next_block_ptr
-
-
-	# if (*next_block_ptr && **next_block_ptr)
-	lw $t0, ($t6)
-	beqz $t0, m__for__if_not_continue
-	lb $t0, ($t0)
-	beqz $t0, m__for__if_not_continue
-m__for__if_continue:
-	j m__for_iter
-m__for__if_not_continue:
-	# $t0 = chunk
-	jal rng
-	remu $t0, $v0, NUM_CHUNKS			# chunk = rng() % NUM_CHUNKS
-
-	li $v0, 4
-	la $a0, maybe_pick_new_chunk__column_msg_1
-	syscall
-
-	li $v0, 1
-	move $a0, $t7
-	syscall
-
-	li $v0, 4
-	la $a0, maybe_pick_new_chunk__column_msg_2
-	syscall
-
-	li $v0, 1
-	move $a0, $t0
-	syscall
-
-	li $v0, 11
-	la $a0, '\n'
-	syscall 					# printf("Column: %d, Chunk: %d\n", column, chunk);
-	# $t0 free to use
-
-	mul $t0, $t0, 4
-	addi $t0, $t0, CHUNKS
-	lw $t1, ($t0) 					# $t1 is to be saved in *next_block_ptr
-
-	sw $t1, ($t6) 					# *next_block_ptr = CHUNKS[chunk]
-
-	# if (column == block_spawner->safe_column)
-	lw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0)
-	beq $t7, $t0, m__for__if_is_safe_column
-	j m__for__if_not_safe_column
-m__for__if_is_safe_column:
-	li $t8, TRUE					# new_safe_column_required = TRUE
-m__for__if_not_safe_column:
-
-# for body end
-	
-m__for_iter:
-	addi $t7, $t7, 1
-	j m__for_condition
-m__for_end:
-
-
-	# if (new_safe_column_required)
-	beqz $t8, m__if_not_new_safe_column_required
-	j m__if_new_safe_column_required
-m__if_new_safe_column_required:
-	# $t0 = safe_column
-	jal rng
-	remu $t0, $v0, MAP_WIDTH  			# safe_column = rng() % MAP_WIDTH
-
-	li $v0, 4
-	la $a0, maybe_pick_new_chunk__safe_msg
-	syscall
-
-	li $v0, 1
-	move $a0, $t0
-	syscall
-
-	li $v0, 11
-	la $a0, '\n'
-	syscall 					# printf("New safe column: %d\n", safe_column);
-
-	sw $t0, BLOCK_SPAWNER_SAFE_COLUMN_OFFSET($s0) 	# block_spawner->safe_column = safe_column;
-
-
-
-	li $t3, 4					# block_spawner->next_block[safe_column] = CHUNKS[SAFE_CHUNK_INDEX];
-	mul $t3, $t3, $t0
-	add $t3, $t3, $s0
-	add $t3, $t3, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
-
-	lw $t1, CHUNKS
-	sw $t1, ($t3)
-	# $t0 free to use
-m__if_not_new_safe_column_required:
-
-
 maybe_pick_new_chunk__epilogue:
-	pop $s0
-	pop $ra
-	li $v0, 0
 	jr	$ra
 
 
@@ -1334,14 +1215,12 @@ do_tick:
 	#
 	# Returns:  None
 	#
-	# Frame:    [[maybe_pick_new_chunk]]
-	# Uses:     [$ra, $s0, $s1, $s2, $t0, $t1, $t6, $t7, $t8]
-	# Clobbers: [$t0 $t1, $t6, $t7, $t8]
+	# Frame:    [...]
+	# Uses:     [...]
+	# Clobbers: [...]
 	#
 	# Locals:
-	#   - $s0 = map
-	#   - $s1 = player
-	#   - $s2 = block_spawner
+	#   - ...
 	#
 	# Structure:
 	#   do_tick
@@ -1351,111 +1230,7 @@ do_tick:
 
 do_tick__prologue:
 do_tick__body:
-	push $ra
-	push $s0
-	push $s1
-	push $s2
-	move $s0, $a0
-	move $s1, $a1
-	move $s2, $a2
-
-	# if (player->action_ticks_left > 0)
-	lw $t0, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
-	bgtz $t0,do__if_tick_gt_0
-	j do__if_tick_not_gt_0 
-do__if_tick_gt_0:
-	addi $t0, $t0, -1 				# --player->action_ticks_left
-	sw $t0, PLAYER_ACTION_TICKS_LEFT_OFFSET($s1)
-	j do__if_tick_gt_0_end
-do__if_tick_not_gt_0:
-	li $t0, PLAYER_RUNNING				# player->state = PLAYER_RUNNING
-	sw $t0, PLAYER_STATE_OFFSET($s1)
-do__if_tick_gt_0_end:
-
-
-	lw $t0, PLAYER_SCORE_OFFSET($s1)		# player->score += SCROLL_SCORE_BONUS
-	addi $t0, $t0, SCROLL_SCORE_BONUS
-	sw $t0, PLAYER_SCORE_OFFSET($s1)
-
-	move $a0, $s2					# maybe_pick_new_chunk(block_spawner)
-	jal maybe_pick_new_chunk
-
-	# $t8 = i
-	# $t7 = j
-do__for1_init:
-	li $t8, 0
-do__for1_condition:
-	blt $t8, MAP_HEIGHT - 1, do__for1_body
-	j do__for1_end
-do__for1_body:
-# for1 body
-do__for2_init:
-	li $t7, 0
-do__for2_condition:
-	blt $t7, MAP_WIDTH, do__for2_body
-	j do__for2_end
-do__for2_body:
-	move $t0, $t8				     
-	addi $t0, $t0, 1
-	mul $t0, $t0, MAP_WIDTH
-	add $t0, $t0, $t7
-	add $t0, $t0, $s0
-	lb $t1, ($t0)
-
-	addi $t0, $t0, -5
-	sb $t1, ($t0)					# map[i][j] = map[i + 1][j]
-do__for2_iter:
-	addi $t7, $t7, 1
-	j do__for2_condition
-do__for2_end:
-# for1 body end
-do__for1_iter:
-	addi $t8, $t8, 1
-	j do__for1_condition
-do__for1_end:
-	# $t8 free to use
-	# $t7 free to use
-
-
-	# $t8 = i
-do__for3_init:
-	li $t8, 0
-do__for3_condition:
-	blt $t8, MAP_WIDTH, do__for3_body
-	j do__for3_end
-do__for3_body:
-	mul $t0, $t8, 4					# char const **next_block = (block_spawner->next_block) + column
-	addi $t0, BLOCK_SPAWNER_NEXT_BLOCK_OFFSET
-	add $t0, $s2
-	move $t7, $t0 					# $t7 = **next_block
-
-	lw $t0, ($t7)
-	lb $t0, ($t0)
-	move $t6, $t0 					# $t6 = char to be saved
-
-	li $t0, 19
-	mul $t0, $t0, MAP_WIDTH
-	add $t0, $t0, $t8
-	add $t0, $s0
-	sb $t6, ($t0)
-
-	lw $t0, ($t7)					# *next_block = *(next_block) + 1
-	addi $t0, $t0, 1
-	
-	sw $t0, ($t7)
-do__for3_iter:
-	addi $t8, $t8, 1
-	j do__for3_condition
-do__for3_end:
-	# $t8 free to use
-
-
 do_tick__epilogue:
-	pop $s2
-	pop $s1
-	pop $s0
-	pop $ra
-	li $v0, 0
 	jr	$ra
 
 ################################################################################
