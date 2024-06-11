@@ -6,9 +6,24 @@
 // THE FOLLOWING FUNCTIONS ARE PROVIDED FOR YOU
 //
 
+// The structure of Object:
+//
+// typedef struct function {
+//     char *name;
+//     void *(*fn_ptr)(void *);
+// } Function;
+// 
+// typedef struct object {
+//     void *data;
+//     size_t capacity;
+//     size_t len;
+//     Function fns[];
+// } Object;
+
 size_t object_size(size_t fn_capacity) {
     return sizeof(void *) + 2 * sizeof(size_t) + fn_capacity * (sizeof(char *) + sizeof(void *));
 }
+
 
 void **obj_data(object obj) {
     return (void **) obj;
@@ -42,6 +57,8 @@ int streq(char *str1, char *str2) {
     return streq(str1 + 1, str2 + 1);
 }
 
+// bumpalo: allocate memory using sbrk
+// returns a pointer to the start of the allocated memory
 void *bumpalo(size_t bytes) {
     void *ptr = sbrk(0);
     sbrk(bytes);
