@@ -29,6 +29,26 @@ read_loop__end:
 
 	# TODO: add your code here!
 
+print_loop__init:
+print_loop__cond:
+	bgt $t0, 0, print_loop__body
+	j print_loop__end
+print_loop__body:
+	addi $t0, $t0, -1
+	mul $t1, $t0, 4
+	lw $t1, numbers($t1)
+
+	li $v0, 1
+	move $a0, $t1
+	syscall
+
+	li $v0, 11
+	li $a0, '\n'
+	syscall
+
+	j print_loop__cond
+print_loop__end:
+
 	li	$v0, 0
 	jr	$ra				# return 0;
 

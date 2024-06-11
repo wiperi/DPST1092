@@ -22,11 +22,32 @@ slow_loop__body:
 	syscall					#
 	move	$t0, $v0			#   scanf("%d", &x);
 
+	# Your code goes here
 
+while__init:
+	li $t8, 0 # $t8 = int i
+while__cond:
+	blt $t8, $t2, while__body
+	j while__end
+while__body:
+	mul $t3, $t8, 4
+	lw $t3, numbers($t3)
+
+	bne $t0, $t3, if_x_neq_numbersi
+	# x == numbers[i]
+	j while__end
+if_x_neq_numbersi:
+	addi $t8, $t8, 1
+	j while__cond
+while__end:
+
+	bne $t8, $t2, i_neq_n_seem
+	# i == n_seen
 	mul	$t3, $t2, 4			#
 	sw	$t0, numbers($t3)		#   numbers[n_seen] = x;
 
 	addi	$t2, $t2, 1			#   n_seen++;
+i_neq_n_seem:
 	j	slow_loop__cond
 slow_loop__end:					# }
 

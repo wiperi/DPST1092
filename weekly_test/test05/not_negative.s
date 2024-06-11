@@ -4,6 +4,8 @@ main:
 	# Registers:
 	#   - $t0: int x
 
+while__cond:
+while__body:
 	li	$v0, 4			# syscall 4: print_string
 	la	$a0, prompt_str		#
 	syscall				# printf("Enter a number: ");
@@ -12,6 +14,16 @@ main:
 	syscall				#
 	move	$t0, $v0		# scanf("%d", &x);
 
+	blt $t0, 0, x_lt_0
+	j x_ge_0
+x_lt_0:
+	# print(Enter a positive number\n)
+	li $v0, 4
+	la $a0, error_str
+	syscall
+
+	j if_end
+x_ge_0:
 	li	$v0, 4			# syscall 4: print_string
 	la	$a0, result_str		#
 	syscall				# printf("You entered: ");
@@ -24,8 +36,14 @@ main:
 	li	$a0, '\n'		#
 	syscall				# printf("%c", '\n');
 
+	j while__end
+if_end:
+	j while__cond
+while__end:
+
 	li	$v0, 0
 	jr	$ra			# return 0;
+
 
 ########################################################################
 # .DATA
@@ -35,3 +53,5 @@ prompt_str:
 	.asciiz "Enter a number: "
 result_str:
 	.asciiz "You entered: "
+error_str:
+	.asciiz "Enter a positive number\n"
