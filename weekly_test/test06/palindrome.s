@@ -34,7 +34,7 @@ while2_init:
 	li $t8, 0 # $t8 = j
 	addi $t7, $t0, -2 # $t7 = k
 while2_cond:
-	blt $t8, $t7, while2_cond
+	blt $t8, $t7, while2_body
 	j while2_end
 while2_body:
 
