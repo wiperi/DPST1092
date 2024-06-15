@@ -17,12 +17,23 @@ main:
 	la	$a1, LINE_LEN		#
 	syscall				# fgets(buffer, LINE_LEN, stdin)
 
+while_init:
+	li $t0, 0
+while_cond:
+	lb $t1, line($t0)
+	bnez $t1, while_body
+	j while_end
+while_body:
+	addi $t0, $t0, 1
+	j while_cond
+while_end:
+
 	li	$v0, 4			# syscall 4: print_string
 	la	$a0, result_str		#
 	syscall				# printf("Line length: ");
 
 	li	$v0, 1			# syscall 1: print_int
-	li	$a0, 42			# 		
+	move	$a0, $t0			# 		
 	syscall				# printf("%d", 42);
 
 	li	$v0, 11			# syscall 11: print_char
