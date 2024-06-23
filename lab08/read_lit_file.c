@@ -48,8 +48,6 @@ int main(int argc, char* argv[]) {
             exit(1);
         }
 
-        printf("%d\n", num_len);
-
         // read integers
         uint64_t res = 0;
         for (int i = 0; i < num_len; i++) {
@@ -59,17 +57,8 @@ int main(int argc, char* argv[]) {
                 exit(1);
             }
             res |= ch << (i * 8);
-            printf("%llu\n", res);
         }
-    }
-
-    // check record length matching with num length
-    int cur_pos = ftell(file);
-    fseek(file, 0, SEEK_END);
-    int tail_pos = ftell(file);
-    if (cur_pos != tail_pos) {
-        fprintf(stderr, "Invalid record length");
-        exit(1);
+        printf("%llu\n", res);
     }
 
     fclose(file);
