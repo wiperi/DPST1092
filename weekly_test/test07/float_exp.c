@@ -7,5 +7,5 @@ uint32_t float_exp(uint32_t f) {
 
     mask <<= 22;
 
-    return mask & f
+    return mask & f;
 }
