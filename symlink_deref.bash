@@ -12,7 +12,7 @@ find . -type l | while read symlink; do
   target=$(readlink "$symlink")
   
   # 备份原符号链接
-  cp "$symlink" "$symlink.bak"
+  cp "$symlink" "bak-$symlink.bak"
   
   # 复制目标文件内容到新文件夹下，并保持原来的文件结构
   # 例如：如果符号链接是 ./subdir/file -> /path/to/target_file
@@ -21,7 +21,6 @@ find . -type l | while read symlink; do
   mkdir -p "$new_folder/$relative_path"
   cp "$target" "$new_folder/$symlink"
   
-  # 删除符号链接并用实际文件替换
+  # 删除符号链接
   rm "$symlink"
-  cp "$target" "$symlink"
 done
