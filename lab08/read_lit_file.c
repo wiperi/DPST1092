@@ -41,6 +41,20 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
+    // check record length matching with num length
+    long prev_pos = ftell(file);
+    fseek(file, 0, SEEK_END);
+    long file_size = ftell(file);
+    fseek(file, prev_pos, SEEK_SET);
+
+    int record_len = file_size - 4;
+
+    if (record_len != num_len) {
+        fprintf(stderr, "The file ends before the end of a record");
+        exit(1);
+    }
+    
+
     // read integers
     uint64_t res = 0;
     for (int i = 0; i < num_len; i++) {
