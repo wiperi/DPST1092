@@ -34,35 +34,40 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-    // read the next byte
-    int num_len = fgetc(file) - '0';
-    if (num_len < 1 || num_len > 8) {
-        fprintf(stderr, "Invalid record length.\n");
-        exit(1);
+    while (1) {
+        // check if reach the end
+        int num_byte = fgetc(file);
+        if (num_byte == EOF) {
+            return 0;
+        }
+
+        // read record length
+        int num_len = num_byte - '0';
+        if (num_len < 1 || num_len > 8) {
+            fprintf(stderr, "Invalid record length.\n");
+            exit(1);
+        }
+
+        printf("%d\n", num_len);
+
+        // read integers
+        uint64_t res = 0;
+        for (int i = 0; i < num_len; i++) {
+            uint64_t ch = fgetc(file);
+            if (ch == EOF) {
+                fprintf(stderr, "Failed to read record.\n");
+                exit(1);
+            }
+            res |= ch << (i * 8);
+            printf("%llu\n", res);
+        }
     }
 
     // check record length matching with num length
-    long prev_pos = ftell(file);
+    int cur_pos = ftell(file);
     fseek(file, 0, SEEK_END);
-    long file_size = ftell(file);
-    fseek(file, prev_pos, SEEK_SET);
-
-    int record_len = file_size - 4;
-
-    // read integers
-    uint64_t res = 0;
-    for (int i = 0; i < num_len; i++) {
-        ch = fgetc(file);
-        if (ch == EOF) {
-            fprintf(stderr, "Failed to read record.\n");
-            exit(1);
-        }
-        res |= ch << (i * 8);
-    }
-    printf("%li\n", res);
-
-    // invalid record length
-    if (record_len != num_len) {
+    int tail_pos = ftell(file);
+    if (cur_pos != tail_pos) {
         fprintf(stderr, "Invalid record length");
         exit(1);
     }
