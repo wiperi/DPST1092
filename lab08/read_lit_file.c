@@ -49,12 +49,6 @@ int main(int argc, char* argv[]) {
 
     int record_len = file_size - 4;
 
-    if (record_len != num_len) {
-        fprintf(stderr, "The file ends before the end of a record");
-        exit(1);
-    }
-    
-
     // read integers
     uint64_t res = 0;
     for (int i = 0; i < num_len; i++) {
@@ -66,6 +60,12 @@ int main(int argc, char* argv[]) {
         res |= ch << (i * 8);
     }
     printf("%li\n", res);
+
+    // invalid record length
+    if (record_len != num_len) {
+        fprintf(stderr, "Invalid record length");
+        exit(1);
+    }
 
     fclose(file);
 
