@@ -2,18 +2,16 @@
 
 // return the value bits rotated left n_rotations
 uint16_t bit_rotate(int n_rotations, uint16_t bits) {
+    // Ensure n_rotations is within [0, 15]
+    n_rotations = ((n_rotations % 16) + 16) % 16;
 
-    // 1001 1000 rotate 4
+    // If no rotation is needed, return the bits as is
+    if (n_rotations == 0) {
+        return bits;
+    }
 
-    // 0000 1111
-    uint16_t r_mask = (1 << (n_rotations)) - 1;
+    // Perform left rotation
+    uint16_t res = (bits << n_rotations) | (bits >> (16 - n_rotations));
 
-    // 1111 0000
-    uint16_t l_mask = ~r_mask;
-
-    uint16_t res = 0;
-    res |= (bits & r_mask) << n_rotations;
-    res |= (bits & l_mask) >> (16 - n_rotations);
-    
     return res;
 }

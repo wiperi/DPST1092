@@ -3,5 +3,6 @@
 // given the 32 bits of a float return it with its sign flipped
 uint32_t sign_flip(uint32_t f) {
 
-    return f ^= (1 << 31);
+    unsigned long long mask = (unsigned long long) 1 << (unsigned long long )31;
+    return f ^= mask;
 }
