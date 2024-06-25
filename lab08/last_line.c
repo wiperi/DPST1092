@@ -70,8 +70,7 @@ int try(int argc, char* argv[]) {
     }
 
     if (fseek(file, -1, SEEK_END) < 0) {
-        perror("fseek() failed");
-        exit(1);
+        return 0;
     }
     char last_char = fgetc(file);
 
@@ -83,7 +82,11 @@ int try(int argc, char* argv[]) {
 
     int ch;
     while ((ch = fgetc(file)) != '\n') {
-        fseek(file, -2, SEEK_CUR);
+        
+        if (fseek(file, -2, SEEK_CUR) < 0) {
+            rewind(file);
+            break;
+        }
 
         if (ftell(file) == 0) {
             break;
