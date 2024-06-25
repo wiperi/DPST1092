@@ -4,49 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int try(int argc, char* argv[]);
-
 int main(int argc, char* argv[]) {
-
-    try(argc, argv);
-    return 0;
-
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <file name>\n", argv[0]);
-        exit(1);
-    }
-
-    FILE* file = fopen(argv[1], "r");
-
-    int ch;
-    int bias = 0;
-    int start = 0;
-    while (1) {
-        if (fseek(file, -1 * bias, SEEK_END) == -1) {
-            fseek(file, -1 * --bias, SEEK_END);
-            break;
-        }
-
-        ch = fgetc(file);
-        if (isprint(ch)) {
-            start = 1;
-        }
-        if (start && !isprint(ch)) {
-            break;
-        }
-
-        bias++;
-    }
-
-    while ((ch = fgetc(file)) != EOF && isprint(ch)) {
-        putchar(ch);
-    }
-    if (ch != '\n') {
-        printf("\n");
-    }
-}
-
-int try(int argc, char* argv[]) {
 
     // if (last char is \n) {
     //     read from second last char;
@@ -69,30 +27,36 @@ int try(int argc, char* argv[]) {
         exit(1);
     }
 
+    // find last char, if ther is only one char in file, return
     if (fseek(file, -1, SEEK_END) < 0) {
         return 0;
     }
     char last_char = fgetc(file);
 
+    // if last char is LF, read from the second last char
     if (last_char == '\n') {
         fseek(file, -2, SEEK_CUR);
     } else {
         fseek(file, -1, SEEK_CUR);
     }
 
+    // read backward, stop until reach LF or go beyond the begining or reach the beginning
     int ch;
     while ((ch = fgetc(file)) != '\n') {
         
         if (fseek(file, -2, SEEK_CUR) < 0) {
+            // go beyond the beginning
             rewind(file);
             break;
         }
 
         if (ftell(file) == 0) {
+            // reach the beginning
             break;
         }
     }
 
+    // print last line
     while ((ch = getc(file)) != EOF) {
         putchar(ch);
     }
