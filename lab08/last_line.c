@@ -4,7 +4,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+int try(int argc, char* argv[]);
+
 int main(int argc, char* argv[]) {
+
+    try(argc, argv);
+    return 0;
 
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <file name>\n", argv[0]);
@@ -39,4 +44,46 @@ int main(int argc, char* argv[]) {
     if (ch != '\n') {
         printf("\n");
     }
+}
+
+int try(int argc, char* argv[]) {
+
+    // if (last char is \n) {
+    //     read from second last char;
+    // } else if (last char is not \n) {
+    //     read from last char;
+    // }
+    // while (does not meet the preivous \n and
+    //        does not reach the file beginning) {
+    //     read;
+    // }
+
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <file name>\n", argv[0]);
+        exit(1);
+    }
+
+    FILE* file = fopen(argv[1], "r");
+
+    fseek(file, -1, SEEK_END);
+    int last_char = fgetc(file);
+
+    if (last_char == '\n') {
+        fseek(file, -2, SEEK_CUR);
+    }
+
+    int ch;
+    while ((ch = fgetc(file)) != '\n') {
+        fseek(file, -2, SEEK_CUR);
+
+        if (ftell(file) == 0) {
+            break;
+        }
+    }
+
+    while ((ch = getc(file)) != EOF) {
+        putchar(ch);
+    }
+
+    return 0;
 }
