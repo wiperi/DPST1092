@@ -64,12 +64,21 @@ int try(int argc, char* argv[]) {
     }
 
     FILE* file = fopen(argv[1], "r");
+    if (file == NULL) {
+        perror("Error opening file: ");
+        exit(1);
+    }
 
-    fseek(file, -1, SEEK_END);
-    int last_char = fgetc(file);
+    if (fseek(file, -1, SEEK_END) < 0) {
+        perror("fseek() failed");
+        exit(1);
+    }
+    char last_char = fgetc(file);
 
     if (last_char == '\n') {
         fseek(file, -2, SEEK_CUR);
+    } else {
+        fseek(file, -1, SEEK_CUR);
     }
 
     int ch;
