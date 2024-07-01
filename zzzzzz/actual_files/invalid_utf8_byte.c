@@ -17,7 +17,6 @@ int invalid_utf8_byte(char *utf8_string) {
 
         // is head valid?
         int tail = 0;
-        printf("%c %x\n", ch, ch);
         if ((ch >> 7) == 0) {
             ;
         } else if ((ch >> 3) == 0b11110) {
