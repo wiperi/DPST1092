@@ -12,7 +12,7 @@ find . -type l | while read symlink; do
   target=$(readlink "$symlink")
   
   # 备份原符号链接
-  cp "$symlink" "bak-$symlink.bak"
+  # cp "$symlink" "$symlink.bak"
   
   # 复制目标文件内容到新文件夹下，并保持原来的文件结构
   # 例如：如果符号链接是 ./subdir/file -> /path/to/target_file
