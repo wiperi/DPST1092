@@ -7,6 +7,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    long total = 0;
+
     for (int i = 1; i < argc; i++) {
         struct stat state;
         if (stat(argv[i], &state) == -1) {
@@ -14,8 +16,11 @@ int main(int argc, char *argv[]) {
             continue;
         }
 
+        total += state.st_size;
         printf("%s: %ld bytes\n", argv[i], state.st_size);
     }
+
+    printf("Total: %ld\n", total);
 
     return 0;
 }
