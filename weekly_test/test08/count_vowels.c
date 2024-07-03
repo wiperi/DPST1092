@@ -1,5 +1,23 @@
 #include <stdio.h>
 
+int is_vowel(int ch) {
+    switch (ch) {
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+        case 'A':
+        case 'E':
+        case 'I':
+        case 'O':
+        case 'U':
+            return 1;
+        default:
+            return 0;
+    }
+}
+
 int main(int argc, char *argv[], char *envp[]) {
     
     if (argc < 2) {
@@ -18,7 +36,7 @@ int main(int argc, char *argv[], char *envp[]) {
     int vowelCount = 0;
     int ch;
     while ((ch = fgetc(file)) != EOF) {
-        if (isVowel(ch)) {
+        if (is_vowel(ch)) {
             vowelCount++;
         }
     }
@@ -27,7 +45,7 @@ int main(int argc, char *argv[], char *envp[]) {
     fclose(file);
 
     // Print the vowel count
-    printf("Number of vowels in the file: %d\n", vowelCount);
+    printf("%d\n", vowelCount);
 
     return 0;
 }

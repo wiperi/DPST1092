@@ -4,7 +4,7 @@
 int main(int argc, char *argv[], char *envp[]) {
 
     if (argc != 3) {
-        printf("Usage: %s <file_path> <output_file_path>\n", argv[0]);
+        printf("Usage: %s <file_path> <file_path>\n", argv[0]);
         return 1;
     }
     
@@ -14,7 +14,7 @@ int main(int argc, char *argv[], char *envp[]) {
         exit(1);
     }
 
-    FILE* fb = fopen(argv[2], "w");
+    FILE* fb = fopen(argv[2], "r");
     if (!fb) {
         perror("fopen failed: ");
         exit(1);
@@ -26,6 +26,10 @@ int main(int argc, char *argv[], char *envp[]) {
         cha = fgetc(fa);
         chb = fgetc(fb);
 
+        if (cha == EOF && chb == EOF) {
+            break;
+        }
+
         if (cha == EOF) {
             printf("EOF on %s\n", argv[1]);
             return 0;
@@ -35,11 +39,12 @@ int main(int argc, char *argv[], char *envp[]) {
             printf("EOF on %s\n", argv[2]);
             return 0;
         }
-
+        
         if (cha != chb) {
-            printf("Files differ at byte %d\n", ftell(fa));
+            printf("Files differ at byte %ld\n", ftell(fa) - 1);
             return 0;
         }
+
     }
 
     printf("Files are identical\n");
