@@ -2,7 +2,7 @@
 // DPST1092 --- Assignment 2: `space', a simple file archiver
 // 
 //
-// Written by YOUR-NAME-HERE (z5555555) on INSERT-DATE-HERE.
+// Written by Tianyang Chen (z5567323) on 3/July/2024.
 //
 // 2024-03-08   v1.1    Team DPST1092 
 
