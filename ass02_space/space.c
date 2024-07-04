@@ -19,6 +19,10 @@
 
 // ADD ANY extra #defines HERE
 
+#define DEBUG_MODE 0
+#define DEBUG_MESSAGE_OFFSET_STRING 20
+#define DEBUG_MESSAGE_OFFSET_OTHER 10
+
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
 int hash_getc(FILE* file, uint8_t* hash);
@@ -85,6 +89,7 @@ void check_galaxy(char* galaxy_pathname) {
                     "error: incorrect first star byte: 0x%x should be 0x63\n", ch);
             exit(1);
         }
+        if (DEBUG_MODE) printf("%-*s %*c\n", DEBUG_MESSAGE_OFFSET_STRING, "magic:", DEBUG_MESSAGE_OFFSET_OTHER, ch);
 
         // check star format
         ch = hash_getc(file, &hash);
@@ -98,6 +103,7 @@ void check_galaxy(char* galaxy_pathname) {
             exit(1);
             break;
         }
+        if (DEBUG_MODE) printf("%-*s %*c\n", DEBUG_MESSAGE_OFFSET_STRING, "star format:", DEBUG_MESSAGE_OFFSET_OTHER, ch);
 
         // check permissions
         int permissions_invalid = 0;
@@ -132,10 +138,11 @@ void check_galaxy(char* galaxy_pathname) {
             fprintf(stderr, "error: invalid permission string %s\n", permissions);
             exit(1);
         }
+        if (DEBUG_MODE) printf("%-*s %*s\n", DEBUG_MESSAGE_OFFSET_STRING, "permisson:", DEBUG_MESSAGE_OFFSET_OTHER, permissions);
 
         // check pathlen
         uint64_t pathlen = little_endian_to_uint(file, 2, &hash);
-        printf("%lx\n", pathlen);
+        if (DEBUG_MODE) printf("%-*s %*lx\n", DEBUG_MESSAGE_OFFSET_STRING, "pathlen:", DEBUG_MESSAGE_OFFSET_OTHER, pathlen);
 
         // read path name
         char path_name[pathlen + 1];
@@ -145,11 +152,11 @@ void check_galaxy(char* galaxy_pathname) {
             path_name[i] = ch;
         }
         path_name[pathlen] = '\0';
-        printf("%s\n", path_name);
+        if (DEBUG_MODE) printf("%-*s %*s\n", DEBUG_MESSAGE_OFFSET_STRING, "path name:", DEBUG_MESSAGE_OFFSET_OTHER, path_name);
 
         // read content len
         uint64_t content_len = little_endian_to_uint(file, 6, &hash);
-        printf("%lx\n", content_len);
+        if (DEBUG_MODE) printf("%-*s %*lx\n", DEBUG_MESSAGE_OFFSET_STRING, "content len:", DEBUG_MESSAGE_OFFSET_OTHER, content_len);
 
         // check content
         char content[content_len + 1];
@@ -159,7 +166,7 @@ void check_galaxy(char* galaxy_pathname) {
             content[i] = ch;
         }
         content[content_len] = '\0';
-        printf("%s\n", content);
+        if (DEBUG_MODE) printf("%-*s %*s\n", DEBUG_MESSAGE_OFFSET_STRING, "content:", DEBUG_MESSAGE_OFFSET_OTHER, content);
 
         // check hash
         int hash_byte = fgetc(file);
