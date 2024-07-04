@@ -25,6 +25,14 @@
 
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
+static int check_galaxy_silence = 0;
+enum {
+    DEFAULT = 0,
+    SILENCE,
+    LIST_STARS,
+    LIST_STARS_VERBOSE,
+} check_galaxy_mode;
+
 int hash_getc(FILE* file, uint8_t* hash);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
 
@@ -38,11 +46,7 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
 
 void list_galaxy(char* galaxy_pathname, int long_listing) {
 
-    printf("list_galaxy called to list galaxy: '%s'\n", galaxy_pathname);
 
-    if (long_listing) {
-        printf("long listing with permissions & sizes specified\n");
-    }
 }
 
 // check the files & directories stored in galaxy_pathname (subset 1)
@@ -54,13 +58,19 @@ void list_galaxy(char* galaxy_pathname, int long_listing) {
 void check_galaxy(char* galaxy_pathname) {
 
     /**
+     * pseudo:
+     * 
+     * open file
+     * 
+     * check if file end
      * check magic
-     * format
-     * perm
-     * pathname len
-     * pathname
-     * content len
-     * content
+     * check format
+     * check permissions
+     * read path len
+     * check path name
+     * read content len
+     * check content
+     * check hash
      */
 
     FILE* file = fopen(galaxy_pathname, "r");
@@ -70,7 +80,6 @@ void check_galaxy(char* galaxy_pathname) {
     }
 
     int ch;
-
 
     while (1) {
         // check if file ends
@@ -175,10 +184,20 @@ void check_galaxy(char* galaxy_pathname) {
             fprintf(stderr, "error: unexpected EOF in galaxy\n");
             exit(1);
         }
-        if (hash_byte == hash) {
-            printf("%s - correct hash\n", path_name);
+
+        if (check_galaxy_silence) {
+            if (hash_byte == hash) {
+                ;
+            } else {
+                fprintf(stderr, "%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash, hash_byte);
+                exit(1);
+            }
         } else {
-            printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash, hash_byte);
+            if (hash_byte == hash) {
+                printf("%s - correct hash\n", path_name);
+            } else {
+                printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash, hash_byte);
+            }
         }
     }
 }
@@ -187,7 +206,16 @@ void check_galaxy(char* galaxy_pathname) {
 
 void extract_galaxy(char* galaxy_pathname) {
 
-    printf("calling extract galaxy. extracting %s\n", galaxy_pathname);
+    /**
+     * pseudo:
+     * 
+     * check galaxy
+     */
+
+    check_galaxy_silence = 1;
+    check_galaxy(galaxy_pathname);
+    check_galaxy_silence = 0;
+    
 }
 
 // create galaxy_pathname containing the files or directories specified in
