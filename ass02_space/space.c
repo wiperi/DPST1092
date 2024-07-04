@@ -126,6 +126,7 @@ void check_galaxy(char* galaxy_pathname) {
                     case '-':
                     case 'r':
                     case 'w':
+                    case 'x':
                         break;
                     default:
                         permissions_invalid = 1;
