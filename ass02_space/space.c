@@ -178,7 +178,7 @@ void check_galaxy(char* galaxy_pathname) {
         if (hash_byte == hash) {
             printf("%s - correct hash\n", path_name);
         } else {
-            printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash_byte, hash);
+            printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash, hash_byte);
         }
     }
 }
@@ -235,7 +235,7 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
     for (int i = 0; i < n_bytes; i++) {
         ch = hash_getc(file, hash);
 
-        res |= (ch << (i * 8));
+        res |= ((uint64_t) ch << (i * 8));
     }
 
     return res;
