@@ -77,7 +77,7 @@ void check_galaxy(char* galaxy_pathname) {
         }
 
         uint8_t hash = 0;
-        
+
         // check magic
         ch = hash_getc(file, &hash);
         if (ch != 'c') {
@@ -127,7 +127,7 @@ void check_galaxy(char* galaxy_pathname) {
                 }
             }
         }
-        permissions[11] = '\0';
+        permissions[10] = '\0';
         if (permissions_invalid) {
             fprintf(stderr, "error: invalid permission string %s\n", permissions);
             exit(1);
