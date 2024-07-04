@@ -25,12 +25,13 @@
 
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
-enum {
-    DEFAULT = 0,
-    SILENCE,
-    LIST_STARS,
-    LIST_STARS_VERBOSE,
-} check_galaxy_mode = DEFAULT;
+uint8_t check_galaxy_mode = 0;
+# define SILENCE 0x1
+# define LIST_STARS 0x2
+# define LIST_STARS_VERBOSE 0x4
+
+// macro to decode mode
+# define CHECK_GALAXY_MODE(M) (check_galaxy_mode & M)
 
 int hash_getc(FILE* file, uint8_t* hash);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
@@ -45,6 +46,14 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
 
 void list_galaxy(char* galaxy_pathname, int long_listing) {
 
+    check_galaxy_mode |= SILENCE;
+    if (long_listing) {
+        check_galaxy_mode |= LIST_STARS_VERBOSE;
+    } else {
+        check_galaxy_mode |= LIST_STARS;
+    }
+    check_galaxy(galaxy_pathname);
+    check_galaxy_mode = 0;
 
 }
 
@@ -111,6 +120,7 @@ void check_galaxy(char* galaxy_pathname) {
             exit(1);
             break;
         }
+        char star_format = ch;
         if (DEBUG_MODE) printf("%-*s %*c\n", DEBUG_MESSAGE_OFFSET_STRING, "star format:", DEBUG_MESSAGE_OFFSET_OTHER, ch);
 
         // check permissions
@@ -184,7 +194,8 @@ void check_galaxy(char* galaxy_pathname) {
             exit(1);
         }
 
-        if (check_galaxy_mode == SILENCE) {
+        // print hash comparision ressult
+        if (CHECK_GALAXY_MODE(SILENCE)) {
             if (hash_byte == hash) {
                 ;
             } else {
@@ -198,6 +209,13 @@ void check_galaxy(char* galaxy_pathname) {
                 printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash, hash_byte);
             }
         }
+
+        // list stars
+        if (CHECK_GALAXY_MODE(LIST_STARS_VERBOSE)) {
+            printf("%10s %2c %6ld  %s\n", permissions, star_format, content_len, path_name);
+        } else if (CHECK_GALAXY_MODE(LIST_STARS)) {
+            printf("%s\n", path_name);
+        }
     }
 }
 
@@ -210,10 +228,6 @@ void extract_galaxy(char* galaxy_pathname) {
      * 
      * check galaxy
      */
-
-    check_galaxy_mode = SILENCE;
-    check_galaxy(galaxy_pathname);
-    check_galaxy_mode = DEFAULT;
 }
 
 // create galaxy_pathname containing the files or directories specified in
