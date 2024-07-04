@@ -21,7 +21,8 @@
 
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
-int hash_getc(FILE* stream, uint8_t* hash);
+int hash_getc(FILE* file, uint8_t* hash);
+uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -97,12 +98,12 @@ void check_galaxy(char* galaxy_pathname) {
 
         if (i == 0) {
             switch (ch) {
-            case '-':
-            case 'd':
-                break;
-            default:
-                permissions_invalid = 1;
-                break;
+                case '-':
+                case 'd':
+                    break;
+                default:
+                    permissions_invalid = 1;
+                    break;
             }
         } else {
             switch (ch) {
@@ -119,6 +120,11 @@ void check_galaxy(char* galaxy_pathname) {
         fprintf(stderr, "error: invalid permission string %s\n", permissions);
         exit(1);
     }
+
+    // check pathlen
+    uint64_t pathlen = little_endian_to_uint(file, 2, &hash);
+    printf("%lu\n", pathlen);
+
 }
 
 // extract the files/directories stored in galaxy_pathname (subset 1 & 3)
@@ -154,8 +160,27 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
 // ADD YOUR EXTRA FUNCTIONS HERE
 
-int hash_getc(FILE* stream, uint8_t* hash) {
-    int ch = fgetc(stream);
+int hash_getc(FILE* file, uint8_t* hash) {
+    int ch = fgetc(file);
     *hash = galaxy_hash(*hash, ch);
     return ch;
+}
+
+uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
+
+    assert(n_bytes <= 8);
+
+    uint64_t res = 0;
+    int ch;
+    for (int i = 0; i < n_bytes; i++) {
+        ch = hash_getc(file, hash);
+        if (ch == EOF) {
+            fprintf(stderr, "error: unexpected EOF in galaxy\n");
+            exit(1);
+        }
+
+        res |= (ch << (i * 8));
+    }
+
+    return res;
 }
