@@ -25,13 +25,12 @@
 
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
-static int check_galaxy_silence = 0;
 enum {
     DEFAULT = 0,
     SILENCE,
     LIST_STARS,
     LIST_STARS_VERBOSE,
-} check_galaxy_mode;
+} check_galaxy_mode = DEFAULT;
 
 int hash_getc(FILE* file, uint8_t* hash);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
@@ -185,7 +184,7 @@ void check_galaxy(char* galaxy_pathname) {
             exit(1);
         }
 
-        if (check_galaxy_silence) {
+        if (check_galaxy_mode == SILENCE) {
             if (hash_byte == hash) {
                 ;
             } else {
@@ -212,10 +211,9 @@ void extract_galaxy(char* galaxy_pathname) {
      * check galaxy
      */
 
-    check_galaxy_silence = 1;
+    check_galaxy_mode = SILENCE;
     check_galaxy(galaxy_pathname);
-    check_galaxy_silence = 0;
-    
+    check_galaxy_mode = DEFAULT;
 }
 
 // create galaxy_pathname containing the files or directories specified in
