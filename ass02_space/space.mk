@@ -10,4 +10,4 @@ SRC +=
 INCLUDES +=
 
 space:	$(SRC) $(INCLUDES)
-	$(CC) $(SRC) -o $@
+	$(CC) -fdiagnostics-color=always -g $(SRC) -o $@

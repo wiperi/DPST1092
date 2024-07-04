@@ -65,66 +65,114 @@ void check_galaxy(char* galaxy_pathname) {
         exit(1);
     }
 
-    uint8_t hash = 0;
     int ch;
 
-    // check magic
-    ch = hash_getc(file, &hash);
-    if (ch != 'c') {
-        fprintf(stderr,
-                "error: incorrect first star byte: 0x%x should be 0x63\n", ch);
-        exit(1);
-    }
 
-    // check star format
-    ch = hash_getc(file, &hash);
-    switch (ch) {
-    case '8':
-    case '7':
-    case '6':
-        break;
-    default:
-        fprintf(stderr, "error: unknown star format: 0x%x\n", ch);
-        exit(1);
-        break;
-    }
+    while (1) {
+        // check if file ends
+        ch = fgetc(file);
+        fseek(file, -1, SEEK_CUR);
+        if (ch == EOF) {
+            return;
+        }
 
-    // check permissions
-    int permissions_invalid = 0;
-    char permissions[10];
-    for (int i = 0; i < 10; i++) {
+        uint8_t hash = 0;
+        
+        // check magic
         ch = hash_getc(file, &hash);
-        permissions[i] = ch;
+        if (ch != 'c') {
+            fprintf(stderr,
+                    "error: incorrect first star byte: 0x%x should be 0x63\n", ch);
+            exit(1);
+        }
 
-        if (i == 0) {
-            switch (ch) {
-                case '-':
-                case 'd':
-                    break;
-                default:
-                    permissions_invalid = 1;
-                    break;
-            }
-        } else {
-            switch (ch) {
-                case '-':
-                case 'r':
-                case 'w':
-                default:
-                    permissions_invalid = 1;
-                    break;
+        // check star format
+        ch = hash_getc(file, &hash);
+        switch (ch) {
+        case '8':
+        case '7':
+        case '6':
+            break;
+        default:
+            fprintf(stderr, "error: unknown star format: 0x%x\n", ch);
+            exit(1);
+            break;
+        }
+
+        // check permissions
+        int permissions_invalid = 0;
+        char permissions[11];
+        for (int i = 0; i < 10; i++) {
+            ch = hash_getc(file, &hash);
+            permissions[i] = ch;
+
+            if (i == 0) {
+                switch (ch) {
+                    case '-':
+                    case 'd':
+                        break;
+                    default:
+                        permissions_invalid = 1;
+                        break;
+                }
+            } else {
+                switch (ch) {
+                    case '-':
+                    case 'r':
+                    case 'w':
+                        break;
+                    default:
+                        permissions_invalid = 1;
+                        break;
+                }
             }
         }
-    }
-    if (permissions_invalid) {
-        fprintf(stderr, "error: invalid permission string %s\n", permissions);
-        exit(1);
-    }
+        permissions[11] = '\0';
+        if (permissions_invalid) {
+            fprintf(stderr, "error: invalid permission string %s\n", permissions);
+            exit(1);
+        }
 
-    // check pathlen
-    uint64_t pathlen = little_endian_to_uint(file, 2, &hash);
-    printf("%lu\n", pathlen);
+        // check pathlen
+        uint64_t pathlen = little_endian_to_uint(file, 2, &hash);
+        printf("%lx\n", pathlen);
 
+        // read path name
+        char path_name[pathlen + 1];
+        for (int i = 0; i < pathlen; i++) {
+            ch = hash_getc(file, &hash);
+
+            path_name[i] = ch;
+        }
+        path_name[pathlen] = '\0';
+        printf("%s\n", path_name);
+
+        // read content len
+        uint64_t content_len = little_endian_to_uint(file, 6, &hash);
+        printf("%lx\n", content_len);
+
+        // check content
+        char content[content_len + 1];
+        for (int i = 0; i < content_len; i++) {
+            ch = hash_getc(file, &hash);
+
+            content[i] = ch;
+        }
+        content[content_len] = '\0';
+        printf("%s\n", content);
+
+        // check hash
+        int hash_byte = fgetc(file);
+        if (hash_byte == EOF) {
+            fprintf(stderr, "error: unexpected EOF in galaxy\n");
+            exit(1);
+        }
+        if (hash_byte == hash) {
+            printf("%s - correct hash\n", path_name);
+        } else {
+            printf("%s - incorrect hash 0x%x should be 0x%x\n", path_name, hash_byte, hash);
+        }
+    }
 }
 
 // extract the files/directories stored in galaxy_pathname (subset 1 & 3)
@@ -162,6 +210,10 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
 int hash_getc(FILE* file, uint8_t* hash) {
     int ch = fgetc(file);
+    if (ch == EOF) {
+        fprintf(stderr, "error: unexpected EOF in galaxy\n");
+        exit(1);
+    }
     *hash = galaxy_hash(*hash, ch);
     return ch;
 }
@@ -174,10 +226,6 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
     int ch;
     for (int i = 0; i < n_bytes; i++) {
         ch = hash_getc(file, hash);
-        if (ch == EOF) {
-            fprintf(stderr, "error: unexpected EOF in galaxy\n");
-            exit(1);
-        }
 
         res |= (ch << (i * 8));
     }
