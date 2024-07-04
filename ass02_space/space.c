@@ -54,7 +54,6 @@ void list_galaxy(char* galaxy_pathname, int long_listing) {
     }
     check_galaxy(galaxy_pathname);
     check_galaxy_mode = 0;
-
 }
 
 // check the files & directories stored in galaxy_pathname (subset 1)
