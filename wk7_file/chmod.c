@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     char *end;
     // first argument is mode in octal
-    mode_t mode = strtol(argv[1], &end, 8);
+    __mode_t mode = strtol(argv[1], &end, 8);
 
     // check first argument was a valid octal number
     if (argv[1][0] == '\0' || end[0] != '\0') {

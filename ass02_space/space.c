@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "space.h"
 
@@ -26,15 +27,17 @@
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
 uint8_t check_galaxy_mode = 0;
-# define SILENCE 0x1
-# define LIST_STARS 0x2
-# define LIST_STARS_VERBOSE 0x4
+#define SILENCE 0x1
+#define LIST_STARS 0x2
+#define LIST_STARS_VERBOSE 0x4
+#define EXTRACT_STARS 0x8
 
 // macro to decode mode
 # define CHECK_GALAXY_MODE(M) (check_galaxy_mode & M)
 
 int hash_getc(FILE* file, uint8_t* hash);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
+int modify_file_permissions(const char* path_name, const char* permissions);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -215,7 +218,39 @@ void check_galaxy(char* galaxy_pathname) {
         } else if (CHECK_GALAXY_MODE(LIST_STARS)) {
             printf("%s\n", path_name);
         }
+
+        // extract starts
+        if (CHECK_GALAXY_MODE(EXTRACT_STARS)) {
+
+            if (permissions[0] == 'd') {
+                // create dir
+                printf("Creating directory: %s\n", path_name);
+                
+                // check if dir exists
+                if (access(path_name, F_OK) == 0) {
+                    fprintf(stderr, "%s: File exists\n", path_name);
+                    exit(1);
+                }
+
+                // create dir
+                if (mkdir(path_name, 0777) == -1) {
+                    fprintf(stderr, "error: failed to create directory %s\n", path_name);
+                    exit(1);
+                }
+
+                // modify permissions
+                if (modify_file_permissions(path_name, permissions) == -1) {
+                    fprintf(stderr, "error: failed to modify permissions for %s\n", path_name);
+                    exit(1);
+                }
+
+            } else {
+                // create file
+            }
+        }
     }
+
+    fclose(file);
 }
 
 // extract the files/directories stored in galaxy_pathname (subset 1 & 3)
@@ -278,4 +313,56 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
     }
 
     return res;
+}
+
+int modify_file_permissions(const char* path_name, const char* permissions) {
+
+    if (strlen(permissions) != 10) {
+        fprintf(stderr, "Invalid permission string format. Expected '-rwxrwxrwx'\n");
+        return -1;
+    }
+
+    struct stat st;
+    if (stat(path_name, &st) != 0) {
+        perror("Error getting file status");
+        return -1;
+    }
+
+    // Check if the file is a directory or a regular file
+    if (permissions[0] == 'd') {
+        if (!S_ISDIR(st.st_mode)) {
+            fprintf(stderr, "error: %s is not a directory\n", path_name);
+            return -1;
+        }
+    } else {
+        if (!S_ISREG(st.st_mode)) {
+            fprintf(stderr, "error: %s is not a regular file\n", path_name);
+            return -1;
+        }
+    }
+
+    // Remove all permissions
+    mode_t new_mode = st.st_mode & ~(S_IRWXU | S_IRWXG | S_IRWXO);
+
+    // User permissions
+    if (permissions[1] == 'r') new_mode |= S_IRUSR;
+    if (permissions[2] == 'w') new_mode |= S_IWUSR;
+    if (permissions[3] == 'x') new_mode |= S_IXUSR;
+
+    // Group permissions
+    if (permissions[4] == 'r') new_mode |= S_IRGRP;
+    if (permissions[5] == 'w') new_mode |= S_IWGRP;
+    if (permissions[6] == 'x') new_mode |= S_IXGRP;
+
+    // Others permissions
+    if (permissions[7] == 'r') new_mode |= S_IROTH;
+    if (permissions[8] == 'w') new_mode |= S_IWOTH;
+    if (permissions[9] == 'x') new_mode |= S_IXOTH;
+
+    if (chmod(path_name, new_mode) != 0) {
+        perror("Error changing file permissions");
+        return -1;
+    }
+
+    return 0;
 }
