@@ -241,7 +241,7 @@ void check_galaxy(char* galaxy_pathname) {
 
             } else {
                 // create file
-                printf("Creating file: %s\n", path_name);
+                printf("Extracting: %s\n", path_name);
 
                 // create file
                 FILE* new_file = fopen(path_name, "w");
