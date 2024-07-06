@@ -32,13 +32,30 @@ uint8_t check_galaxy_mode = 0;
 #define LIST_STARS 0x2
 #define LIST_STARS_VERBOSE 0x4
 #define EXTRACT_STARS 0x8
-
-// macro to decode mode
 # define CHECK_GALAXY_MODE(M) (check_galaxy_mode & M)
+
+// STRUCTS
+
+typedef struct Node {
+    char* path_name;
+    struct Node* next;
+} Node;
+
+typedef struct Queue{
+    Node* head;
+    Node* tail;
+} Queue;
+
+// FUNCTION PROTOTYPES
 
 int hash_getc(FILE* file, uint8_t* hash);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
 int modify_file_permissions(const char* path_name, const char* permissions);
+int queue_is_empty(Queue* q);
+Node* new_Node(const char* path_name);
+void enqueue(Queue* q, Node* node);
+char* dequeue(Queue* q);
+int ls_dir(const char* path_name);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -250,15 +267,15 @@ void check_galaxy(char* galaxy_pathname) {
                     exit(1);
                 }
 
-                // modify permissions
-                if (modify_file_permissions(path_name, permissions) == -1) {
-                    fprintf(stderr, "error: failed to modify permissions for %s\n", path_name);
-                    exit(1);
-                }
-
                 // write content
                 if (fwrite(content, 1, content_len, new_file) != content_len) {
                     perror(path_name);
+                    exit(1);
+                }
+
+                // modify permissions
+                if (modify_file_permissions(path_name, permissions) == -1) {
+                    fprintf(stderr, "error: failed to modify permissions for %s\n", path_name);
                     exit(1);
                 }
 
@@ -302,12 +319,8 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
     // REPLACE THIS CODE PRINTFS WITH YOUR CODE
 
-    printf("create_galaxy called to create galaxy: '%s'\n", galaxy_pathname);
-    printf("format = %x\n", format);
-    printf("append = %d\n", append);
-    printf("These %d pathnames specified:\n", n_pathnames);
-    for (int p = 0; p < n_pathnames; p++) {
-        printf("%s\n", pathnames[p]);
+    for (int i = 0; i < n_pathnames; i++) {
+        ls_dir(pathnames[i]);
     }
 }
 
@@ -388,4 +401,98 @@ int modify_file_permissions(const char* path_name, const char* permissions) {
     }
 
     return 0;
+}
+
+
+
+int queue_is_empty(Queue* q) {
+    return q->head == NULL;
+}
+
+Node* new_Node(const char* path_name) {
+    Node* new_Node = malloc(sizeof(Node));
+    new_Node->path_name = strdup(path_name);
+    new_Node->next = NULL;
+    return new_Node;
+}
+
+void enqueue(Queue* q, Node* node) {
+
+    if (queue_is_empty(q)) {
+        q->head = node;
+        q->tail = node;
+        return;
+    }
+
+    q->tail->next = node;
+    q->tail = q->tail->next;
+}
+
+char* dequeue(Queue* q) {
+
+    if (queue_is_empty(q)) {
+        return NULL;
+    }
+
+    Node* prev_head = q->head;
+    char* path_name = strdup(q->head->path_name);
+
+    q->head = q->head->next;
+    if (q->head == NULL) {
+        q->tail = NULL;
+    }
+
+    free(prev_head->path_name);
+    free(prev_head);
+
+    return path_name;
+}
+
+int ls_dir(const char* path_name) {
+
+    Queue q = {NULL, NULL};
+    enqueue(&q, new_Node(path_name));
+
+    while (!queue_is_empty(&q)) {
+        char* cur_path = dequeue(&q);
+        printf("%s\n", cur_path);
+
+        DIR* dir = opendir(cur_path);
+        if (dir == NULL) {
+            continue;
+        }
+
+        struct dirent** entry_list;
+        int n_entries = scandir(cur_path, &entry_list, NULL, alphasort);
+        if (n_entries == -1) {
+            perror("scandir");
+            continue;
+        }
+
+        for (int i = 0; i < n_entries; i++) {
+
+            struct dirent* entry = entry_list[i];
+
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+                continue;
+            }
+
+            char new_path[1024];
+            snprintf(new_path, sizeof(new_path), "%s/%s", cur_path, entry->d_name);
+
+            struct stat st;
+            if (stat(new_path, &st) == -1) {
+                perror("stat");
+                continue;
+            }
+
+            if (S_ISDIR(st.st_mode)) {
+                enqueue(&q, new_Node(new_path));
+            } else if (S_ISREG(st.st_mode)) {
+                printf("%s\n", new_path);
+            }
+        }
+
+        closedir(dir);
+    }
 }
