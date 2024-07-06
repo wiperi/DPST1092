@@ -27,6 +27,7 @@
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
 uint8_t check_galaxy_mode = 0;
+#define DEFAULT 0
 #define SILENCE 0x1
 #define LIST_STARS 0x2
 #define LIST_STARS_VERBOSE 0x4
@@ -56,7 +57,7 @@ void list_galaxy(char* galaxy_pathname, int long_listing) {
         check_galaxy_mode |= LIST_STARS;
     }
     check_galaxy(galaxy_pathname);
-    check_galaxy_mode = 0;
+    check_galaxy_mode = DEFAULT;
 }
 
 // check the files & directories stored in galaxy_pathname (subset 1)
@@ -225,16 +226,10 @@ void check_galaxy(char* galaxy_pathname) {
             if (permissions[0] == 'd') {
                 // create dir
                 printf("Creating directory: %s\n", path_name);
-                
-                // check if dir exists
-                if (access(path_name, F_OK) == 0) {
-                    fprintf(stderr, "%s: File exists\n", path_name);
-                    exit(1);
-                }
 
                 // create dir
                 if (mkdir(path_name, 0777) == -1) {
-                    fprintf(stderr, "error: failed to create directory %s\n", path_name);
+                    perror(path_name);
                     exit(1);
                 }
 
@@ -246,6 +241,29 @@ void check_galaxy(char* galaxy_pathname) {
 
             } else {
                 // create file
+                printf("Creating file: %s\n", path_name);
+
+                // create file
+                FILE* new_file = fopen(path_name, "w");
+                if (new_file == NULL) {
+                    perror(path_name);
+                    exit(1);
+                }
+
+                // modify permissions
+                if (modify_file_permissions(path_name, permissions) == -1) {
+                    fprintf(stderr, "error: failed to modify permissions for %s\n", path_name);
+                    exit(1);
+                }
+
+                // write content
+                if (fwrite(content, 1, content_len, new_file) != content_len) {
+                    perror(path_name);
+                    exit(1);
+                }
+
+                // close file
+                fclose(new_file);
             }
         }
     }
@@ -262,6 +280,11 @@ void extract_galaxy(char* galaxy_pathname) {
      * 
      * check galaxy
      */
+
+    check_galaxy_mode |= SILENCE;
+    check_galaxy_mode |= EXTRACT_STARS;
+    check_galaxy(galaxy_pathname);
+    check_galaxy_mode = DEFAULT;
 }
 
 // create galaxy_pathname containing the files or directories specified in
