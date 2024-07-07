@@ -326,12 +326,89 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
         bfs_directory(pathnames[i], &awaiting_queue);
     }
 
+    FILE* galaxy = fopen(galaxy_pathname, append ? "a" : "w");
+    if (galaxy == NULL) {
+        perror(galaxy_pathname);
+        exit(1);
+    }
+
     while (!queue_is_empty(&awaiting_queue)) {
         char* star_path_name = dequeue(&awaiting_queue);
 
+        // create star
+
+        FILE* star = fopen(star_path_name, "r");
+        if (star == NULL) {
+            perror(star_path_name);
+            exit(1);
+        }
+
         printf("adding: %s\n", star_path_name);
 
-        // create star
+        // write magic
+        fputc(STAR_MAGIC, galaxy);
+
+        // write format
+        fputc(format, galaxy);
+
+        // write permissions
+        struct stat st;
+        if (stat(star_path_name, &st) == -1) {
+            perror(star_path_name);
+            exit(1);
+        }
+
+        char permissions[11];
+        permissions[0] = S_ISDIR(st.st_mode) ? 'd' : '-';
+        permissions[1] = (st.st_mode & S_IRUSR) ? 'r' : '-';
+        permissions[2] = (st.st_mode & S_IWUSR) ? 'w' : '-';
+        permissions[3] = (st.st_mode & S_IXUSR) ? 'x' : '-';
+        permissions[4] = (st.st_mode & S_IRGRP) ? 'r' : '-';
+        permissions[5] = (st.st_mode & S_IWGRP) ? 'w' : '-';
+        permissions[6] = (st.st_mode & S_IXGRP) ? 'x' : '-';
+        permissions[7] = (st.st_mode & S_IROTH) ? 'r' : '-';
+        permissions[8] = (st.st_mode & S_IWOTH) ? 'w' : '-';
+        permissions[9] = (st.st_mode & S_IXOTH) ? 'x' : '-';
+        permissions[10] = '\0';
+        for (int i = 0; i < 10; i++) {
+            fputc(permissions[i], galaxy);
+        }
+
+        // write path len
+        int path_len = strlen(star_path_name);
+        fputc(path_len, galaxy);
+        fputc(path_len >> 8, galaxy);
+
+        // write path name
+        for (int i = 0; i < path_len; i++) {
+            fputc(star_path_name[i], galaxy);
+        }
+
+        // write content len
+        fseek(star, 0, SEEK_END);
+        int content_len = ftell(star);
+        fseek(star, 0, SEEK_SET);
+        fputc(content_len, galaxy);
+        fputc(content_len >> 8, galaxy);
+        fputc(content_len >> 16, galaxy);
+        fputc(content_len >> 24, galaxy);
+        fputc(content_len >> 32, galaxy);
+        fputc(content_len >> 40, galaxy);
+
+        // write content
+        for (int i = 0; i < content_len; i++) {
+            fputc(fgetc(star), galaxy);
+        }
+
+        // write hash
+        uint8_t hash = 0;
+        for (int i = 0; i < content_len; i++) {
+            hash = galaxy_hash(hash, fgetc(star));
+        }
+        fputc(hash, galaxy);
+
+        fclose(star);
+
     }
 }
 
