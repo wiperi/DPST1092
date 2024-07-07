@@ -62,6 +62,8 @@ char* dequeue(Queue* q);
 void bfs_directory(const char* path_name, Queue* awaiting_queue);
 void sub_path(const char* path_name, Queue* awaiting_queue);
 
+void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
 // if long_listing is non-zero then file/directory permissions, formats & sizes
@@ -406,8 +408,14 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
         }
 
         // write content
-        for (int i = 0; i < content_len; i++) {
-            hash_putc(galaxy, &hash, fgetc(star));
+        if (format == STAR_FMT_7) {
+            encode(star, galaxy, &hash, content_len);
+        } else if (format == STAR_FMT_6) {
+
+        } else {
+            for (int i = 0; i < content_len; i++) {
+                hash_putc(galaxy, &hash, fgetc(star));
+            }
         }
 
         // write hash
@@ -626,5 +634,50 @@ void sub_path(const char* path_name, Queue* awaiting_queue) {
             sub_path[i] = '\0';
             enqueue(awaiting_queue, new_Node(sub_path));
         }
+    }
+}
+
+void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
+
+    int n_ending_zero = 0;
+    int encode_i = 0;
+    uint8_t encoded = 0;
+    int n_encoded = 0;
+
+    while (1) {
+
+        int src_byte = fgetc(from);
+        if (src_byte == EOF) {
+            if (encode_i != 0) {
+                hash_putc(to, hash, encoded);
+                n_encoded++;
+            }
+            break;
+        }
+
+        for (int i = 0; i < 8; i++) {
+            unsigned bit = (src_byte >> (7 - i)) & 01;
+
+            if (i == 0) {
+                // dicard first bit
+                n_ending_zero++;
+            } else {
+                // append bit
+                encoded |= (bit << (7 - encode_i));
+                printf("%x\n", encoded);
+                encode_i++;
+
+                if (encode_i == 8) {
+                    hash_putc(to, hash, encoded);
+                    encode_i = 0;
+                    encoded = 0;
+                    n_encoded++;
+                }
+            }
+        }
+    }
+
+    for (int i = n_encoded; i < content_len; i++) {
+        hash_putc(to, hash, 0);
     }
 }
