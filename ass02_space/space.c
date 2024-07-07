@@ -49,12 +49,16 @@ typedef struct Queue{
 // FUNCTION PROTOTYPES
 
 int hash_getc(FILE* file, uint8_t* hash);
+int hash_putc(FILE* file, uint8_t* hash, int ch);
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash);
+uint64_t uint_to_little_endian(FILE* file, int n_bytes, uint64_t num, uint8_t* hash);
 int modify_file_permissions(const char* path_name, const char* permissions);
+
 int queue_is_empty(Queue* q);
 Node* new_Node(const char* path_name);
 void enqueue(Queue* q, Node* node);
 char* dequeue(Queue* q);
+
 void bfs_directory(const char* path_name, Queue* awaiting_queue);
 void sub_path(const char* path_name, Queue* awaiting_queue);
 
@@ -337,6 +341,11 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
         // create star
 
+        if (strstr(star_path_name, "..")) {
+            fprintf(stderr, "error: Can not add paths containing '..' to galaxy\n");
+            exit(1);
+        }
+
         FILE* star = fopen(star_path_name, "r");
         if (star == NULL) {
             perror(star_path_name);
@@ -345,11 +354,13 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
         printf("adding: %s\n", star_path_name);
 
+        uint8_t hash = 0;
+
         // write magic
-        fputc(STAR_MAGIC, galaxy);
+        hash_putc(galaxy, &hash, STAR_MAGIC);
 
         // write format
-        fputc(format, galaxy);
+        hash_putc(galaxy, &hash, format);
 
         // write permissions
         struct stat st;
@@ -371,44 +382,38 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
         permissions[9] = (st.st_mode & S_IXOTH) ? 'x' : '-';
         permissions[10] = '\0';
         for (int i = 0; i < 10; i++) {
-            fputc(permissions[i], galaxy);
+            hash_putc(galaxy, &hash, permissions[i]);
         }
 
         // write path len
-        int path_len = strlen(star_path_name);
-        fputc(path_len, galaxy);
-        fputc(path_len >> 8, galaxy);
+        uint64_t path_len = strlen(star_path_name);
+        uint_to_little_endian(galaxy, 2, path_len, &hash);
 
         // write path name
         for (int i = 0; i < path_len; i++) {
-            fputc(star_path_name[i], galaxy);
+            hash_putc(galaxy, &hash, star_path_name[i]);
         }
 
         // write content len
-        fseek(star, 0, SEEK_END);
-        int content_len = ftell(star);
-        fseek(star, 0, SEEK_SET);
-        fputc(content_len, galaxy);
-        fputc(content_len >> 8, galaxy);
-        fputc(content_len >> 16, galaxy);
-        fputc(content_len >> 24, galaxy);
-        fputc(content_len >> 32, galaxy);
-        fputc(content_len >> 40, galaxy);
+        uint64_t content_len = 0;
+        if (S_ISDIR(st.st_mode)) {
+            uint_to_little_endian(galaxy, 6, 0, &hash);
+        } else {
+            fseek(star, 0, SEEK_END);
+            content_len = ftell(star);
+            fseek(star, 0, SEEK_SET);
+            uint_to_little_endian(galaxy, 6, content_len, &hash);
+        }
 
         // write content
         for (int i = 0; i < content_len; i++) {
-            fputc(fgetc(star), galaxy);
+            hash_putc(galaxy, &hash, fgetc(star));
         }
 
         // write hash
-        uint8_t hash = 0;
-        for (int i = 0; i < content_len; i++) {
-            hash = galaxy_hash(hash, fgetc(star));
-        }
         fputc(hash, galaxy);
 
         fclose(star);
-
     }
 }
 
@@ -418,6 +423,15 @@ int hash_getc(FILE* file, uint8_t* hash) {
     int ch = fgetc(file);
     if (ch == EOF) {
         fprintf(stderr, "error: unexpected EOF in galaxy\n");
+        exit(1);
+    }
+    *hash = galaxy_hash(*hash, ch);
+    return ch;
+}
+
+int hash_putc(FILE* file, uint8_t* hash, int ch) {
+    if (fputc(ch, file) == EOF) {
+        perror("fputc");
         exit(1);
     }
     *hash = galaxy_hash(*hash, ch);
@@ -437,6 +451,18 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
     }
 
     return res;
+}
+
+uint64_t uint_to_little_endian(FILE* file, int n_bytes, uint64_t num, uint8_t* hash) {
+
+    assert(n_bytes <= 8);
+
+    for (int i = 0; i < n_bytes; i++) {
+        hash_putc(file, hash, num & 0xff);
+        num >>= 8;
+    }
+
+    return num;
 }
 
 int modify_file_permissions(const char* path_name, const char* permissions) {
