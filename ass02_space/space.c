@@ -55,8 +55,8 @@ int queue_is_empty(Queue* q);
 Node* new_Node(const char* path_name);
 void enqueue(Queue* q, Node* node);
 char* dequeue(Queue* q);
-void bfs_directory(const char* path_name);
-void sub_path(const char* path_name);
+void bfs_directory(const char* path_name, Queue* awaiting_queue);
+void sub_path(const char* path_name, Queue* awaiting_queue);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -319,8 +319,19 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
                    int n_pathnames, char* pathnames[n_pathnames]) {
 
     
+    Queue awaiting_queue = {NULL, NULL};
+
     for (int i = 0; i < n_pathnames; i++) {
-        bfs_directory(pathnames[i]);
+        sub_path(pathnames[i], &awaiting_queue);
+        bfs_directory(pathnames[i], &awaiting_queue);
+    }
+
+    while (!queue_is_empty(&awaiting_queue)) {
+        char* star_path_name = dequeue(&awaiting_queue);
+
+        printf("adding: %s\n", star_path_name);
+
+        // create star
     }
 }
 
@@ -448,14 +459,14 @@ char* dequeue(Queue* q) {
     return path_name;
 }
 
-void bfs_directory(const char* path_name) {
+void bfs_directory(const char* path_name, Queue* awaiting_queue) {
 
     Queue q = {NULL, NULL};
     enqueue(&q, new_Node(path_name));
 
     while (!queue_is_empty(&q)) {
         char* cur_path = dequeue(&q);
-        printf("%s\n", cur_path);
+        enqueue(awaiting_queue, new_Node(cur_path));
 
         // ignore regular file
         DIR* dir = opendir(cur_path);
@@ -492,7 +503,7 @@ void bfs_directory(const char* path_name) {
             if (S_ISDIR(st.st_mode)) {
                 enqueue(&q, new_Node(new_path));
             } else if (S_ISREG(st.st_mode)) {
-                printf("%s\n", new_path);
+                enqueue(awaiting_queue, new_Node(new_path));
             }
         }
 
@@ -500,16 +511,17 @@ void bfs_directory(const char* path_name) {
     }
 }
 
-void sub_path(const char* path_name) {
+void sub_path(const char* path_name, Queue* awaiting_queue) {
 
     for (size_t i = 0; i < strlen(path_name); i++) {
         if (path_name[i] == '/') {
             // new sub path
-            char* res = malloc(i + 1);
+            char sub_path[i + 1];
             for (size_t j = 0; j < i; j++) {
-                res[j] = path_name[j];
+                sub_path[j] = path_name[j];
             }
-            res[i] = '\0';
+            sub_path[i] = '\0';
+            enqueue(awaiting_queue, new_Node(sub_path));
         }
     }
 }
