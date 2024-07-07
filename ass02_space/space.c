@@ -352,7 +352,7 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
             exit(1);
         }
 
-        printf("adding: %s\n", star_path_name);
+        printf("Adding: %s\n", star_path_name);
 
         uint8_t hash = 0;
 
