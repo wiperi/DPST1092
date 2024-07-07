@@ -32,7 +32,7 @@ uint8_t check_galaxy_mode = 0;
 #define LIST_STARS 0x2
 #define LIST_STARS_VERBOSE 0x4
 #define EXTRACT_STARS 0x8
-# define CHECK_GALAXY_MODE(M) (check_galaxy_mode & M)
+#define CHECK_GALAXY_MODE(M) (check_galaxy_mode & M)
 
 // STRUCTS
 
@@ -55,7 +55,7 @@ int queue_is_empty(Queue* q);
 Node* new_Node(const char* path_name);
 void enqueue(Queue* q, Node* node);
 char* dequeue(Queue* q);
-int ls_dir(const char* path_name);
+void ls_dir(const char* path_name);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -317,8 +317,7 @@ void extract_galaxy(char* galaxy_pathname) {
 void create_galaxy(char* galaxy_pathname, int append, int format,
                    int n_pathnames, char* pathnames[n_pathnames]) {
 
-    // REPLACE THIS CODE PRINTFS WITH YOUR CODE
-
+    
     for (int i = 0; i < n_pathnames; i++) {
         ls_dir(pathnames[i]);
     }
@@ -448,7 +447,7 @@ char* dequeue(Queue* q) {
     return path_name;
 }
 
-int ls_dir(const char* path_name) {
+void ls_dir(const char* path_name) {
 
     Queue q = {NULL, NULL};
     enqueue(&q, new_Node(path_name));
