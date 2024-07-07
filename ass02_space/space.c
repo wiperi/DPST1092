@@ -55,7 +55,8 @@ int queue_is_empty(Queue* q);
 Node* new_Node(const char* path_name);
 void enqueue(Queue* q, Node* node);
 char* dequeue(Queue* q);
-void ls_dir(const char* path_name);
+void bfs_directory(const char* path_name);
+void sub_path(const char* path_name);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -319,7 +320,7 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
     
     for (int i = 0; i < n_pathnames; i++) {
-        ls_dir(pathnames[i]);
+        bfs_directory(pathnames[i]);
     }
 }
 
@@ -447,7 +448,7 @@ char* dequeue(Queue* q) {
     return path_name;
 }
 
-void ls_dir(const char* path_name) {
+void bfs_directory(const char* path_name) {
 
     Queue q = {NULL, NULL};
     enqueue(&q, new_Node(path_name));
@@ -456,11 +457,13 @@ void ls_dir(const char* path_name) {
         char* cur_path = dequeue(&q);
         printf("%s\n", cur_path);
 
+        // ignore regular file
         DIR* dir = opendir(cur_path);
         if (dir == NULL) {
             continue;
         }
 
+        // get entry list of dir
         struct dirent** entry_list;
         int n_entries = scandir(cur_path, &entry_list, NULL, alphasort);
         if (n_entries == -1) {
@@ -476,7 +479,7 @@ void ls_dir(const char* path_name) {
                 continue;
             }
 
-            char new_path[1024];
+            char new_path[strlen(cur_path) + strlen(entry->d_name) + 2];
             snprintf(new_path, sizeof(new_path), "%s/%s", cur_path, entry->d_name);
 
             struct stat st;
@@ -485,6 +488,7 @@ void ls_dir(const char* path_name) {
                 continue;
             }
 
+            // ignore regular file
             if (S_ISDIR(st.st_mode)) {
                 enqueue(&q, new_Node(new_path));
             } else if (S_ISREG(st.st_mode)) {
@@ -493,5 +497,19 @@ void ls_dir(const char* path_name) {
         }
 
         closedir(dir);
+    }
+}
+
+void sub_path(const char* path_name) {
+
+    for (size_t i = 0; i < strlen(path_name); i++) {
+        if (path_name[i] == '/') {
+            // new sub path
+            char* res = malloc(i + 1);
+            for (size_t j = 0; j < i; j++) {
+                res[j] = path_name[j];
+            }
+            res[i] = '\0';
+        }
     }
 }

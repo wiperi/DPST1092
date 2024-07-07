@@ -4,7 +4,17 @@
 int main(int argc, char *argv[], char *envp[]) {
     
 
-    char* res = strtok("first/second/third", "/");
+    char path[] = "first/ /";
 
-    printf("%s\n", res);
+    char* res = strtok(path, "/");
+
+    for (int i = 0; i < 100; i++)
+    {
+        printf("%s\n", res);
+        res = strtok(NULL, "/");
+        if (!res) {
+            break;
+        }
+    }
+    
 }
