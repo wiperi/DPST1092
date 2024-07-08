@@ -63,6 +63,9 @@ void bfs_directory(const char* path_name, Queue* awaiting_queue);
 void sub_path(const char* path_name, Queue* awaiting_queue);
 
 void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+void decode(char* content, uint64_t content_len, FILE* to);
+uint8_t cut_head(uint8_t ch, int head_len);
+uint8_t cut_body(uint8_t ch, int body_len);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -244,7 +247,7 @@ void check_galaxy(char* galaxy_pathname) {
             printf("%s\n", path_name);
         }
 
-        // extract starts
+        // extract stars
         if (CHECK_GALAXY_MODE(EXTRACT_STARS)) {
 
             if (permissions[0] == 'd') {
@@ -275,9 +278,15 @@ void check_galaxy(char* galaxy_pathname) {
                 }
 
                 // write content
-                if (fwrite(content, 1, content_len, new_file) != content_len) {
-                    perror(path_name);
-                    exit(1);
+                if (star_format == STAR_FMT_7) {   
+                    decode(content, content_len, new_file);
+                } else if (star_format == STAR_FMT_6) {
+
+                } else {
+                    if (fwrite(content, 1, content_len, new_file) != content_len) {
+                        perror(path_name);
+                        exit(1);
+                    }
                 }
 
                 // modify permissions
@@ -691,25 +700,33 @@ uint8_t cut_body(uint8_t ch, int body_len) {
     return (ch & mask) << (7 - body_len);
 }
 
-void decode(FILE* from, FILE* to, int head_len, uint8_t head, uint8_t body, uint8_t* hash) {
+void decode(char* content, uint64_t content_len, FILE* to) {
 
-    int body_len = 8 - head_len;
+    int head = 0;
+    int body = 0;
+    int head_len = 7;
 
-    int ch = fgetc(from);
-    if (ch == EOF) {
-        return;
-    }
+    for (uint64_t i = 0; i < content_len; i++) {
 
-    head = cut_head(ch, head_len);
+        uint8_t ch = content[i];
+        int body_len = 8 - head_len;
 
-    hash_putc(to, hash, head | body);
+        head = cut_head(ch, head_len);
 
-    body = cut_body(ch, body_len);
+        printf("%c\n", head | body);
+        fputc(head | body, to);
 
-    if (body_len == 7) {
-        hash_putc(to, hash, head | body);
-        decode(from, to, 7, 0, 0);
-    } else {
-        decode(from, to , head_len - 1, head, body);
+        body = cut_body(ch, body_len);
+
+        if (body_len == 7) {
+            printf("%c - inner\n", head | body);
+            fputc(head | body, to);
+
+            head_len = 7;
+            head = 0;
+            body = 0;
+        } else {
+            head_len--;
+        }
     }
 }
