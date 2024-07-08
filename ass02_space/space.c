@@ -62,10 +62,12 @@ char* dequeue(Queue* q);
 void bfs_directory(const char* path_name, Queue* awaiting_queue);
 void sub_path(const char* path_name, Queue* awaiting_queue);
 
-void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
-void decode(char* content, uint64_t content_len, FILE* to);
+void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+void decode_7bit(char* content, uint64_t content_len, FILE* to);
 uint8_t cut_head(uint8_t ch, int head_len);
 uint8_t cut_body(uint8_t ch, int body_len);
+void encode_6bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+void decode_6bit(char* content, uint64_t content_len, FILE* to);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
 //
@@ -208,13 +210,30 @@ void check_galaxy(char* galaxy_pathname) {
         if (DEBUG_MODE) printf("%-*s %*lx\n", DEBUG_MESSAGE_OFFSET_STRING, "content len:", DEBUG_MESSAGE_OFFSET_OTHER, content_len);
 
         // check content
-        char content[content_len + 1];
-        for (int i = 0; i < content_len; i++) {
+        uint64_t data_len = 0;
+        if (star_format == STAR_FMT_6) {
+            if (((content_len * 6) % 8) == 0) {
+                data_len = ((content_len * 6) / 8);
+            } else {
+                data_len = ((content_len * 6) / 8) + 1;
+            }
+        } else if (star_format == STAR_FMT_7) {
+            if (((content_len * 7) % 8) == 0) {
+                data_len = ((content_len * 7) / 8);
+            } else {
+                data_len = ((content_len * 7) / 8) + 1;
+            }
+        } else {
+            data_len = content_len;
+        }
+
+        char content[data_len + 1];
+        for (int i = 0; i < data_len; i++) {
             ch = hash_getc(file, &hash);
 
             content[i] = ch;
         }
-        content[content_len] = '\0';
+        content[data_len] = '\0';
         if (DEBUG_MODE) printf("%-*s %*s\n", DEBUG_MESSAGE_OFFSET_STRING, "content:", DEBUG_MESSAGE_OFFSET_OTHER, content);
 
         // check hash
@@ -279,9 +298,9 @@ void check_galaxy(char* galaxy_pathname) {
 
                 // write content
                 if (star_format == STAR_FMT_7) {   
-                    decode(content, content_len, new_file);
+                    decode_7bit(content, content_len, new_file);
                 } else if (star_format == STAR_FMT_6) {
-
+                    decode_6bit(content, content_len, new_file);
                 } else {
                     if (fwrite(content, 1, content_len, new_file) != content_len) {
                         perror(path_name);
@@ -418,9 +437,9 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
         // write content
         if (format == STAR_FMT_7) {
-            encode(star, galaxy, &hash, content_len);
+            encode_7bit(star, galaxy, &hash, content_len);
         } else if (format == STAR_FMT_6) {
-
+            encode_6bit(star, galaxy, &hash, content_len);
         } else {
             for (int i = 0; i < content_len; i++) {
                 hash_putc(galaxy, &hash, fgetc(star));
@@ -646,7 +665,7 @@ void sub_path(const char* path_name, Queue* awaiting_queue) {
     }
 }
 
-void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
+void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
 
     int encode_i = 0;
     uint8_t encoded = 0;
@@ -669,7 +688,8 @@ void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
             if (i == 0) {
                 // dicard first bit
                 if (bit == 1) {
-                    fprintf(stderr, "error: byte 0x%x can not be represented in 6-bit format\n", src_byte);
+                    fprintf(stderr, "error: byte 0x%x can not be represented in 7-bit format\n", src_byte);
+                    exit(1);
                 }
             } else {
                 // append bit
@@ -685,11 +705,77 @@ void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
             }
         }
     }
+}
 
-    for (int i = n_encoded; i < content_len; i++) {
-        hash_putc(to, hash, 0);
+void encode_6bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
+
+    uint64_t bit_buffer = 0;
+    int bit_count = 0;
+    int n_encoded = 0;
+
+    while (1) {
+        int byte_read = fgetc(from);
+        if (byte_read == EOF) {
+            break;
+        }
+        
+        uint8_t eight_bit = (uint8_t) byte_read;
+        int six_bit = galaxy_to_6_bit(eight_bit);
+        if (six_bit == -1) {
+            fprintf(stderr, "error: byte 0x%x can not be represented in 6-bit format\n", byte_read);
+            exit(1);
+        }
+
+        // valid six bit value add to buffer
+        bit_buffer = (bit_buffer << 6) | (six_bit & 0x3f);
+        bit_count += 6;
+
+        // shrink buffer?
+        while (bit_count >= 8) {
+            bit_count -= 8;
+            hash_putc(to, hash, ((bit_buffer >> bit_count) & 0xff));
+            n_encoded++;
+        }
+    }
+
+    if (bit_count > 0) {
+        hash_putc(to, hash, (bit_buffer << (8 - bit_count)) & 0xff);
     }
 }
+
+void decode_6bit(char* content, uint64_t content_len, FILE* to) {
+
+    uint64_t bit_buffer = 0;
+    int bit_count = 0;
+    int n_decoded = 0;
+
+    for (uint64_t i = 0; i < content_len; i++)
+    {
+        uint8_t byte_read = content[i];
+
+        // add 8 bit to buffer
+        bit_buffer = (bit_buffer << 8) | byte_read;
+        bit_count += 8;
+
+        // shrink buffer?
+        while (bit_count >= 6) {
+            bit_count -= 6;
+            uint8_t six_bit = (bit_buffer >> bit_count) & 0x3f;
+
+            int eight_bit = galaxy_from_6_bit(six_bit);
+            if (eight_bit == -1) {
+                fprintf(stderr, "error: invalid 6 bit value 0x%x\n", six_bit);
+                exit(1);
+            }
+            fputc(eight_bit, to);
+            n_decoded++;
+            if (n_decoded == content_len) {
+                return;
+            }
+        }
+    }
+}
+
 
 uint8_t cut_head(uint8_t ch, int head_len) {
     return (ch >> (8 - head_len));
@@ -700,7 +786,7 @@ uint8_t cut_body(uint8_t ch, int body_len) {
     return (ch & mask) << (7 - body_len);
 }
 
-void decode(char* content, uint64_t content_len, FILE* to) {
+void decode_7bit(char* content, uint64_t content_len, FILE* to) {
 
     int head = 0;
     int body = 0;
@@ -723,7 +809,7 @@ void decode(char* content, uint64_t content_len, FILE* to) {
         body = cut_body(ch, body_len);
 
         if (body_len == 7) {
-            fputc(head | body, to);
+            fputc(ch & 0x7f, to);
             n_decoded++;
             if (n_decoded == content_len) {
                 return;
