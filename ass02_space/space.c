@@ -705,6 +705,7 @@ void decode(char* content, uint64_t content_len, FILE* to) {
     int head = 0;
     int body = 0;
     int head_len = 7;
+    int n_decoded = 0;
 
     for (uint64_t i = 0; i < content_len; i++) {
 
@@ -713,14 +714,20 @@ void decode(char* content, uint64_t content_len, FILE* to) {
 
         head = cut_head(ch, head_len);
 
-        printf("%c\n", head | body);
         fputc(head | body, to);
+        n_decoded++;
+        if (n_decoded == content_len) {
+            return;
+        }
 
         body = cut_body(ch, body_len);
 
         if (body_len == 7) {
-            printf("%c - inner\n", head | body);
             fputc(head | body, to);
+            n_decoded++;
+            if (n_decoded == content_len) {
+                return;
+            }
 
             head_len = 7;
             head = 0;
