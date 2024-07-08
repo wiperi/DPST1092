@@ -639,7 +639,6 @@ void sub_path(const char* path_name, Queue* awaiting_queue) {
 
 void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
 
-    int n_ending_zero = 0;
     int encode_i = 0;
     uint8_t encoded = 0;
     int n_encoded = 0;
@@ -660,11 +659,12 @@ void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
 
             if (i == 0) {
                 // dicard first bit
-                n_ending_zero++;
+                if (bit == 1) {
+                    fprintf(stderr, "error: byte 0x%x can not be represented in 6-bit format\n", src_byte);
+                }
             } else {
                 // append bit
                 encoded |= (bit << (7 - encode_i));
-                printf("%x\n", encoded);
                 encode_i++;
 
                 if (encode_i == 8) {
@@ -679,5 +679,37 @@ void encode(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
 
     for (int i = n_encoded; i < content_len; i++) {
         hash_putc(to, hash, 0);
+    }
+}
+
+uint8_t cut_head(uint8_t ch, int head_len) {
+    return (ch >> (8 - head_len));
+}
+
+uint8_t cut_body(uint8_t ch, int body_len) {
+    uint32_t mask = (1 << body_len) - 1;
+    return (ch & mask) << (7 - body_len);
+}
+
+void decode(FILE* from, FILE* to, int head_len, uint8_t head, uint8_t body, uint8_t* hash) {
+
+    int body_len = 8 - head_len;
+
+    int ch = fgetc(from);
+    if (ch == EOF) {
+        return;
+    }
+
+    head = cut_head(ch, head_len);
+
+    hash_putc(to, hash, head | body);
+
+    body = cut_body(ch, body_len);
+
+    if (body_len == 7) {
+        hash_putc(to, hash, head | body);
+        decode(from, to, 7, 0, 0);
+    } else {
+        decode(from, to , head_len - 1, head, body);
     }
 }
