@@ -17,5 +17,29 @@ extern char **environ;
 
 int main(int argc, char **argv)
 {
+    if (argc < 2) {
+        printf("Usage: %s <file1.c> <file2.c> <file3.c>...\n", argv[0]);
+        return 0;
+    }
+
+    for (int i = 1; i < argc; i++) {
+        char *file = argv[i];
+        char *output = malloc(strlen(file) + 1);
+        strcpy(output, file);
+        output[strlen(file) - 2] = '\0';
+
+        char *args[] = {DCC_PATH, file, "-o", output, NULL};
+
+        pid_t pid;
+        int status;
+
+        if (posix_spawn(&pid, DCC_PATH, NULL, NULL, args, environ) == 0) {
+            waitpid(pid, &status, 0);
+        } else {
+            perror("posix_spawn");
+            return EXIT_FAILURE;
+        }
+    }
+    
     return EXIT_SUCCESS;
 }

@@ -10,12 +10,11 @@ int main(int argc, char *argv[], char *envp[]) {
     }
     
     // get ${HOME}
-    char *home = getenv("HOME");
-    printf("%s\n", home);
+    char *home_path = getenv("HOME");
 
     // open ${HOME}/.diary
-    char diary_path[strlen(home) + strlen(".diary") + 2];
-    sprintf(diary_path, "%s/%s", home, ".diary");
+    char diary_path[strlen(home_path) + strlen(".diary") + 2];
+    sprintf(diary_path, "%s/%s", home_path, ".diary");
 
     FILE* diary = fopen(diary_path, "a");
     if(!diary) {
