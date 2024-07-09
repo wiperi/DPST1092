@@ -33,6 +33,7 @@ int main(int argc, char **argv)
         pid_t pid;
         int status;
 
+        printf("running the command: \"%s %s -o %s\"\n", DCC_PATH, file, output);
         if (posix_spawn(&pid, DCC_PATH, NULL, NULL, args, environ) == 0) {
             waitpid(pid, &status, 0);
         } else {
