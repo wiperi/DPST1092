@@ -62,11 +62,11 @@ char* dequeue(Queue* q);
 void bfs_directory(const char* path_name, Queue* awaiting_queue);
 void sub_path(const char* path_name, Queue* awaiting_queue);
 
-void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+void encode_7bit(FILE* from, FILE* to, uint8_t* hash);
 void decode_7bit(char* content, uint64_t content_len, FILE* to);
 uint8_t cut_head(uint8_t ch, int head_len);
 uint8_t cut_body(uint8_t ch, int body_len);
-void encode_6bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len);
+void encode_6bit(FILE* from, FILE* to, uint8_t* hash);
 void decode_6bit(char* content, uint64_t content_len, FILE* to);
 
 // print the files & directories stored in galaxy_pathname (subset 0)
@@ -440,9 +440,9 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
         // write content
         if (format == STAR_FMT_7) {
-            encode_7bit(star, galaxy, &hash, content_len);
+            encode_7bit(star, galaxy, &hash);
         } else if (format == STAR_FMT_6) {
-            encode_6bit(star, galaxy, &hash, content_len);
+            encode_6bit(star, galaxy, &hash);
         } else {
             for (int i = 0; i < content_len; i++) {
                 hash_putc(galaxy, &hash, fgetc(star));
@@ -752,24 +752,23 @@ void sub_path(const char* path_name, Queue* waitlist) {
  * @param hash The hash value to update.
  * @param content_len The length of the content to encode.
  */
-void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
+void encode_7bit(FILE* from, FILE* to, uint8_t* hash) {
 
-    int encode_i = 0;
-    uint8_t encoded = 0;
-    int n_encoded = 0;
+    int bit_counter = 0;
+    uint8_t buffer = 0;
 
     while (1) {
 
         int src_byte = fgetc(from);
         if (src_byte == EOF) {
-            if (encode_i != 0) {
-                hash_putc(to, hash, encoded);
-                n_encoded++;
+            if (bit_counter != 0) {
+                hash_putc(to, hash, buffer);
             }
             break;
         }
 
         for (int i = 0; i < 8; i++) {
+
             unsigned bit = (src_byte >> (7 - i)) & 01;
 
             if (i == 0) {
@@ -779,22 +778,30 @@ void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
                     exit(1);
                 }
             } else {
-                // append bit
-                encoded |= (bit << (7 - encode_i));
-                encode_i++;
+                // add bit to buffer
+                buffer |= (bit << (7 - bit_counter));
+                bit_counter++;
 
-                if (encode_i == 8) {
-                    hash_putc(to, hash, encoded);
-                    encode_i = 0;
-                    encoded = 0;
-                    n_encoded++;
+                if (bit_counter == 8) {
+                    // buffer full, write to file
+                    hash_putc(to, hash, buffer);
+                    bit_counter = 0;
+                    buffer = 0;
                 }
             }
         }
     }
 }
 
-void encode_6bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
+/**
+ * Encode a file in 6-bit format and write the encoded data to a file.
+ * 
+ * @param from The file to read from.
+ * @param to The file to write to.
+ * @param hash The hash value to update.
+ * @param content_len The length of the content to encode.
+ */
+void encode_6bit(FILE* from, FILE* to, uint8_t* hash) {
 
     uint64_t bit_buffer = 0;
     int bit_count = 0;
@@ -825,20 +832,29 @@ void encode_6bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
         }
     }
 
+    // write remaining bits
     if (bit_count > 0) {
         hash_putc(to, hash, (bit_buffer << (8 - bit_count)) & 0xff);
     }
 }
 
+/**
+ * Decode a 6-bit encoded content and write the decoded data to a file.
+ * 
+ * @param content The 6-bit encoded content to be decoded.
+ * @param content_len The length of the content.
+ * @param to The file pointer to write the decoded data to.
+ */
 void decode_6bit(char* content, uint64_t content_len, FILE* to) {
 
     uint64_t bit_buffer = 0;
     int bit_count = 0;
     int n_decoded = 0;
+    uint64_t i = 0;
 
-    for (uint64_t i = 0; i < content_len; i++)
-    {
-        uint8_t byte_read = content[i];
+    while (1) {
+
+        uint8_t byte_read = content[i++];
 
         // add 8 bit to buffer
         bit_buffer = (bit_buffer << 8) | byte_read;
@@ -854,6 +870,7 @@ void decode_6bit(char* content, uint64_t content_len, FILE* to) {
                 fprintf(stderr, "error: invalid 6 bit value 0x%x\n", six_bit);
                 exit(1);
             }
+
             fputc(eight_bit, to);
             n_decoded++;
             if (n_decoded == content_len) {
@@ -908,7 +925,7 @@ void decode_7bit(char* content, uint64_t content_len, FILE* to) {
     int body = 0;
     int head_len = 7;
     int n_decoded = 0;
-    int i = 0;
+    uint64_t i = 0;
 
     while (1) {
 
