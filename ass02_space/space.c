@@ -20,12 +20,14 @@
 
 // ADD ANY extra #defines HERE
 
+// DEBUG MODE SETTINGS
 #define DEBUG_MODE 0
 #define DEBUG_MESSAGE_OFFSET_STRING 20
 #define DEBUG_MESSAGE_OFFSET_OTHER 10
 
 // ADD YOUR FUNCTION PROTOTYPES (AND STRUCTS IF ANY) HERE
 
+// check_galaxy_mode is a bit field that stores the current mode of check_galaxy()
 uint8_t check_galaxy_mode = 0;
 #define DEFAULT 0
 #define SILENCE 0x1
@@ -95,23 +97,20 @@ void list_galaxy(char* galaxy_pathname, int long_listing) {
 // either, indicating the hash byte is correct, or indicating the hash byte
 // is incorrect, what the incorrect value is and the correct value would be
 
+/**
+ * Check the files and directories stored in a galaxy. Can be modified to also list or extract the stars.
+ * 
+ * It can be configured by bit flags in check_galaxy_mode.
+ * 
+ * The following flags are available:
+ * - SILENCE: Do not print any messages.
+ * - LIST_STARS: List the names of the stars.
+ * - LIST_STARS_VERBOSE: List the names, permissions, formats and sizes of the stars.
+ * - EXTRACT_STARS: Extract the stars to the file system.
+ * 
+ * @param galaxy_pathname The path name of the galaxy.
+ */
 void check_galaxy(char* galaxy_pathname) {
-
-    /**
-     * pseudo:
-     * 
-     * open file
-     * 
-     * check if file end
-     * check magic
-     * check format
-     * check permissions
-     * read path len
-     * check path name
-     * read content len
-     * check content
-     * check hash
-     */
 
     FILE* file = fopen(galaxy_pathname, "r");
     if (file == NULL) {
@@ -143,9 +142,9 @@ void check_galaxy(char* galaxy_pathname) {
         // check star format
         ch = hash_getc(file, &hash);
         switch (ch) {
-        case '8':
-        case '7':
-        case '6':
+        case STAR_FMT_8:
+        case STAR_FMT_7:
+        case STAR_FMT_6:
             break;
         default:
             fprintf(stderr, "error: unknown star format: 0x%x\n", ch);
@@ -326,9 +325,15 @@ void check_galaxy(char* galaxy_pathname) {
 
 // extract the files/directories stored in galaxy_pathname (subset 1 & 3)
 
+
+/**
+ * Extracts the galaxy from the specified pathname.
+ *
+ * @param galaxy_pathname The pathname of the galaxy to extract.
+ */
 void extract_galaxy(char* galaxy_pathname) {
 
-    // extracting jobs done in check_galaxy()
+    // extracting jobs done by check_galaxy()
 
     check_galaxy_mode |= SILENCE;
     check_galaxy_mode |= EXTRACT_STARS;
@@ -346,6 +351,15 @@ void extract_galaxy(char* galaxy_pathname) {
 // format specifies the galaxy format to use, it must be one STAR_FMT_6,
 // STAR_FMT_7 or STAR_FMT_8
 
+/**
+ * Create a galaxy containing the files or directories specified in pathnames.
+ * 
+ * @param galaxy_pathname The pathname of the galaxy to create.
+ * @param append Whether to append to the galaxy if it exists.
+ * @param format The galaxy format to use.
+ * @param n_pathnames The number of pathnames to add to the galaxy.
+ * @param pathnames The pathnames to add to the galaxy.
+ */
 void create_galaxy(char* galaxy_pathname, int append, int format,
                    int n_pathnames, char* pathnames[n_pathnames]) {
 
