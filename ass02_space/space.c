@@ -209,31 +209,32 @@ void check_galaxy(char* galaxy_pathname) {
         uint64_t content_len = little_endian_to_uint(file, 6, &hash);
         if (DEBUG_MODE) printf("%-*s %*lx\n", DEBUG_MESSAGE_OFFSET_STRING, "content len:", DEBUG_MESSAGE_OFFSET_OTHER, content_len);
 
-        // check content
-        uint64_t data_len = 0;
+        // calculate star content len (after compression, the length of content[])
+        uint64_t star_content_len = 0;
         if (star_format == STAR_FMT_6) {
             if (((content_len * 6) % 8) == 0) {
-                data_len = ((content_len * 6) / 8);
+                star_content_len = ((content_len * 6) / 8);
             } else {
-                data_len = ((content_len * 6) / 8) + 1;
+                star_content_len = ((content_len * 6) / 8) + 1;
             }
         } else if (star_format == STAR_FMT_7) {
             if (((content_len * 7) % 8) == 0) {
-                data_len = ((content_len * 7) / 8);
+                star_content_len = ((content_len * 7) / 8);
             } else {
-                data_len = ((content_len * 7) / 8) + 1;
+                star_content_len = ((content_len * 7) / 8) + 1;
             }
         } else {
-            data_len = content_len;
+            star_content_len = content_len;
         }
 
-        char content[data_len + 1];
-        for (int i = 0; i < data_len; i++) {
+        // read content
+        char content[star_content_len + 1];
+        for (int i = 0; i < star_content_len; i++) {
             ch = hash_getc(file, &hash);
 
             content[i] = ch;
         }
-        content[data_len] = '\0';
+        content[star_content_len] = '\0';
         if (DEBUG_MODE) printf("%-*s %*s\n", DEBUG_MESSAGE_OFFSET_STRING, "content:", DEBUG_MESSAGE_OFFSET_OTHER, content);
 
         // check hash
@@ -327,11 +328,7 @@ void check_galaxy(char* galaxy_pathname) {
 
 void extract_galaxy(char* galaxy_pathname) {
 
-    /**
-     * pseudo:
-     * 
-     * check galaxy
-     */
+    // extracting jobs done in check_galaxy()
 
     check_galaxy_mode |= SILENCE;
     check_galaxy_mode |= EXTRACT_STARS;
@@ -353,29 +350,33 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
                    int n_pathnames, char* pathnames[n_pathnames]) {
 
     
-    Queue awaiting_queue = {NULL, NULL};
+    // waitlist records stars to be added to galaxy
+    Queue waitlist = {NULL, NULL};
 
+    // add all pathnames to waitlist
     for (int i = 0; i < n_pathnames; i++) {
-        sub_path(pathnames[i], &awaiting_queue);
-        bfs_directory(pathnames[i], &awaiting_queue);
+        sub_path(pathnames[i], &waitlist);
+        bfs_directory(pathnames[i], &waitlist);
     }
 
+    // open galaxy
     FILE* galaxy = fopen(galaxy_pathname, append ? "a" : "w");
     if (galaxy == NULL) {
         perror(galaxy_pathname);
         exit(1);
     }
 
-    while (!queue_is_empty(&awaiting_queue)) {
-        char* star_path_name = dequeue(&awaiting_queue);
+    // empty waitlist
+    while (!queue_is_empty(&waitlist)) {
 
-        // create star
+        char* star_path_name = dequeue(&waitlist);
 
         if (strstr(star_path_name, "..")) {
             fprintf(stderr, "error: Can not add paths containing '..' to galaxy\n");
             exit(1);
         }
 
+        // create star
         FILE* star = fopen(star_path_name, "r");
         if (star == NULL) {
             perror(star_path_name);
@@ -384,6 +385,7 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
         printf("Adding: %s\n", star_path_name);
 
+        // init star hash
         uint8_t hash = 0;
 
         // write magic
@@ -432,6 +434,7 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
             fseek(star, 0, SEEK_END);
             content_len = ftell(star);
             fseek(star, 0, SEEK_SET);
+
             uint_to_little_endian(galaxy, 6, content_len, &hash);
         }
 
@@ -455,6 +458,13 @@ void create_galaxy(char* galaxy_pathname, int append, int format,
 
 // ADD YOUR EXTRA FUNCTIONS HERE
 
+/**
+ * Read a character from a file and update the hash value.
+ * 
+ * @param file The file to read from.
+ * @param hash The hash value to update.
+ * @return The character read from the file.
+ */
 int hash_getc(FILE* file, uint8_t* hash) {
     int ch = fgetc(file);
     if (ch == EOF) {
@@ -465,6 +475,14 @@ int hash_getc(FILE* file, uint8_t* hash) {
     return ch;
 }
 
+/**
+ * Write a character to a file and update the hash value.
+ * 
+ * @param file The file to write to.
+ * @param hash The hash value to update.
+ * @param ch The character to write to the file.
+ * @return The character written to the file.
+ */
 int hash_putc(FILE* file, uint8_t* hash, int ch) {
     if (fputc(ch, file) == EOF) {
         perror("fputc");
@@ -474,6 +492,14 @@ int hash_putc(FILE* file, uint8_t* hash, int ch) {
     return ch;
 }
 
+/**
+ * Convert a little-endian byte sequence to an unsigned integer.
+ * 
+ * @param file The file to read from.
+ * @param n_bytes The number of bytes to read.
+ * @param hash The hash value to update.
+ * @return The unsigned integer represented by the byte sequence.
+ */
 uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
 
     assert(n_bytes <= 8);
@@ -489,6 +515,15 @@ uint64_t little_endian_to_uint(FILE* file, int n_bytes, uint8_t* hash) {
     return res;
 }
 
+/**
+ * Convert an unsigned integer to a little-endian byte sequence and write it to a file.
+ * 
+ * @param file The file to write to.
+ * @param n_bytes The number of bytes to write.
+ * @param num The unsigned integer to write.
+ * @param hash The hash value to update.
+ * @return The remaining value of the unsigned integer.
+ */
 uint64_t uint_to_little_endian(FILE* file, int n_bytes, uint64_t num, uint8_t* hash) {
 
     assert(n_bytes <= 8);
@@ -501,6 +536,13 @@ uint64_t uint_to_little_endian(FILE* file, int n_bytes, uint64_t num, uint8_t* h
     return num;
 }
 
+/**
+ * Modify the permissions of a file or directory.
+ * 
+ * @param path_name The path name of the file or directory.
+ * @param permissions The new permissions to set.
+ * @return 0 if successful, -1 otherwise.
+ */
 int modify_file_permissions(const char* path_name, const char* permissions) {
 
     if (strlen(permissions) != 10) {
@@ -553,12 +595,22 @@ int modify_file_permissions(const char* path_name, const char* permissions) {
     return 0;
 }
 
-
-
+/**
+ * Check if a queue is empty.
+ * 
+ * @param q The queue to check.
+ * @return 1 if the queue is empty, 0 otherwise.
+ */
 int queue_is_empty(Queue* q) {
     return q->head == NULL;
 }
 
+/**
+ * Create a new node. The node holds a copy of the given string in headp memory.
+ * 
+ * @param path_name The path name of the node.
+ * @return The new node.
+ */
 Node* new_Node(const char* path_name) {
     Node* new_Node = malloc(sizeof(Node));
     new_Node->path_name = strdup(path_name);
@@ -566,6 +618,12 @@ Node* new_Node(const char* path_name) {
     return new_Node;
 }
 
+/**
+ * Add a node to the end of a queue.
+ * 
+ * @param q The queue to add the node to.
+ * @param node The node to add.
+ */
 void enqueue(Queue* q, Node* node) {
 
     if (queue_is_empty(q)) {
@@ -578,6 +636,12 @@ void enqueue(Queue* q, Node* node) {
     q->tail = q->tail->next;
 }
 
+/**
+ * Remove and return the head of a queue.
+ * 
+ * @param q The queue to remove the head from.
+ * @return The path name of the head node, stored in heap memory.
+ */
 char* dequeue(Queue* q) {
 
     if (queue_is_empty(q)) {
@@ -598,14 +662,20 @@ char* dequeue(Queue* q) {
     return path_name;
 }
 
-void bfs_directory(const char* path_name, Queue* awaiting_queue) {
+/**
+ * Breadth-first search a directory (in alphabetically ascending order) and add all files and subdirectories to a queue.
+ * 
+ * @param path_name The path name of the directory.
+ * @param waitlist The queue to add the files and subdirectories to.
+ */
+void bfs_directory(const char* path_name, Queue* waitlist) {
 
     Queue q = {NULL, NULL};
     enqueue(&q, new_Node(path_name));
 
     while (!queue_is_empty(&q)) {
         char* cur_path = dequeue(&q);
-        enqueue(awaiting_queue, new_Node(cur_path));
+        enqueue(waitlist, new_Node(cur_path));
 
         // ignore regular file
         DIR* dir = opendir(cur_path);
@@ -625,6 +695,7 @@ void bfs_directory(const char* path_name, Queue* awaiting_queue) {
 
             struct dirent* entry = entry_list[i];
 
+            // ignore . and ..
             if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
                 continue;
             }
@@ -642,7 +713,7 @@ void bfs_directory(const char* path_name, Queue* awaiting_queue) {
             if (S_ISDIR(st.st_mode)) {
                 enqueue(&q, new_Node(new_path));
             } else if (S_ISREG(st.st_mode)) {
-                enqueue(awaiting_queue, new_Node(new_path));
+                enqueue(waitlist, new_Node(new_path));
             }
         }
 
@@ -650,7 +721,15 @@ void bfs_directory(const char* path_name, Queue* awaiting_queue) {
     }
 }
 
-void sub_path(const char* path_name, Queue* awaiting_queue) {
+/**
+ * Add all sub paths of a path name to a queue.
+ * 
+ * Subpath example: /a/b/c -> /a, /a/b
+ * 
+ * @param path_name The path name to add sub paths from.
+ * @param waitlist The queue to add the sub paths to.
+ */
+void sub_path(const char* path_name, Queue* waitlist) {
 
     for (size_t i = 0; i < strlen(path_name); i++) {
         if (path_name[i] == '/') {
@@ -660,11 +739,19 @@ void sub_path(const char* path_name, Queue* awaiting_queue) {
                 sub_path[j] = path_name[j];
             }
             sub_path[i] = '\0';
-            enqueue(awaiting_queue, new_Node(sub_path));
+            enqueue(waitlist, new_Node(sub_path));
         }
     }
 }
 
+/**
+ * Encode a file in 7-bit format and write the encoded data to a file.
+ * 
+ * @param from The file to read from.
+ * @param to The file to write to.
+ * @param hash The hash value to update.
+ * @param content_len The length of the content to encode.
+ */
 void encode_7bit(FILE* from, FILE* to, uint8_t* hash, uint64_t content_len) {
 
     int encode_i = 0;
@@ -777,25 +864,55 @@ void decode_6bit(char* content, uint64_t content_len, FILE* to) {
 }
 
 
+/**
+ * Cuts the head of a given character by a specified length.
+ *
+ * @param ch The character to cut the head from.
+ * @param head_len The length of the head to cut.
+ * @return The resulting character after cutting the head.
+ */
 uint8_t cut_head(uint8_t ch, int head_len) {
     return (ch >> (8 - head_len));
 }
 
+/**
+ * Cuts the body of a character based on the specified length.
+ *
+ * @param ch The character to cut the body from.
+ * @param body_len The length of the body to cut.
+ * @return The resulting character after cutting the body.
+ */
 uint8_t cut_body(uint8_t ch, int body_len) {
     uint32_t mask = (1 << body_len) - 1;
     return (ch & mask) << (7 - body_len);
 }
 
+/**
+ * Decodes a 7-bit encoded content and writes the decoded data to a file.
+ *
+ * @param content The 7-bit encoded content to be decoded.
+ * @param content_len The length of the content.
+ * @param to The file pointer to write the decoded data to.
+ */
 void decode_7bit(char* content, uint64_t content_len, FILE* to) {
+
+    /**
+     * Divide each byte into two parts: head and body.
+     * 
+     * Head will be assembled with previous body to form a 7-bit sequence.
+     * 
+     * Body will be assembled with next head to form a 7-bit sequence.
+     */
 
     int head = 0;
     int body = 0;
     int head_len = 7;
     int n_decoded = 0;
+    int i = 0;
 
-    for (uint64_t i = 0; i < content_len; i++) {
+    while (1) {
 
-        uint8_t ch = content[i];
+        uint8_t ch = content[i++];
         int body_len = 8 - head_len;
 
         head = cut_head(ch, head_len);
