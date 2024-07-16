@@ -18,30 +18,31 @@ int main(int argc, char **argv)
     }
 
     for (int i = 1; i < argc; i++) {
-        char *path = argv[i];
-        char *binary_file = malloc(strlen(path) + 1);
-        strcpy(binary_file, path);
-        binary_file[strlen(path) - 2] = '\0';
+        char *src_path = argv[i];
+        char *bin_path = malloc(strlen(src_path) + 1);
+        strcpy(bin_path, src_path);
+        bin_path[strlen(src_path) - 2] = '\0';
 
         // check if neccessary to compile
         // get st of output file
         struct stat binary_st;
-        if (stat(binary_file, &binary_st) == 0) {
+        if (stat(bin_path, &binary_st) == 0) {
             // check if the output file is newer than the input file
             struct stat src_st;
-            if (stat(path, &src_st) == 0) {
+            if (stat(src_path, &src_st) == 0) {
                 if (binary_st.st_mtime > src_st.st_mtime) {
+                    printf("%s does not need compiling\n", src_path);
                     continue;
                 }
             }
         }
 
-        char *args[] = {DCC_PATH, path, "-o", binary_file, NULL};
+        char *args[] = {DCC_PATH, src_path, "-o", bin_path, NULL};
 
         pid_t pid;
         int status;
 
-        printf("running the command: \"%s %s -o %s\"\n", DCC_PATH, path, binary_file);
+        printf("running the command: \"%s %s -o %s\"\n", DCC_PATH, src_path, bin_path);
         if (posix_spawn(&pid, DCC_PATH, NULL, NULL, args, environ) == 0) {
             waitpid(pid, &status, 0);
         } else {
