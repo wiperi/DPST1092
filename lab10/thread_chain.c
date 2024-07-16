@@ -4,13 +4,13 @@
 void *my_thread(void *data) {
 
     // base case
-    int* times = (int*) data;
-    if (*times == 0) {
+    int* n_time = (int*) data;
+    if (*n_time == 0) {
         return NULL;
     }
 
     // update times
-    (*times)--;
+    (*n_time)--;
     
     thread_hello();
 
@@ -25,10 +25,10 @@ void *my_thread(void *data) {
 
 void my_main(void) {
 
-    int times = 50;
+    int n_time = 50;
     
     pthread_t thread_handle;
-    pthread_create(&thread_handle, NULL, my_thread, &times);
+    pthread_create(&thread_handle, NULL, my_thread, &n_time);
 
     pthread_join(thread_handle, NULL);
 }

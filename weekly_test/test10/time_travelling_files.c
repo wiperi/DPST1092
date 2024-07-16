@@ -1,15 +1,13 @@
-#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <time.h>
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     time_t now = time(NULL);
 
     // open file
-    for (int i = 1; i < argc; i++)
-    {
+    for (int i = 1; i < argc; i++) {
         struct stat st;
         stat(argv[i], &st);
 
