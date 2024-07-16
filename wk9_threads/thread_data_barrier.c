@@ -16,18 +16,18 @@
 //! NOTE: `dcc` tends to not like this example code
 //! try running with `clang` or `gcc` instead.
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <unistd.h>
 
 struct thread_data {
-    pthread_barrier_t *barrier;
+    pthread_barrier_t* barrier;
     int number;
 };
 
-void *my_thread(void *data) {
-    struct thread_data *thread_data = (struct thread_data *)data;
+void* my_thread(void* data) {
+    struct thread_data* thread_data = (struct thread_data*)data;
     int number = thread_data->number;
     pthread_barrier_wait(thread_data->barrier);
 
@@ -38,6 +38,10 @@ void *my_thread(void *data) {
 }
 
 pthread_t function_creates_thread(void) {
+
+    // the barrier is initialized with a count of 2, meaning it will make sure
+    // that both the main thread and the new thread created must reach the
+    // barrier before either of them can proceed.
     pthread_barrier_t barrier;
     pthread_barrier_init(&barrier, NULL, 2);
 
