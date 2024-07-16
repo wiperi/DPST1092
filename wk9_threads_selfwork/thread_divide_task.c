@@ -1,7 +1,7 @@
 /**
  * Introduction:
  *
- * Use multiple threads to calculate the sum from [0, n]
+ * Use multiple threads to calculate the sum from [0, n]. Each thread handle n/n_threads integers.
  */
 #include <assert.h>
 #include <pthread.h>

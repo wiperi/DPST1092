@@ -14,7 +14,7 @@ void* thread_count(void* arg) {
     pthread_t* id_ptr = (pthread_t*)arg;
 
     for (int i = 10; i >= 1; i--) {
-        printf("Thrad %lu counting [%d]\n", *id_ptr, i);
+        printf("Thread %lu counting [%d]\n", *id_ptr, i);
         sleep(1);
     }
 }

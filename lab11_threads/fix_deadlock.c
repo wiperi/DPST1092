@@ -62,14 +62,14 @@ void *bob_withdraw(void *data) {
 // wallet 1 cent at a time
 void *alice_deposit(void *data) {
     for (int i = 0; i < 10000; i++) {
-        pthread_mutex_lock(&alice_wallet_mutex);
         pthread_mutex_lock(&bank_account_mutex);
+        pthread_mutex_lock(&alice_wallet_mutex);
 
         alice_wallet--;
         bank_account++;
 
-        pthread_mutex_unlock(&bank_account_mutex);
         pthread_mutex_unlock(&alice_wallet_mutex);
+        pthread_mutex_unlock(&bank_account_mutex);
     }
 
     return NULL;
@@ -80,14 +80,14 @@ void *alice_deposit(void *data) {
 // wallet 1 cent at a time
 void *bob_deposit(void *data) {
     for (int i = 0; i < 10000; i++) {
-        pthread_mutex_lock(&bob_wallet_mutex);
         pthread_mutex_lock(&bank_account_mutex);
+        pthread_mutex_lock(&bob_wallet_mutex);
 
         bob_wallet--;
         bank_account++;
 
-        pthread_mutex_unlock(&bank_account_mutex);
         pthread_mutex_unlock(&bob_wallet_mutex);
+        pthread_mutex_unlock(&bank_account_mutex);
     }
 
     return NULL;
@@ -116,14 +116,14 @@ void *alice_send_bob(void *data) {
 // 1 cent at a time
 void *bob_send_alice(void *data) {
     for (int i = 0; i < 10000; i++) {
-        pthread_mutex_lock(&bob_wallet_mutex);
         pthread_mutex_lock(&alice_wallet_mutex);
+        pthread_mutex_lock(&bob_wallet_mutex);
 
         bob_wallet--;
         alice_wallet++;
 
-        pthread_mutex_unlock(&alice_wallet_mutex);
         pthread_mutex_unlock(&bob_wallet_mutex);
+        pthread_mutex_unlock(&alice_wallet_mutex);
     }
 
     return NULL;

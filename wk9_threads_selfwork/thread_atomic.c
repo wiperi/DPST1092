@@ -15,6 +15,9 @@ void* thread_add_10000(void* a) {
 
     for (int i = 0; i < 10000; i++) {
 
+        // atomic_fetch_add is an atomic operation, which ensures that 
+        // fetch and add as a single operation, will be executed without 
+        // interruption
         atomic_fetch_add(&score, 1);
 
     }

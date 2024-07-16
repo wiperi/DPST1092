@@ -12,6 +12,7 @@ void* thread_func(void* arg) {
 
     printf("Thread: Father told me: %s\n", (char*) arg);
 
+    // return a value
     int* ret = (int*) malloc(sizeof(int));
     *ret = 666;
     return (void*) ret;
