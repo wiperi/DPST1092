@@ -1,21 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <posix/unistd.h>
+#include <string.h>
+#include <unistd.h>
+#include <spawn.h>
+#include <sys/wait.h>
+#include <string.h>
 
-int main(int argc, char *argv[], char *envp[]) {
-    
-    if (argc != 2) {
-        printf("Usage: %s <command>\n", argv[0]);
+#define MAX_LINE_LENGTH 1024
+
+extern char** environ;
+
+int main(int argc, char *argv[]) {
+    char *command = argv[1];
+    char line[MAX_LINE_LENGTH];
+    char *args[3];
+    pid_t pid;
+
+    args[0] = command;
+    args[2] = NULL;
+
+    while (fgets(line, sizeof(line), stdin) != NULL) {
+        *(strchr(line, '\n')) = '\0';
+        args[1] = line;
+
+        posix_spawn(&pid, command, NULL, NULL, args, environ);
+        waitpid(pid, NULL, 0);
     }
-    
-    // get command from argv
-    char* command = argv[1];
 
-    // get argument from stdio
-    // excute command
-    char arg[1024];
-
-    while (fgets(arg, sizeof(arg), stdin) != NULL) {
-        // execute command with argument
-    }
+    return 0;
 }
