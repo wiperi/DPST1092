@@ -101,13 +101,30 @@ factorial:
 factorial__prologue:
 	
 	# TODO: set up your stack frame
+	push $ra
+	push $s0
+	move $s0, $a0 # $s0 = int n
 
 factorial__body:
 	
 	# TODO: complete the function body
+	li $t0, 1
+	bgt $s0, $t0, if_gt_1
+	j if_le_1
+if_gt_1:
+	addi $a0, -1
+	jal factorial
+	mul $v0, $s0
+	j if_end
+if_le_1:
+	li $v0, 1
+	j if_end
+if_end:
 
 factorial__epilogue:
 	
 	# TODO: clean up your stack frame
+	pop $s0
+	pop $ra
 
 	jr	$ra
