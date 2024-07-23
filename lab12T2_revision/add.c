@@ -15,11 +15,11 @@ uint32_t make_add(uint32_t d, uint32_t s, uint32_t t) {
 
     res |= (1 << 5);
 
-    res |= (d << 15);
+    res |= (d << 11);
 
-    res |= (t << 20);
+    res |= (t << 16);
 
-    res |= (s << 25);
+    res |= (s << 21);
 
     return res;
 

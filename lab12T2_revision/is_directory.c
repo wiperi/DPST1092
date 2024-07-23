@@ -5,7 +5,7 @@
 int main(int argc, char* argv[], char* envp[]) {
 
     struct stat st;
-    if (stat(argv[1], &st)) {
+    if (stat(argv[1], &st) < 0) {
         printf("%d\n", 0);
         exit(0);
     }
