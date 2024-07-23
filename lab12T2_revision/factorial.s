@@ -112,7 +112,7 @@ factorial__body:
 	bgt $s0, $t0, if_gt_1
 	j if_le_1
 if_gt_1:
-	addi $a0, -1
+	addi $a0, $s0, -1
 	jal factorial
 	mul $v0, $s0
 	j if_end
