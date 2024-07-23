@@ -20,11 +20,47 @@ final_q4:
 	# YOU DO NOT NEED TO CHANGE THE LINES ABOVE HERE
 
 
-	# REPLACE THIS LINE WITH YOUR CODE
-	move	$t0, $a0	# array
-	move	$t1, $a1	# length
-	li	$v0, 42
+final_q4_prologue:
+	push $s0
+	push $s1
+	push $ra
 
+	move $s0, $a0 # $s0 = array
+	move $s1, $a1 # $s1 = length
+final_q4_body:
+
+while_init:
+	li $t8, 0
+	li $t7, 1
+while_cond:
+	addi $t0, $s1, -1
+	blt $t7, $t0, while_body
+	j while_end
+while_body:
+
+	mul $t0, $t7, 4
+	add $t0, $t0, $s0
+	lw $t1, ($t0)
+
+	lw $t2, -4($t0)
+	lw $t3, 4($t0)
+
+	ble $t1, $t2, total_increment
+	ble $t1, $t3, total_increment
+	j no_increment
+total_increment:
+	addi $t8, $t8, 1 # total++
+no_increment:
+	addi $t7, $t7, 1
+	j while_cond
+while_end:
+
+	move $v0, $t8
+
+final_q4_epilogue:
+	pop $ra
+	pop $s1
+	pop $s0
 	jr	$ra
 
 
