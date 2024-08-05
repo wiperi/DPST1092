@@ -2,6 +2,7 @@
 #include <spawn.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -63,4 +64,51 @@ int main(int argc, char const* argv[]) {
     }
 
     return 0;
+}
+
+/************************************************************************
+ * UTF8
+ ************************************************************************/
+int valid_utf8(char* input) {
+    
+    uint8_t ch;
+    int i = 0;
+    while (input[i] != '\0')
+    {
+        ch = input[i];
+
+        // is head valid?
+        int tail = 0;
+        if ((ch >> 7) == 0) {
+            ;
+        } else if ((ch >> 3) == 0b11110) {
+            tail = 3;
+        } else if ((ch >> 4) == 0b1110) {
+            tail = 2;
+        } else if ((ch >> 5) == 0b110) {
+            tail = 1;
+        } else {
+            // invalid
+            return i;
+        }
+
+        // is tail valid?
+        if (tail != 0) {
+            for (int j = 0; j < tail; j++) {
+                i++;
+                ch = input[i];
+
+                if ((ch >> 6) == 0b10) {
+                    ;
+                } else {
+                    // invalid
+                    return i;
+                }
+            }
+        }
+
+        i++;
+    }
+    
+    return -1;
 }
