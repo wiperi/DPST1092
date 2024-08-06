@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 02
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 02 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/02/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Laboratory</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 02
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>learning to run MIPS programs with mipsy and mipsy-web</li>
+
+<li>understanding MIPS I/O (syscalls)</li>
+
+<li>understanding MIPS control instructions (branch)</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab02</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab02</kbd>
+<kbd is="sh">cd lab02</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab02</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS Grading</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <code>grade.s</code>,
+a MIPS assembler program
+which reads a number
+and always prints <strong>FL</strong>:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy grade.s</kbd>
+Enter a mark: <kbd>100</kbd>
+FL
+</pre>
+
+<p>
+Add code to <code>grade.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// read a mark and print the corresponding UNSW grade</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">mark</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter a mark: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mark</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mark</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"FL</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mark</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">65</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"PS</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mark</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">75</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"CR</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mark</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">85</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"DN</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"HD</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy grade.s</kbd>
+Enter a mark: <kbd>42</kbd>
+FL
+<kbd is="sh">1521 mipsy grade.s</kbd>
+Enter a mark: <kbd>72</kbd>
+CR
+<kbd is="sh">1521 mipsy grade.s</kbd>
+Enter a mark: <kbd>89</kbd>
+HD
+</pre>
+
+
+<aside class="hint">
+<p>
+Make sure you understand the <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_control/#print_if_even.s">print_if_even.s</a> lecture example.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest grade </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_grade grade.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS Counting</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given a MIPS assembler program <code>count.s</code>,
+which reads a number and prints 42:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy count.s</kbd>
+Enter a number: <kbd>13</kbd>
+42
+</pre>
+
+<p>
+Add code to <code>count.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// read a number n and print the integers 1..n one per line</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter a number: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy count.s</kbd>
+Enter a number: <kbd>4</kbd>
+1
+2
+3
+4
+<kbd is="sh">1521 mipsy count.s</kbd>
+Enter a number: <kbd>10</kbd>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre>
+
+
+<aside class="hint">
+<p>
+Make sure you understand the <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_control/#count_to_10.s">count_to_10.s</a> lecture example.
+</p><p>
+Start by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest count </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_count count.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS 7-Eleven</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <code>seven_eleven.s</code>,
+a MIPS assembler program
+which reads a number and prints 42:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy seven_eleven.s</kbd>
+Enter a number: <kbd>13</kbd>
+42
+</pre>
+
+<p>
+Add code to <code>seven_eleven.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read a number and print positive multiples of 7 or 11 &lt; n</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter a number: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy seven_eleven.s</kbd>
+Enter a number: <kbd>15</kbd>
+7
+11
+14
+<kbd is="sh">1521 mipsy seven_eleven.s</kbd>
+Enter a number: <kbd>42</kbd>
+7
+11
+14
+21
+22
+28
+33
+35
+</pre>
+
+
+<aside class="hint">
+<p>
+Make sure you understand the <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_control/#print_if_even.s">print_if_even.s</a>
+and <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_control/#count_to_10.s">count_to_10.s</a> lecture examples.
+</p><p>
+Start by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest seven_eleven </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_seven_eleven seven_eleven.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS Sequence</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given a MIPS assembler program <code>sequence.s</code>,
+which reads a number and prints 42:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy sequence.s</kbd>
+Enter the starting number: <kbd>13</kbd>
+42
+</pre>
+
+<p>
+Add code to <code>sequence.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read three numbers `start`, `stop`, `step`</span>
+<span class="c1">// Print the integers between `start` and `stop` moving in increments of size `step`</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter the starting number: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">start</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter the stopping number: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stop</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter the step size: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">step</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stop</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy sequence.s</kbd>
+Enter the starting number: <kbd>1</kbd>
+Enter the stopping number: <kbd>10</kbd>
+Enter the step size: <kbd>2</kbd>
+1
+3
+5
+7
+9
+<kbd is="sh">1521 mipsy sequence.s</kbd>
+Enter the starting number: <kbd>1</kbd>
+Enter the stopping number: <kbd>-10</kbd>
+Enter the step size: <kbd>-2</kbd>
+1
+-1
+-3
+-5
+-7
+-9
+</pre>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest sequence </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_sequence sequence.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>MIPS Tetrahedra</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <code>tetrahedral.s</code>,
+a MIPS assembler program that
+reads a number and prints 42:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy tetrahedral.s</kbd>
+Enter a number: <kbd>42</kbd>
+42
+</pre>
+
+<p>
+Add code to <code>tetrahedral.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read a number n and print the first n tetrahedral numbers</span>
+<span class="c1">// https://en.wikipedia.org/wiki/Tetrahedral_number</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">how_many</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter how many: "</span><span class="p">);</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">how_many</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">how_many</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">                </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">);</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy tetrahedral.s</kbd>
+Enter how many: <kbd>5</kbd>
+1
+4
+10
+20
+35
+<kbd is="sh">1521 mipsy tetrahedral.s</kbd>
+Enter how many: <kbd>12</kbd>
+1
+4
+10
+20
+35
+56
+84
+120
+165
+220
+286
+364
+</pre>
+
+<aside class="hint">
+<p>
+Make sure you understand
+the <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_control/#sum_100_squares.s">sum_100_squares.s</a> lecture example.
+</p><p>
+Started by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest tetrahedral </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_tetrahedral tetrahedral.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Read &amp; Execute MIPS Instructions</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a MIPS assembler program <code>dynamic_load.s</code>
+which reads MIPS instructions as signed decimal integers
+until it reads the value -1,
+then executes the instructions.
+</p><p>
+<b>dynamic_load.s</b> should read instructions until it reads the value -1.
+</p><p>
+<b>dynamic_load.s</b> should then print a message,
+load the instructions, print another message,
+exactly as in the examples below.
+</p><p>
+For example,
+below is a tiny MIPS assembler program
+which prints 42.
+The comment on each line shows
+how the instruction is encoded,
+as a hexadecimal and as a signed decimal integer;
+it is this signed integer value
+that your program will read.
+
+</p><pre>li $a0, 42  # 3404002a    872677418
+li $v0, 1   # 34020001    872546305
+syscall     # 0000000c           12
+jr $ra      # 03e00008     65011720
+</pre>
+
+<p>
+This is what <code>dynamic_load.s</code> must do.
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy dynamic_load.s</kbd>
+Enter mips instructions as integers, -1 to finish:
+<kbd>872677418
+872546305
+12
+65011720
+-1
+</kbd>Starting executing instructions
+42Finished executing instructions
+</pre>
+
+<p>
+The supplied files for the lab include
+files containing the instructions for
+some MIPS assembler programs from lectures.
+You can use these to test your program; for example:
+
+</p><pre is="tty"><kbd is="sh">cat add.instructions</kbd>
+872939537
+873005081
+19419168
+663585
+872546305
+12
+872677386
+872546315
+12
+65011720
+-1
+<kbd is="sh">1521 mipsy dynamic_load.s &lt;add.instructions</kbd>
+Enter mips instructions as integers, -1 to finish:
+Starting executing instructions
+42
+Finished executing instructions
+<kbd is="sh">1521 mipsy dynamic_load.s &lt;print10.instructions</kbd>
+Enter mips instructions as integers, -1 to finish:
+Starting executing instructions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Finished executing instructions
+<kbd is="sh">1521 mipsy dynamic_load.s &lt;sum_100_squares.instructions</kbd>
+Enter mips instructions as integers, -1 to finish:
+Starting executing instructions
+338350
+Finished executing instructions
+</pre>
+
+<p>
+If you want to experiment with your own tests,
+this command will give you any MIPS program as integers.
+
+</p><pre is="tty"><kbd is="sh">1521 mips_instructions 42.s</kbd>
+537133098
+537001985
+12
+537133066
+537001995
+12
+65011720
+-1
+</pre>
+
+<p>
+If you want to try creating your own test cases,
+here is some MIPS assembler
+that prints a message without using initialized data:
+
+
+</p><div class="highlight mips"><pre><span></span><span class="c"># print a string without using pre-initialized data</span>
+<span class="c"># for the dynamic load challenge exercise</span>
+
+<span class="nf">main:</span>
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$a0</span><span class="nb">,</span><span class="w"> </span>'H'<span class="w">       </span><span class="c"># printf("%c", 'Hi');</span>
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$v0</span><span class="nb">,</span><span class="w"> </span><span class="kc">11</span>
+<span class="w">    </span><span class="k">syscall</span>
+
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$a0</span><span class="nb">,</span><span class="w"> </span>'i'<span class="w">       </span><span class="c"># printf("%c", 'i');</span>
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$v0</span><span class="nb">,</span><span class="w"> </span><span class="kc">11</span>
+<span class="w">    </span><span class="k">syscall</span>
+
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$a0</span><span class="nb">,</span><span class="w"> </span>'\n'<span class="w">      </span><span class="c"># printf("%c", '\n');</span>
+<span class="w">    </span><span class="nv">li</span><span class="w">   </span><span class="kt">$v0</span><span class="nb">,</span><span class="w"> </span><span class="kc">11</span>
+<span class="w">    </span><span class="k">syscall</span>
+
+<span class="w">    </span><span class="k">jr</span><span class="w">   </span><span class="kt">$ra</span>
+</pre></div>
+
+
+<aside class="hint">
+<p>
+This exercises involves
+writing only a small amount of code,
+but it is tricky to get right
+and will involve some thought and experimentation.
+</p>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+The input to <code>dynamic_load.s</code>
+will be between 1 and 1024 signed decimal integers:
+mipsy can't read hexadecimal.
+
+</p></li><li><p>
+You can assume the instructions don't use initialized data.
+This mean printing strings in the normal way won't work.
+
+</p></li><li><p>
+You can assume the instructions read in execute a <code>jr $ra</code> instruction to terminate.
+
+</p></li><li><p>
+You can assume the instructions don't use jump instructions,
+except for <code>jr $ra</code>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest dynamic_load </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab02_dynamic_load dynamic_load.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  3 Tuesday  12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

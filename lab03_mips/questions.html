@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 03
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 03 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/03/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/03/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 03
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>understanding how array indices are calculated</li>
+
+<li>practicing using MIPS control instructions (branch)</li>
+
+<li>learning how  MIPS memory access works (lw/sw)</li>
+
+<li>practicing running MIPS programs with mipsy and mipsy-web</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab03</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab03</kbd>
+<kbd is="sh">cd lab03</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab03</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Bigger MIPS</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/print_bigger/files.cp/print_bigger.s"><code>print_bigger.s</code></a>,
+a MIPS assembler program that
+reads 10 numbers and then prints them:
+
+</p><pre is="tty"><kbd is="sh">cat numbers1.txt</kbd>
+12086
+24363
+47363
+64268
+34001
+6800
+60742
+48867
+26002
+54999
+<kbd is="sh">1521 mipsy print_bigger.s &lt;numbers1.txt</kbd>
+12086
+24363
+47363
+64268
+34001
+6800
+60742
+48867
+26002
+54999
+</pre>
+
+<p>
+Add code to <code>print_bigger.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read 10 numbers into an array then print the numbers which are</span>
+<span class="c1">// larger than the final number read.</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define ARRAY_LEN 10</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">final_number</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">ARRAY_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">final_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">final_number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy print_bigger.s &lt;numbers1.txt</kbd>
+64268
+60742
+54999
+<kbd is="sh">cat numbers2.txt</kbd>
+53906
+9064
+40906
+4504
+4774
+7892
+15334
+45515
+55387
+5681
+<kbd is="sh">1521 mipsy print_bigger.s &lt;numbers2.txt</kbd>
+53906
+9064
+40906
+7892
+15334
+45515
+55387
+5681
+</pre>
+
+<aside class="hint">
+<p>
+Start by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest print_bigger </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab03_print_bigger print_bigger.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 04 March 12:00 (midday)</strong> (2024-03-04 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS Order Checking</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/unordered/files.cp/unordered.s"><code>unordered.s</code></a>,
+a MIPS assembler program that
+reads 10 numbers and then prints 42:
+
+</p><p>
+Add code to <code>unordered.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read 10 numbers into an array</span>
+<span class="c1">// print 0 if they are in non-decreasing order</span>
+<span class="c1">// print 1 otherwise</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define ARRAY_LEN 10</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">ARRAY_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">swapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">swapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">swapped</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">cat numbers1.txt</kbd>
+12086
+24363
+47363
+64268
+34001
+6800
+60742
+48867
+26002
+54999
+<kbd is="sh">1521 mipsy unordered.s &lt;numbers1.txt</kbd>
+1
+<kbd is="sh">cat sorted.txt</kbd>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+<kbd is="sh">1521 mipsy unordered.s &lt;sorted.txt</kbd>
+0
+</pre>
+
+<aside class="hint">
+<p>
+Start by choosing which register you will use for each variable.
+</p><p>
+Reading the 10 numbers in every time can be inconvenient when debugging.
+</p><p>
+You can comment out the loop that reads the 10 numbers and just initialize
+the array to values useful for debugging.
+</p><p>
+See <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/unordered/files.cp/unordered_hard_coded.s"><code>unordered_hard_coded.s</code></a> for an example of this.
+</p><p>
+Don't forget to uncomment the loop that reads the 10 numbers  before autotesting.
+
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest unordered </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab03_unordered unordered.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 04 March 12:00 (midday)</strong> (2024-03-04 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>MIPS Swapping</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/swap_numbers/files.cp/swap_numbers.s"><code>swap_numbers.s</code></a>,
+a MIPS assembler program that
+reads 10 numbers and then prints them:
+
+</p><p>
+Add code to <code>swap_numbers.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Read 10 numbers into an array</span>
+<span class="c1">// swap any pair of numbers which are out of order</span>
+<span class="c1">// then print the array</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define ARRAY_LEN 10</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">ARRAY_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">            </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy swap_numbers.s &lt;numbers1.txt</kbd>
+12086
+24363
+47363
+34001
+6800
+60742
+48867
+26002
+54999
+64268
+<kbd is="sh">1521 mipsy swap_numbers.s &lt;numbers2.txt</kbd>
+9064
+40906
+4504
+4774
+7892
+15334
+45515
+53906
+5681
+55387
+</pre>
+
+<aside class="hint">
+<p>
+Start by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest swap_numbers </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab03_swap_numbers swap_numbers.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 04 March 12:00 (midday)</strong> (2024-03-04 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>MIPS Bubbles</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/bubblesort/files.cp/bubblesort.s"><code>bubblesort.s</code></a>,
+a MIPS assembler program that
+reads 10 numbers and then prints them:
+
+</p><p>
+Add code to <code>bubblesort.s</code>
+to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Reads 10 numbers into an array, bubblesorts them</span>
+<span class="c1">// and then prints the 10 numbers</span>
+<span class="c1">// then print them</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define ARRAY_LEN 10</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">ARRAY_LEN</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">swapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">swapped</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">swapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">                </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">                </span><span class="n">swapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ARRAY_LEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy bubblesort.s &lt;numbers1.txt</kbd>
+6800
+12086
+24363
+26002
+34001
+47363
+48867
+54999
+60742
+64268
+<kbd is="sh">1521 mipsy bubblesort.s &lt;numbers2.txt</kbd>
+4504
+4774
+5681
+7892
+9064
+15334
+40906
+45515
+53906
+55387
+</pre>
+
+<aside class="hint">
+<p>
+Start by choosing which register you will use for each variable.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest bubblesort </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab03_bubblesort bubblesort.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 04 March 12:00 (midday)</strong> (2024-03-04 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Reversing MIPS</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+In most of the previous lab exercises involving MIPS assembly you have
+been given a C program and your task has been to write an equivalent
+MIPS assembly program. In this challenge exercise you will do the
+opposite: you have been given a MIPS program
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/unmips/files.ln/unmips.s"><code>unmips.s</code></a>,
+and you must write an equivalent C program in <code>unmips.c</code>.
+</p>
+
+<p>
+Deciphering the behaviour of an assembly program can be a very useful skill
+in a variety of situations, such as during
+<a href="https://en.wikipedia.org/wiki/Reverse_engineering">reverse engineering</a>,
+when examining compiler output, or when attempting to exploit certain
+security vulnerabilities.
+</p>
+
+<p>
+<code>unmips.s</code> does not have any comments, and its label names are
+extremely bad. This is typical of compiler output and the output of
+<a href="https://en.wikipedia.org/wiki/Disassembler">disassemblers</a>,
+and hopefully also demonstrates the importance of good style in human
+written assembly.
+</p>
+
+<p>
+You may assume that the input to <code>unmips.c</code> will consist of three lines (with
+each line followed by a newline character):
+</p><ul>
+<li>The first line will consist of 70 characters, each either a <code>0</code> or <code>1</code>.</li>
+<li>The second line will be a positive integer less than 1000.</li>
+<li>The third line will be an integer greater than or equal to 0 and less than 1000.</li>
+</ul>
+<p></p>
+
+<p>
+For example:
+</p><pre is="tty"><kbd is="sh">make unmips</kbd>
+<kbd is="sh">./unmips</kbd>
+<kbd>0111011110000111111100001101001111111101110011101100101000011001101011</kbd>
+<kbd>22</kbd>
+<kbd>22</kbd>
+@        @  @       @  @   @@@            @@      @@@ @@  @  @@   @   
+@@      @@@@@@     @@@@@@ @   @          @  @    @      @@@@@  @ @@@  
+  @    @      @   @       @@ @@@        @@@@@@  @@@    @     @@@    @ 
+ @@@  @@@    @@@ @@@     @      @      @      @@   @  @@@   @   @  @@@
+@   @@   @  @       @   @@@    @@@    @@@    @  @ @@@@   @ @@@ @@@@   
+@@ @  @ @@@@@@     @@@ @   @  @   @  @   @  @@@@@     @ @@         @  
+   @@@@       @   @    @@ @@@@@@ @@@@@@ @@@@     @   @@   @       @@@ 
+  @    @     @@@ @@@  @                     @   @@@ @  @ @@@     @   @
+ @@@  @@@   @       @@@@                   @@@ @    @@@@    @   @@@ @@
+@   @@   @ @@@     @    @                 @    @@  @    @  @@@ @      
+@@ @  @ @@    @   @@@  @@@               @@@  @  @@@@  @@@@    @@     
+   @@@@   @  @@@ @   @@   @             @   @@@@@    @@    @  @  @    
+  @    @ @@@@    @@ @  @ @@@           @@@ @     @  @  @  @@@@@@@@@   
+ @@@  @@     @  @   @@@@    @         @    @@   @@@@@@@@@@         @  
+@   @@  @   @@@@@@ @    @  @@@       @@@  @  @ @          @       @@@ 
+@@ @  @@@@ @       @@  @@@@   @     @   @@@@@@ @@        @@@     @   @
+   @@@     @@     @  @@    @ @@@   @@@ @         @      @   @   @@@ @@
+  @   @   @  @   @@@@  @  @@    @ @    @@       @@@    @@@ @@@ @      
+ @@@ @@@ @@@@@@ @    @@@@@  @  @@ @@  @  @     @   @  @        @@     
+@               @@  @     @@@@@     @@@@@@@   @@@ @@@@@@      @  @    
+@@             @  @@@@   @     @   @       @ @          @    @@@@@@   
+  @           @@@@    @ @@@   @@@ @@@     @@ @@        @@@  @      @  
+</pre>
+<p></p>
+
+<p>
+You can find more examples in the provided
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/unmips/files.ln/unmips_examples.txt"><code>unmips_examples.txt</code></a>.
+</p>
+
+<aside class="hint">
+There are a number of strategies that you might want to consider:
+<ul>
+<li>You could try to run the MIPS program with many examples and recognise
+    patterns in the output. </li>
+<li>You could use <a href="https://www.youtube.com/watch?v=25lGn6WNC5o">mipsy's debugger</a>
+    to step through the MIPS program. </li>
+<li>You could incrementally add comments and improve the label names as
+    you understand the MIPS assembly better. </li>
+<li>You could insert extra assembly which outputs information while
+    the MIPS program is running (making sure to modify a <i>copy</i> of
+    <code>unmips.s</code>).
+</li>
+<!-- You could write a decompiler -->
+</ul>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>Your program must not start any external processes (e.g. using <code>posix_spawn</code>
+or <code>exec</code>).</p></li>
+</ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest unmips </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab03_unmips unmips.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 04 March 12:00 (midday)</strong> (2024-03-04 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  4 Monday   12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

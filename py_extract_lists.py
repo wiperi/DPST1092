@@ -30,7 +30,7 @@ def extract_urls(url):
         for link in links:
             # Extract the href attribute (URL)
             href = link.get("href")
-            if href and (href.endswith("pdf")):  # Check if it ends with ".c"
+            if href and str(href).endswith('questions') and str(href).find('lab') > 0:  # Check if it ends with ".c"
 
                 if href not in hash:
                     # href not in hash, add it to the list
@@ -49,7 +49,7 @@ def extract_urls(url):
 
 if __name__ == "__main__":
     # Example usage
-    url = "https://webcms3.cse.unsw.edu.au/COMP2521/24T1/resources/94742"  # Replace with the actual URL
+    url = "https://cgi.cse.unsw.edu.au/~cs1521/24T1/"  # Replace with the actual URL
     tar_dir = "C:/Users/15617/Downloads"
 
     urls = extract_urls(url)
@@ -60,13 +60,13 @@ if __name__ == "__main__":
         for url in urls:
             print(url)
             
-        # Prompt the user to start the download
+        # Prompt user
         print(f"Files will be downloaded to: {tar_dir}")
         user_input = input("Enter 'y' to start download: ")
         if user_input.lower() == 'y':
             for url in urls:
                 # download files
-                download_file(url, tar_dir, ".pdf")
+                download_file(url, tar_dir, ".html")
         else:
             print("Download cancelled by user.")
     else:

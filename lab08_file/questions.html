@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 08
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 08 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/08/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/08/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 08
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>learning how to access files</li>
+
+<li>learning how to work with binary data</li>
+
+<li>learning how to use lseek</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab08</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab08</kbd>
+<kbd is="sh">cd lab08</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab08</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Create a File of Integers</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+    Write a C program, <code>create_integers_file</code>,
+    which takes 3 arguments:
+</p><ol>
+    <li>a filename,
+    </li><li>the beginning of a range of integers, and
+    </li><li>the end of a range of integers;
+</li></ol>
+<p>
+    and which creates a file of this name
+    containing the specified integers.
+    You can assume the range will always be strictly ascending.
+    For example:
+
+</p><pre is="tty"><kbd is="sh">./create_integers_file fortytwo.txt 40 42</kbd>
+<kbd is="sh">cat fortytwo.txt</kbd>
+40
+41
+42
+<kbd is="sh">./create_integers_file a.txt 1 5</kbd>
+<kbd is="sh">cat a.txt</kbd>
+1
+2
+3
+4
+5
+<kbd is="sh">./create_integers_file 1000.txt 1 1000</kbd>
+<kbd is="sh">wc 1000.txt</kbd>
+1000 1000 3893 1000.txt
+</pre>
+
+<p>
+    Your program should print a suitable error message
+    if given the wrong number of arguments,
+    or if the file can not be created.
+
+</p><aside class="hint">
+    Use <cite>fopen(3)</cite> to create the file
+    and <cite>fprintf(3)</cite> to output to the file.
+    If you need some help starting off, read this
+    <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/files/index#create_file_fopen.c">example program</a>
+    to see how to use these functions to create and write to a file.
+</aside>
+
+<aside class="hint">
+    For this exercise,
+    you can use the simple function <cite>atoi(3)</cite>
+    to convert a null-terminated string to an <code>int</code>.
+    In general, <cite>strtol(3)</cite> is a more useful function
+    because it allows error handling —
+    but this is not required for this exercise.
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest create_integers_file </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_create_integers_file create_integers_file.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Print the Bytes of A File</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a C program, <code>print_bytes</code>,
+which takes one argument, a filename,
+and which should should read the specifed file
+and print one line for each byte of the file.
+The line should show the byte in decimal and hexadecimal.
+If that byte is a an ASCII printable character,
+its ASCII value should also be printed.
+
+</p><p>
+Assume ASCII printable characters are those for which
+the <code>ctype.h</code> function <cite>isprint(3)</cite> returns
+a non-zero value.
+
+</p><p>
+Follow the format in this example exactly:
+
+</p><pre is="tty"><kbd is="sh">echo "Hello Andrew!" &gt;hello.txt</kbd>
+<kbd is="sh">./print_bytes hello.txt</kbd>
+byte    0:  72 0x48 'H'
+byte    1: 101 0x65 'e'
+byte    2: 108 0x6c 'l'
+byte    3: 108 0x6c 'l'
+byte    4: 111 0x6f 'o'
+byte    5:  32 0x20 ' '
+byte    6:  65 0x41 'A'
+byte    7: 110 0x6e 'n'
+byte    8: 100 0x64 'd'
+byte    9: 114 0x72 'r'
+byte   10: 101 0x65 'e'
+byte   11: 119 0x77 'w'
+byte   12:  33 0x21 '!'
+byte   13:  10 0x0a
+</pre>
+
+<aside class="hint">
+<p>
+Use <cite>fgetc(3)</cite> to read the file,
+and <cite>printf(3)</cite> for output.
+</p><p>
+The <cite>printf(3)</cite> format you need
+will be similar to <code>"byte %4ld: %3d 0x%02x"</code>
+</p></aside>
+
+<aside class="note">
+<p>
+Note that, in the above example,
+the last byte has value 10 (ASCII <q>linefeed</q>, '\n')
+which is <em>not</em> a printable character —
+<code>isprint('\n')</code> returns 0 —
+so its ASCII value is not printed.
+</p><p>
+The useful *nix utility <cite>hexdump(1)</cite>
+does what this program does and more.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest print_bytes </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_print_bytes print_bytes.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Create a Binary File</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a C program, <code>create_binary_file</code>,
+which takes at least one argument: a filename,
+and subsequently, integers in the range 0…255 inclusive
+specifying byte values.
+It should create a file of the specified name,
+containing the specified bytes.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./create_binary_file hello.txt 72 101 108 108 111 33 10</kbd>
+<kbd is="sh">cat hello.txt</kbd>
+Hello!
+<kbd is="sh">./create_binary_file count.binary 1 2 3 251 252 253 254 255</kbd>
+<kbd is="sh">./print_bytes count.binary</kbd>
+byte    0:   1 0x01
+byte    1:   2 0x02
+byte    2:   3 0x03
+byte    3: 251 0xfb
+byte    4: 252 0xfc
+byte    5: 253 0xfd
+byte    6: 254 0xfe
+byte    7: 255 0xff
+<kbd is="sh">./create_binary_file 4_bytes.binary 222 173 190 239</kbd>
+<kbd is="sh">./print_bytes 4_bytes.binary</kbd>
+byte    0: 222 0xde
+byte    1: 173 0xad
+byte    2: 190 0xbe
+byte    3: 239 0xef
+</pre>
+
+<p>
+Your program should print a suitable error message
+if given the wrong number of arguments,
+or if the file can not be created.
+
+</p><aside class="hint">
+Use <cite>fopen(3)</cite> to create the file
+and <cite>fputc(3)</cite> to output to the file.
+If you need some help starting off,
+read this <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/files/index#create_file_fopen.c">example program</a>
+to see how to use these functions to create and write to a file.
+</aside>
+
+<aside class="hint">
+For this exercise,
+you can use the simple function <cite>atoi(3)</cite>
+to convert a null-terminated string to an <code>int</code>.
+In general, <cite>strtol(3)</cite> is a more useful function
+because it allows error handling —
+but this is not required for this exercise.
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest create_binary_file </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_create_binary_file create_binary_file.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Read a file of little-endian integers</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Write a C program, <code>read_lit_file</code>,
+which takes one argument: a filename,
+specifying the path to a file using the <code>LIT</code> file format.
+
+</p><p>
+A <code>LIT</code>, or <b>L</b>ittle-endian <b>I</b>n<b>t</b>eger file is
+a format for storing a sequence of integers in a file which we have defined.
+
+</p><p>
+The format for a <code>LIT</code> file starts off with a header. The header
+format is as follows:
+
+    </p><table class="table table-sm table-striped">
+    <thead>
+    <tr><th>name
+        </th><th>length
+        </th><th>type
+        </th><th>description
+    </th></tr>
+    </thead>
+    <tbody>
+    <tr><th scope="row">magic number
+        </th><td>3 <abbr title="byte">B</abbr>
+
+        </td><td>characters sequence
+        </td><td>The magic number for LIT files, which is the sequence of bytes
+            0x4C, 0x49, 0x54 (ASCII <code>LIT</code>).
+    </td></tr></tbody>
+    </table>
+
+<p>
+After the header, the file contains a sequence of records. Each record
+uses the following format:
+
+</p><table class="table table-sm table-striped">
+    <thead>
+    <tr><th>name
+        </th><th>length
+        </th><th>type
+        </th><th>description
+    </th></tr>
+    </thead>
+    <tbody>
+    <tr><th scope="row">number of bytes
+        </th><td>1 <abbr title="byte">B</abbr>
+
+        </td><td>ASCII character
+        </td><td>One of the characters <code>'1'</code>, <code>'2'</code>, <code>'3'</code>,
+            <code>'4'</code>, <code>'5'</code>, <code>'6'</code>, <code>'7'</code> or
+            <code>'8'</code>, indicating the number of bytes forming the integer
+            stored in this record.
+    </td></tr><tr><th scope="row">value
+        </th><td><var>num-bytes</var>
+        </td><td>little-endian integer
+        </td><td>The integer value stored in this record, using the specified number
+            of bytes.
+    </td></tr></tbody>
+</table>
+
+<p>
+Your program should read the file specified by the argument,
+and print out the integers stored in the file,
+one per line, in the order they appear in the file.
+
+</p><p>
+Your program should print a suitable error message to <cite>stderr(3)</cite> and then <cite>exit(3)</cite> with status <code>1</code> if:
+</p><ul>
+<li>the user does not provide exactly one argument
+</li><li>the file does not exist
+</li><li>the magic number is not correct, or the file is not long enough to contain
+    a complete header
+</li><li>the file contains a record with an invalid number of bytes
+</li><li>the file ends before the end of a record
+</li></ul>
+
+For example:
+
+<pre is="tty"><kbd is="sh">unzip examples.zip</kbd>
+<kbd is="sh-comment">... extracting ...</kbd>
+<kbd is="sh">dcc -o read_lit_file read_lit_file.c</kbd>
+<kbd is="sh">xxd examples/one_record.lit</kbd>
+00000000: 4c49 5433 5432 32                        LIT3T22
+<kbd is="sh">./read_lit_file examples/one_record.lit</kbd>
+3289684
+<kbd is="sh">./read_lit_file examples/assortment.lit</kbd>
+123
+250
+4242
+4242
+424242424242424242
+18374686479671623680
+71776119061217280
+71776119061217280
+49
+12345678987654321
+4242424242424242424
+<kbd is="sh">./read_lit_file examples/completely_empty.lit</kbd>
+Failed to read magic
+<kbd is="sh">./read_lit_file examples/too_short_1.lit</kbd>   
+42
+Failed to read record
+<kbd is="sh">./read_lit_file examples/invalid_num_bytes_1.lit</kbd>
+42
+Invalid record length
+</pre>
+
+
+<aside class="hint">
+Use <cite>fopen(3)</cite> to read the file
+and <cite>fgetc(3)</cite> or <cite>fread(3)</cite> to read the contents.
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest read_lit_file </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_read_lit_file read_lit_file.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Print File Modes</h3></header>
+    
+
+
+
+
+
+
+
+
+
+We would like to print the access permissions for a set of files
+
+<p>
+Write a C program, <code>file_modes.c</code>, which is given one or more pathnames as command line arguments.
+It should print one line for each pathnames which gives the permissions of the file or directory.
+
+</p><p>
+Follow the output format below.
+
+</p><pre is="tty"><kbd is="sh">dcc file_modes.c -o file_modes</kbd>
+<kbd is="sh">ls -ld file_modes.c file_modes diary.c diary</kbd>
+-rwxr-xr-x 1 z5555555 z5555555 116744 Nov  2 13:00 diary
+-rw-r--r-- 1 z5555555 z5555555    604 Nov  2 12:58 diary.c
+-rwxr-xr-x 1 z5555555 z5555555 222672 Nov  2 13:00 file_modes
+-rw-r--r-- 1 z5555555 z5555555   2934 Nov  2 12:59 file_modes.c
+<kbd is="sh">./file_modes file_modes file_modes.c diary diary.c</kbd>
+-rwxr-xr-x file_modes
+-rw-r--r-- file_modes.c
+-rwxr-xr-x diary
+-rw-r--r-- diary.c
+<kbd is="sh">chmod 700 file_modes</kbd>
+<kbd is="sh">chmod 640 diary.c</kbd>
+<kbd is="sh">chmod 600 file_modes.c</kbd>
+<kbd is="sh">ls -ld file_modes.c file_modes diary.c diary</kbd>
+-rwxr-xr-x 1 z5555555 z5555555 116744 Nov  2 13:00 diary
+-rw-r----- 1 z5555555 z5555555    604 Nov  2 12:58 diary.c
+-rwx------ 1 z5555555 z5555555 222672 Nov  2 13:00 file_modes
+-rw------- 1 z5555555 z5555555   2934 Nov  2 12:59 file_modes.c
+<kbd is="sh">./file_modes file_modes file_modes.c diary diary.c</kbd>
+-rwx------ file_modes
+-rw------- file_modes.c
+-rwxr-xr-x diary
+-rw-r----- diary.c
+</pre>
+
+The first character on each line should be '<b>-</b>' for ordinary files and '<b>d</b>' for directories. For example:
+
+<pre is="tty"><kbd is="sh">./file_modes /tmp /web/cs1521/index.html</kbd>
+drwxrwxrwx /tmp
+-rw-r--r-- /web/cs1521/index.html
+</pre>
+
+<aside class="hint">
+<p>
+The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/files/#stat.c">stat.c</a> lecture example prints the permissions as an octal number.
+</p><p>
+The <cite>stat(2)</cite> system call returns meta-information about files.
+</p><p>
+The <cite>inode(7)</cite> man page describes how permissions are represented.
+</p><p>
+
+You may find some of the following approaches useful:
+</p><ul>
+    <li>Use the provided masks documented in <cite>inode(7)</cite> to extract the permissions from the <code>st_mode</code> field of the <code>struct stat</code> returned by <cite>stat(2)</cite>.
+    </li><li>Break the permissions component of <code>st_mode</code> into groups of 3 bits and handle each group in a loop.</li>
+    <li>Or perhaps best of all, iterate over all 9 bits, and make use of a fixed array of characters and the modulo (<code>%</code>) operator to calculate an index into the array.</li>
+</ul>
+</aside>
+
+<aside class="note">
+You can assume only ordinary files and directories (not links, devices, ...) are specified as arguments.
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest file_modes </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_file_modes file_modes.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Extract ASCII from a Binary File</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+We are distributing programs as binaries,
+and would like to know what if the C compiler
+is leaving any confidential information
+in the binaries as ASCII strings.
+
+</p><p>
+Only 95 of 256 byte values correspond to printable ASCII characters,
+so several byte values in a row
+corresponding to printable characters
+probably will occur infrequently in non-ASCII data.
+There is only a 2% chance that
+four (independent, uniform) random byte values
+will correspond to ASCII printable characters.
+
+</p><p>
+Write a C program, <code>hidden_strings</code>,
+which takes one argument, a filename;
+it should read that file,
+and print all sequences of length 4 or longer
+of consecutive byte values
+corresponding to printable ASCII characters.
+In other words,
+your program should read through the bytes of the file,
+and if it finds 4 bytes in a row containing printable characters,
+it should print those bytes,
+and any following bytes containing ASCII printable characters.
+
+</p><p>
+Print each sequence on a separate line.
+
+</p><p>
+Assume ASCII printable characters are those for which
+the <code>ctype.h</code> function <cite>isprint(3)</cite>
+returns a non-zero value.
+
+</p><p>
+Do not read the entire file into an array.
+
+</p><p>
+Use the <code>create_binary_file</code> program from the previous exercise
+to create simple test data.  For example:
+
+</p><pre is="tty"><kbd is="sh">dcc hidden_strings.c -o hidden_strings</kbd>
+<kbd is="sh">./create_binary_file test_file 72 101 108 108 111 255 255 65 110 100 114 101 119</kbd>
+<kbd is="sh">./hidden_strings test_file</kbd>
+Hello
+Andrew
+</pre>
+
+<p>
+When you think your program is working,
+try extracting strings from a compiled binary.
+For example:
+
+</p><pre is="tty"><kbd is="sh">cat secret.c</kbd>
+#define secret_hash_define 1
+
+// secret comment
+
+int secret_global_variable;
+
+int main(void) {
+    int secret_local_variable;
+    char *s = "secret string";
+}
+
+int secret_function_name() {
+}
+<kbd is="sh">gcc secret.c -o binary1</kbd>
+<kbd is="sh">gcc secret.c -g -o binary2</kbd>
+<kbd is="sh">gcc secret.c -s -o binary3</kbd>
+<kbd is="sh">./hidden_strings binary1</kbd>
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+__cxa_finalize
+__libc_start_main
+GLIBC_2.2.5
+...
+<kbd is="sh">./hidden_strings binary1|grep secret</kbd>
+secret string
+secret.c
+secret_function_name
+secret_global_variable
+<kbd is="sh">./hidden_strings binary2|grep secret</kbd>
+secret string
+secret.c
+secret.c
+secret_global_variable
+secret_function_name
+secret_local_variable
+secret.c
+secret_function_name
+secret_global_variable
+<kbd is="sh">./hidden_strings binary3|grep secret</kbd>
+secret string
+</pre>
+
+<p>
+The above example shows that, by default,
+<cite>gcc(1)</cite> leaves function names,
+global variables names and the filename in the binary.
+
+</p><p>
+If you specify the <code>-g</code> command line option,
+variable names are also left in the binary.
+This is part of information left for debuggers
+such as <cite>gdb(1)</cite> (which dcc uses).
+This information allows debuggers to print the current value of variables.
+
+</p><p>
+If you specify the <code>-s</code> command line option,
+all names are stripped from the binary but the string remains.
+
+</p><p>
+</p><aside class="hint">
+Use <cite>fopen(3)</cite> to open the file,
+and <cite>fgetc(3)</cite> to read the file.
+</aside>
+
+<aside class="hint">
+Use a 4-element array as a buffer.
+</aside>
+
+<aside class="note">
+<p>
+You do not have to consider locale or Unicode in this exercises.
+</p><p>
+Tab ('\t') and newline ('\n') are not printing characters for our purposes:
+<cite>isprint(3)</cite> returns 0 for them.
+</p><p>
+You are not permitted to read the entire file into an array.
+</p><p>
+The useful *nix utility <cite>strings(1)</cite>
+does almost exactly what your program does.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest hidden_strings </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_hidden_strings hidden_strings.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Print The Last line of Huge Files</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a C program, <code>last_line</code>,
+which takes one argument, a filename,
+and which should print the last line of that file.
+For example:
+
+</p><pre is="tty"><kbd is="sh">dcc last_line.c -o last_line</kbd>
+<kbd is="sh">echo -e 'hello\ngood bye' &gt;hello_goodbye.txt</kbd>
+<kbd is="sh">cat hello_goodbye.txt</kbd>
+hello
+good bye
+<kbd is="sh">./last_line hello_goodbye.txt</kbd>
+good bye
+</pre>
+
+<p>
+You program should not assume the last byte of the file is a newline character.
+
+</p><pre is="tty"><kbd is="sh">echo -n -e 'hello\ngoodbye' &gt;no_last_newline.txt</kbd>
+hello
+goodbye<kbd is="sh">./last_line no_last_newline.txt</kbd>
+goodbye<kbd is="sh"></kbd>
+</pre>
+
+<p>
+Your program should handle extremely large files.
+It should not read the entire file.
+As this is a challenge exercise,
+marks will not be awarded for programs which read the entire file.
+</p><p>
+For example, it should be able to print the last line of a one-terabyte file:
+
+</p><pre is="tty"><kbd is="sh">echo -e 'Hello\nGood Bye'|dd status=none seek=1T bs=1 of=/tmp/gigantic_file$$</kbd>
+<kbd is="sh">ls -l /tmp/gigantic_file$$</kbd>
+-rw-r--r-- 1 z5555555 z5555555 1099511627791 Oct 26 17:27 gigantic_file12345
+<kbd is="sh">./last_line /tmp/gigantic_file$$</kbd>
+Good Bye
+</pre>
+
+<p>
+The gigantic file created above is a <a href="https://en.wikipedia.org/wiki/Sparse_file">sparse file</a>,
+consisting almost entirely of zero bytes:
+it uses little actual disk space,
+but, to be safe, remove it when you finish the exercise.
+</p><p>
+The commands above create the sparse file in /tmp to avoid it accidentally being backed up or otherwise copied.
+</p><p>
+Sparse files can create problems
+if they are accidentally copied by a program
+which doesn't handle them specially —
+and most programs don't.
+</p><p>
+BTW the <em>$$</em> in the above command is replaced by the shell process id.  This is because /tmp is shared so we'd like to use a filename that is (more or less) unique.
+
+</p><aside class="note">
+<p>
+Assume line are separated only by the byte corresponding to <code>'\n'</code>.
+</p><p>
+Assume bytes can contain any value;
+you cannot assume bytes are ASCII values.
+</p></aside>
+
+<aside class="hint">
+Use <cite>fseek(3)</cite> and <cite>fgetc(3)</cite>.
+</aside>
+
+<aside class="note">
+<p>
+If the last byte of file is not <code>'\n'</code>,
+you should print all bytes after the last <code>'\n'</code> byte.
+</p><p>
+If there is no <code>'\n'</code> byte, you should print the entire file.
+</p><p>
+If the last byte of the file is <code>'\n'</code>,
+you should print every byte
+after the previous (second last <code>'\n'</code>) <code>'\n'</code> byte.
+</p><p>
+If there is no previous <code>'\n'</code> byte,
+you should print the entire file.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest last_line </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab08_last_line last_line.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 08 April 12:00 (midday)</strong> (2024-04-08 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  9  Monday   12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 10
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 10 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/10/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/10/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 10
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>practice using POSIX threads in C</li>
+
+<li>learn how to fix broken concurrent code</li>
+
+<li>write a higher complexity concurrent program</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab10</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab10</kbd>
+<kbd is="sh">cd lab10</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab10</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Compile C Files</h3></header>
+    
+
+
+
+
+
+
+
+
+
+You have been given <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/compile_c_files/files.cp/compile_c_files.c"><code>compile_c_files.c</code></a>,
+a C program that given the pathname of C source code files compiles them with DCC. For example:
+
+<pre is="tty"><kbd is="sh">dcc compile_c_files.c -o compile_c_files</kbd>
+<kbd is="sh">ls -1</kbd>
+compile_c_files
+compile_c_files.c
+file_modes.c
+file_sizes.c
+<kbd is="sh">./compile_c_files file_sizes.c file_modes.c</kbd>
+running the command: "/usr/local/bin/dcc file_modes.c -o file_modes"
+running the command: "/usr/local/bin/dcc file_sizes.c -o file_sizes"
+<kbd is="sh">ls -1</kbd>
+compile_c_files
+compile_c_files.c
+file_modes
+file_modes.c
+file_sizes
+file_sizes.c
+<kbd is="sh">file file_modes</kbd>
+file_modes: ELF 64-bit LSB executable # ...
+</pre>
+
+<aside class="note">
+<p>
+You should use <cite>posix_spawn(3)</cite> to create the child processes.
+</p><p>
+As you are taking user input, <cite>system(3)</cite> would be insecure.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest compile_c_files </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab10_compile_c_files compile_c_files.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 22 April 12:00 (midday)</strong> (2024-04-22 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Fix a data race</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Provided for you is a file, <code>fix_race.c</code>
+that contains a global variable: <code>global_counter</code>,
+and a function <code>perform_increment</code>:
+
+</p><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">global_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">perform_increment</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">global_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">global_counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+Unfortunately, <code>perform_increment</code> is currently
+not safe to call from multiple threads simultaneously!
+As it stands, this causes a
+<a href="https://en.wikipedia.org/wiki/Race_condition#In_software">data race</a>,
+resulting in our program not printing the desired output:
+
+</p><pre is="tty"><kbd is="sh">make fix_race</kbd>
+dcc -pthread fix_race.c test_fix_race.c -o fix_race
+
+<kbd is="sh_comment">should output "Global counter result: 500000000"</kbd>
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 49851959
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 49787244
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 49285021
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 49659783
+</pre>
+
+<p>
+The <code>./fix_race <strong>50</strong> <strong>1000000</strong> </code>
+specifies that
+<strong>50</strong> threads will each
+call <code>perform_increment</code> <strong>1000000</strong> times.
+
+</p><p>
+Your task is to fix the program by making the <code>perform_increment</code>
+function thread-safe to call
+(i.e. it can be called by multiple threads simultaneously
+and maintain correct program behaviour).
+
+</p><p>
+There are two predominant approaches to solving this exercise that we
+have explored in this course.
+Firstly, you could use a mutex (<code>pthread_mutex_t</code>) to guard
+access to the <code>global_counter</code>.
+Secondly, you could modify the <code>global_counter</code> to be an
+atomic variable, and ensure you increment it atomically.
+
+</p><p>
+Both of these approaches are perfectly valid -- and in-fact,
+we strongly suggest that you solve this exercise twice,
+trying each approach. Note that there is only a single submission
+for this exercise, so in that case you will have to choose which
+approach to submit.
+
+</p><p>
+An example of using a mutex can be found in the
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/current/topic/threads/code/bank_account_mutex.c">bank_account_mutex.c</a> lecture code.
+
+</p><p>
+An example of using atomics can be found in the
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/current/topic/threads/code/bank_account_atomic.c">bank_account_atomic.c</a> lecture code.
+
+</p><p>
+When your program is working, it should behave as follows:
+
+</p><pre is="tty"><kbd is="sh">make fix_race</kbd>
+dcc -pthread fix_race.c test_fix_race.c -o fix_race
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+<kbd is="sh">./fix_race 50 1000000</kbd>
+Global counter result: 50000000
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make fix_race'</span>
+</pre>
+
+<aside class="danger">
+<ul class="list-unstyled">
+<li><p>
+   You must follow the conditions of the exercise.
+   Not following the conditions listed in the exercise
+   will cause you to lose marks.
+
+   </p><p>
+   Do not change anything below the
+   <code>/// DO NOT CHANGE ANY CODE BELOW THIS POINT</code>
+   comment.
+
+   </p><p>
+   The only file you may modify is <code>fix_race.c</code>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest fix_race </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab10_fix_race fix_race.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 22 April 12:00 (midday)</strong> (2024-04-22 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Fix a deadlock</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Provided for you is a file, <code>fix_deadlock.c</code>
+that contains 6 functions executed as threads:
+
+</p><ul>
+<li><code>alice_withdraw</code>
+</li><li><code>bob_withdraw</code>
+</li><li><code>alice_deposit</code>
+</li><li><code>bob_deposit</code>
+</li><li><code>alice_send_bob</code>
+</li><li><code>bob_send_alice</code>
+</li></ul>
+
+<p>
+Each of these threads modifies 2 of 3 global variables,
+each protected by their own mutex. These global variables
+(and their accompanying mutexes) are:
+
+</p><ul>
+<li><code>int bank_account</code> (guarded by: <code>pthread_mutex_t bank_account_mutex</code>)
+</li><li><code>int alice_wallet</code> (guarded by: <code>pthread_mutex_t alice_wallet_mutex</code>)
+</li><li><code>int bob_wallet</code>   (guarded by: <code>pthread_mutex_t bob_wallet_mutex</code>)
+</li></ul>
+
+<p>
+However, this program has a problem: it (almost always) deadlocks!
+Although there are many different avenues for this program to deadlock
+currently, we can examine a single example of how it may be possible.
+
+</p><p>
+Consider the case where <code>alice_withdraw</code>
+and <code>alice_deposit</code> are executing in parallel.
+Let's say <code>alice_withdraw</code> manages to lock the
+<code>bank_account_mutex</code> right at the same time as
+<code>alice_deposit</code> manages to lock the
+<code>alice_wallet_mutex</code>
+(these are lines <code>29</code> and <code>65</code> respectively).
+Following onto the next line of code for each thread,
+we see that <code>alice_withdraw</code> then tries to
+lock the <code>alice_wallet_mutex</code>, which it will
+not be able to since we just established that the
+<code>alice_deposit</code> function just locked that mutex.
+However, <code>alice_deposit</code>'s next line of code
+will attempt to lock the <code>bank_account_mutex</code>,
+which <code>alice_withdraw</code> is currently holding!
+
+</p><p>
+In this scenario, both threads are stuck waiting for each
+other's mutexes, but because they're both stuck
+(and cannot progress),
+each will never be able to
+unlock their own mutexes in order
+to allow the other thread to lock
+it and make further progress!
+This is a classic deadlock scenario!
+
+</p><p>
+Your task is to fix the program by
+<strong>establishing a global ordering of lock acquisition</strong>!
+Curiously enough, we have already worked through the
+process of fixing a (slightly simpler) deadlock
+scenario during lectures
+
+</p><p>
+An example of using a mutex incorrectly can be found in the
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/current/topic/threads/code/bank_account_broken.c">bank_account_broken.c</a> lecture code.
+
+</p><p>
+An example of using a mutex correctly can be found in the
+<a href="https://cgi.cse.unsw.edu.au/~cs1521/current/topic/threads/code/bank_account_mutex.c">bank_account_mutex.c</a> lecture code.
+
+</p><p>
+You should <strong>not</strong> solve this exercise by attempting to modify the
+behaviours of threads, or by making some threads do nothing, or by changing
+the types of any global variables, or by removing or introducing
+any new ones.
+
+</p><p>
+You <strong>should</strong> simply swap the ordering of some mutex
+lock and unlocks such that a global ordering is established,
+which will free your program from deadlock.
+Once this is achieved,
+(assuming you didn't violate any of the above conditions),
+your task is complete!
+
+</p><p>
+When your program is working, it should behave as follows:
+
+</p><pre is="tty"><kbd is="sh">make fix_deadlock</kbd>
+dcc -pthread fix_deadlock.c test_fix_deadlock.c -o fix_deadlock
+<kbd is="sh">./fix_deadlock</kbd>
+bank account balance: $10000.00
+alice wallet balance: $200.00
+bob   wallet balance: $200.00
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make fix_deadlock'</span>
+</pre>
+
+<aside class="danger">
+<ul class="list-unstyled">
+<li><p>
+   You must follow the conditions of the exercise.
+   Not following the conditions listed in the exercise
+   will cause you to lose marks.
+
+   </p><p>
+   Do not change anything below the
+   <code>/// DO NOT CHANGE ANY CODE BELOW THIS POINT</code>
+   comment.
+
+   </p><p>
+   The only file you may modify is <code>fix_deadlock.c</code>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest fix_deadlock </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab10_fix_deadlock fix_deadlock.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 22 April 12:00 (midday)</strong> (2024-04-22 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Create a chain of threads</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Provided for you is a file, <code>thread_chain.c</code>
+that spawns a new thread: <code>my_thread</code>,
+which calls a provided function <code>thread_hello()</code>
+before terminating.
+
+
+</p><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pthread.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"thread_chain.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">my_thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">thread_hello</span><span class="p">();</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">my_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pthread_t</span><span class="w"> </span><span class="n">thread_handle</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread_handle</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">my_thread</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">pthread_join</span><span class="p">(</span><span class="n">thread_handle</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+When we run the program, we are greeted with the following output:
+
+</p><pre is="tty"><kbd is="sh">make thread_chain</kbd>
+dcc -pthread thread_chain.c test_thread_chain.c -o thread_chain -Wl,--wrap=pthread_create
+<kbd is="sh">./thread_chain</kbd>
+Hello from thread 01!
+ERROR: thread_hello was called less than 50 times!
+help: it was only called 1 time(s)
+the program will now exit
+</pre>
+
+<p>
+Your task is to make this program generate a chain of 50 threads
+that each say hello!
+Your <code>my_main</code> should continue to simply create one thread,
+however the thread it creates (<code>my_thread</code>) should modify its
+behaviour as follows:
+
+</p><p>
+It should continue to first call the <code>thread_hello</code> function.
+<code>thread_hello</code> will print the <code>Hello from thread N!</code> message
+for you as required --
+do not try to manually print this message yourself as you will lose marks.
+It should then create another thread which continues this same process.
+
+</p><p>
+Similiarly to how we wrote recursive functions in the first week of COMP1521,
+you should make the thread create another thread that uses the same <code>my_thread</code>
+function as its entry point.
+Finally, it should call <code>pthread_join</code> on the newly created thread,
+in order to make sure our current thread waits for the new thread to finish!
+
+</p><p>
+This however, would cause an endless chain of threads spawning threads spawning threads,
+ad infinitum!
+In this exercise, you are required to make the chain have <strong>exactly length 50</strong>.
+
+</p><p>
+The following is a diagram to help illustrate what this chain conceptually looks like:
+
+</p><figure class="text-center">
+<img class="img img-fluid p-2" src="../../activities/thread_chain/assets/chain.svg"/>
+</figure>
+
+<aside class="hint">
+   <p>
+   You are (almost certainly) going to want to make use of the
+   data argument in <code>pthread_create</code> (the final parameter)
+   to indicate how many threads in the chain are
+   still left to be created.
+
+   </p><p>
+   This exercise essentially glues together threads and recursion.
+   If you are struggling with the recursive aspect of the problem,
+   it is worth revising from week 1's content.
+
+   </p><p>
+   Don't forget to make each thread call <code>pthread_join</code>
+   after spawning the next thread in the chain!
+</p></aside>
+
+<p>
+When your program is working, it should behave as follows:
+
+</p><pre is="tty"><kbd is="sh">make thread_chain</kbd>
+dcc -pthread thread_chain.c test_thread_chain.c -o thread_chain -Wl,--wrap=pthread_create
+<kbd is="sh">./thread_chain</kbd>
+Hello from thread 01!
+Hello from thread 02!
+Hello from thread 03!
+Hello from thread 04!
+<em>[ ... output redacted ... ]</em>
+Hello from thread 47!
+Hello from thread 48!
+Hello from thread 49!
+Hello from thread 50!
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make thread_chain'</span>
+</pre>
+
+<aside class="danger">
+<ul class="list-unstyled">
+<li><p>
+   </p><p>
+   The only file you may modify is <code>thread_chain.c</code>.
+   </p><p>
+   If, when compiling, you get an error that looks like...
+</p><pre is="tty">/usr/bin/ld: /tmp/test_thread_chain-37801e.o: in function `__wrap_pthread_create':
+/home/student/test_thread_chain.c:77: undefined reference to `pthread_create'
+</pre>
+   ...then it means that you are not compiling the program correctly.
+   Either use the provided Makefile, or instead compile the program exactly as follows:
+<pre is="tty"><kbd is="sh">dcc -pthread thread_chain.c test_thread_chain.c -o thread_chain -Wl,--wrap=pthread_create</kbd>
+</pre>
+</li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest thread_chain </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab10_thread_chain thread_chain.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 22 April 12:00 (midday)</strong> (2024-04-22 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Compile C Files If Needed</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Copy your code from the last activity into <code>compile_if_needed.c</code>
+
+</p><pre is="tty"><kbd is="sh">cp compile_c_files.c compile_if_needed.c</kbd>
+</pre>
+
+<p>
+Unfortunately the code you have written so far is inefficient.
+</p><p>
+It recompiles the C file even if this is not necessary.
+</p><p>
+Modify <code>compile_if_needed.c</code> so that it only compiles C files if necessary.
+</p><p>
+A compilation is necessary if the binary doesn't exist.
+</p><p>
+A compilation is also necessary if the C file has been changed since the last compilation.
+In other words, if the modification time of the C file is more recent than the modification time of the binary.
+</p><p>
+Follow the output format below.
+
+</p><pre is="tty"><kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+running the command: "/usr/local/bin/dcc file_modes.c -o file_modes"
+running the command: "/usr/local/bin/dcc file_sizes.c -o file_sizes"
+<kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+file_modes.c does not need compiling
+file_sizes.c does not need compiling
+<kbd is="sh">rm file_sizes</kbd>
+<kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+file_modes.c does not need compiling
+running the command: "/usr/local/bin/dcc file_sizes.c -o file_sizes"
+<kbd is="sh">echo &gt;&gt; file_sizes.c # add a new-line to file_sizes.c</kbd>
+<kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+file_modes.c does not need compiling
+running the command: "/usr/local/bin/dcc file_sizes.c -o file_sizes"
+<kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+file_modes.c does not need compiling
+file_sizes.c does not need compiling
+<kbd is="sh">./compile_if_needed file_sizes.c file_modes.c</kbd>
+file_modes.c does not need compiling
+file_sizes.c does not need compiling
+</pre>
+
+<aside class="hint">
+The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/files/#stat.c">stat.c</a>
+lecture example prints a file modification time.
+</aside>
+
+<aside class="note">
+<p>
+You should use <cite>posix_spawn(3)</cite> to create the child processes.
+</p><p>
+As you are taking user input, <cite>system(3)</cite> would be insecure.
+</p><p>
+BTW this is essentially what the program <em>make</em> does.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest compile_if_needed </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab10_compile_if_needed compile_if_needed.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 22 April 12:00 (midday)</strong> (2024-04-22 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  11 Monday   12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

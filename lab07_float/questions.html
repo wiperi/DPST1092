@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 07
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 07 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/07/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/07/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 07
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>to practice using bitwise memory</li>
+
+<li>to practice manipulating dynamic memory</li>
+
+<li>to explore arbitrary precision integer arithmetic</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab07</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab07</kbd>
+<kbd is="sh">cd lab07</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab07</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Create An addi Instruction</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+   section {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #dee3e6;
+   }
+   section > nav, th[scope="rowgroup"] > nav {
+      color: var(--grey);
+      float: right;
+   }
+   th[scope="rowgroup"] > nav {
+      font-size: 75%;
+      font-weight: normal;
+   }
+   table.narrow {
+      margin-left: auto;
+       margin-right: auto;
+       width: 75%;
+   }
+   tbody > tr:first-child > th[scope="rowgroup"] {
+      background-color: var(--light);
+      padding-left: 2rem;
+   }
+   td > hr {
+       margin-top: 0.2rem;
+       margin-bottom: 0.2rem;
+      }
+   </style>
+In the first half of the course, we explored a variety of MIPS instructions, and representing
+them in MIPS assembler.
+
+<p>
+   However, each CPU instruction is represented in memory as some particular bit pattern.
+The CPU is able to decode the instruction in order to determine what operation to perform, and which
+operands (whether it be a register or immediate value) are involved.
+
+</p><p>
+   In this exercise, we will construct the bit pattern for an <code>addi</code> instruction, given operands.
+   
+   </p><p>
+      The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1//resources/mips-guide.html#instructions">MIPS documentation guide</a> provides the
+general bit pattern for an <b>addi</b> instruction, including the opcode and the bits used for each operand.
+
+
+
+</p><table class="table table-sm">
+   <colgroup><col class="text-center"/><col/><col/><col/></colgroup>
+   <thead>
+      <tr>
+         <th>
+            </th><th colspan="2">Instruction
+               </th><th>Description
+                  </th><th>Encoding
+                     
+                     </th></tr></thead><tbody id="insn-arith">
+                        <tr><td>✓
+                           </td><td><code title="Add Immediate Word">ADDI</code>
+                              </td><td><code>R<sub>t</sub>, R<sub>s</sub>, <var>Imm<sub>16</sub></var></code>
+                                 </td><td>
+                                 <code>R<sub>t</sub> = R<sub>s</sub> + <var>Imm<sub>16</sub></var></code>
+                                 </td><td><code>001000ssssstttttIIIIIIIIIIIIIIII</code>
+                                 </td></tr></tbody></table>
+                    
+<p>
+The bit pattern here can be broken down into 4 components:
+</p><ul>
+   <li>
+      <strong>The opcode</strong>: in this case, the opcode <code>001000</code> is used to distinguish
+      the instruction as an <code>addi</code> instruction.
+   </li>
+   <li>
+      <strong>The two registers</strong>: <code>sssss</code> and <code>ttttt</code> are used to represent the
+      registers being used as operands for the instruction. Each register number is encoded as a 5-bit
+      value - recall that there are 32 general-purpose registers available in MIPS, numbered <code>$0</code>
+      to <code>$31</code>. This means that 5 bits is sufficient to refer to a register.
+   </li>
+   <li>
+      <strong>An immediate value</strong>:
+      The last 16 bits are used to represent the final operand - a 16-bit immediate value.
+   </li>
+</ul>
+                                 
+                                 
+<p>
+The function <code>addi</code> is given each of the operands for a MIPS <b>addi</b> instruction. 
+Add code so that it returns the encoded binary form of the instruction.
+
+
+
+
+</p><p>
+Your task is to add code to this function in <b>addi.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// return the encoded binary MIPS for addi $t,$s, i</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="nf">addi</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="c1">// REPLACE WITH YOUR CODE</span>
+
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+<p>
+   <code>1521 spim2hex</code> can be used
+   to print the encoded binary form of a particular <b>addi</b> instruction as a hexadecimal, for example:
+
+</p><pre is="tty"><kbd is="sh">echo 'addi $9 $27 42' | 1521 spim2hex</kbd>
+2369002a
+<kbd is="sh">./addi 9 27 42</kbd>
+addi(9, 27, 42) returned 0x2369002a
+<kbd is="sh">echo 'addi $17 $19 -3' | 1521 spim2hex</kbd>
+2271fffd
+<kbd is="sh">./addi 17 19 -3</kbd>
+addi(17, 19, -3) returned 0x2271fffd
+</pre>
+
+With the first example above, we can see that the binary representation of <code>2369002a</code> is<br/>
+<code>001000 11011 01001 0000000000101010</code><br/>
+with the opcode being represented in the first group, <code>27</code> being represented by the
+second group, <code>9</code> being represented by the third group, and the immediate value <code>42</code>
+being represented by the last group.
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make addi'</span>
+</pre>
+
+<aside class="note">
+<ul class="list-unstyled">
+
+<li><p>
+You may assume that the supplied values of s and t will be between 0 and 31.
+
+</p></li><li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You are not permitted
+   to change the <code>main</code> function you have been given,
+or to change <code>addi</code>'s prototype (its return type and argument types).
+
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest addi </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_addi addi.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Convert from big- to little-endian in MIPS</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+In the files for this lab,
+you have been given <code>mips_networking.s</code>,
+a MIPS assembler program that reads <em>one</em> number and then prints it.
+
+</p><p>
+Add code to <code>mips_networking.s</code> to make it equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// Reads a 4-byte value and reverses the byte order, then prints it</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define BYTE_MASK 0xFF</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">network_bytes</span><span class="p">;</span>
+<span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">network_bytes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">computer_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">byte_mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BYTE_MASK</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">computer_bytes</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="n">network_bytes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">byte_mask</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">24</span><span class="p">;</span>
+<span class="w">    </span><span class="n">computer_bytes</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="n">network_bytes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">byte_mask</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="n">computer_bytes</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="n">network_bytes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">byte_mask</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="n">computer_bytes</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="p">(</span><span class="n">network_bytes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">byte_mask</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">24</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">24</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">computer_bytes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+In other words, it should read <em>one</em> number,
+<strong>network_bytes</strong>, reverse the byte order 
+inside it, and print the result.
+
+</p><p>
+The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1//resources/mips-guide.html#instructions">MIPS documentation guide</a> provides a
+set of bitwise operations that will be useful for this.
+
+</p><p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy mips_networking.s</kbd>
+<kbd>5</kbd>
+83886080
+<kbd is="sh">1521 mipsy mips_networking.s</kbd>
+<kbd>255</kbd>
+-16777216
+<kbd is="sh">1521 mipsy mips_networking.s</kbd>
+<kbd>-1</kbd>
+-1
+<kbd is="sh">1521 mipsy mips_networking.s</kbd>
+<kbd>2147483647</kbd>
+-129
+</pre>
+
+<aside class="hint">
+<ul class="list-unstyled">
+<li><p>
+There are two different groups of shift instructions in MIPS. 
+Unless you are multiplying or dividing by a power of two,
+you should use the logical shift instructions.
+</p></li></ul>
+</aside>
+
+
+<aside class="note">
+<ul class="list-unstyled">
+
+<li><p>
+Reversing bytes like this is necessary when you want 
+to send data over a network, or receive it from a network 
+and is normally done by the network drivers or operating system.
+
+</p></li><li><p>
+This is sometimes called <em>network byte order</em> or <em>big-endian</em> order.
+
+</p></li><li><p>
+Computers normally store numbers in <em>little-endian</em> order,
+which is the opposite of network byte order.
+
+</p></li><li><p>
+A straightforward explanation of why this is done can be found 
+<a href="https://www.pcmag.com/encyclopedia/term/byte-order">here</a>, 
+and a more detailed explanation <a href="https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/">here</a>. 
+
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest mips_networking </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_mips_networking mips_networking.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Extract The Components of a Float</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<h4>Floating-point Representation</h4>
+<p>
+Single-precision floating-point numbers
+that follow the IEEE 754 standard
+have an internal structure that looks like this:
+
+</p><figure class="text-center">
+<img class="img img-fluid p-2" src="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/float_bits/float.png"/>
+</figure>
+
+<p>
+The value is determined as:
+\[
+    {-1}^{\text{sign}} \times \left(1 + \text{frac}\right) \times 2^{\text{exp} - 127}
+\]
+The 32 bits in each <code>float</code> are used as follows:
+
+</p><dl class="row">
+<dt class="col-3 text-right">
+<code>sign</code>
+</dt><dd class="col-9"><p>
+is a single bit that indicates the number's sign.
+If set to 0, the number is positive;
+if set to 1, the number is negative.
+
+</p></dd><dt class="col-3 text-right">
+<code>exp</code>
+</dt><dd class="col-9"><p>
+is an unsigned 8-bit value (giving a range of \([0\cdots255]\))
+which is interpreted as a value in the range \([-127\cdots128]\)
+by subtracting 127 (the <q>bias</q>)
+from the stored 8-bit value.
+It gives a multiplier
+for the fraction part
+(<abbr>i.e.</abbr>, \( 2^{\text{exp}-127} \)).
+
+</p></dd><dt class="col-3 text-right">
+<code>frac</code>
+</dt><dd class="col-9"><p>
+is a value in the range \( [0\cdots1] \),
+determined using positional notation:
+\[
+    \frac{\text{bit}_{22}}{2^{1}}
+  + \frac{\text{bit}_{21}}{2^{2}}
+  + \frac{\text{bit}_{20}}{2^{3}}
+  + \cdots
+  + \frac{\text{bit}_{2}}{2^{21}}
+  + \frac{\text{bit}_{1}}{2^{22}}
+  + \frac{\text{bit}_{0}}{2^{23}}
+\]
+The overall value of the floating-point value
+is determined by adding 1 to the fraction:
+we assume that the "fraction" part
+is actually a value in the range \( [1\cdots2] \),
+but save bits by not explicitly storing
+the leading 1 bit.
+</p></dd></dl>
+
+<p>
+For example:
+
+</p><pre>raw 32 bits:  01000000001000000000000000000000
+partitioned:  0 10000000 01000000000000000000000
+sign:         0, so positive
+exp:          10000000 = 128, so multiplier is 2<sup>128-127</sup> = 2<sup>1</sup>
+frac:         0×2<sup>-1</sup> + 1×2<sup>-2</sup> + ... = 0.25, but we need to add 1
+
+final value:  1.25 × 2<sup>1</sup> = 2.5
+</pre>
+
+<h4>Exercise Description</h4>
+
+
+
+<p>
+Your task is to add code to this function in <b>float_bits.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// separate out the 3 components of a float</span>
+<span class="n">float_components_t</span><span class="w"> </span><span class="nf">float_bits</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+The function <code>float_bits</code> is given
+the bits of a <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">float</a> as type <code>uint32_t</code>.
+Add code so that it returns a <code>struct float_components</code>,
+containing the sign, exponent and fraction fields of the <code>struct</code>.
+
+</p><p>
+You also should add appropriate code to the functions
+<code>is_nan</code>,
+<code>is_positive_infinity</code>,
+<code>is_negative_infinity</code>, and
+<code>is_zero</code>.
+All four functions take
+a <code>struct float_components</code> as their argument,
+and return 0 or 1 depending on
+some property of the <code>float</code> it represents:
+
+</p><ul>
+<li><p>
+<code>is_nan</code> returns 1
+iff the <code>struct float_components</code> corresponds to
+the not-a-number value, <abbr>NaN</abbr>, and 0 otherwise;
+
+</p></li><li><p>
+<code>is_positive_infinity</code> returns 1
+iff the <code>struct float_components</code> corresponds to
+the positive infinity, <code>inf</code>, and 0 otherwise;
+
+</p></li><li><p>
+<code>is_negative_infinity</code> returns 1
+iff the <code>struct float_components</code> corresponds to
+the negative infinity, <code>-inf</code>, and 0 otherwise; and
+
+</p></li><li><p>
+<code>is_zero</code> returns 1
+iff the <code>struct float_components</code> corresponds to
+either positive or negative zero.
+</p></li></ul>
+
+<p>
+These function must be implemented only using bit operations and integer comparisons.
+
+</p><p>
+Once these functions are completed,
+you should get output like:
+
+</p><pre is="tty"><kbd is="sh">./float_bits -42</kbd>
+float_bits(-42) returned
+sign=0x1
+exponent=0x84
+fraction=0x280000
+is_nan returned 0
+is_positive_infinity returned 0
+is_negative_infinity returned 0
+is_zero returned 0
+<kbd is="sh">./float_bits 3.14159</kbd>
+float_bits(3.14159012) returned
+sign=0x0
+exponent=0x80
+fraction=0x490fd0
+is_nan returned 0
+is_positive_infinity returned 0
+is_negative_infinity returned 0
+is_zero returned 0
+<kbd is="sh">./float_bits -inf</kbd>
+float_bits(-inf) returned
+sign=0x1
+exponent=0xff
+fraction=0x000000
+is_nan returned 0
+is_positive_infinity returned 0
+is_negative_infinity returned 1
+is_zero returned 0
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make float_bits'</span>
+</pre>
+
+<aside class="hint">
+<p>
+To extract the three components of the <code>float</code>,
+use the bitwise operators <code>&amp;</code> and <code>&gt;&gt;</code>.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You are not permitted
+   to call any functions from the C library,
+or to perform floating-point operations,
+or to use variables of type <code>float</code> or <code>double</code>,
+or to use multiplication or division.
+
+</p></li><li><p>
+You are not permitted
+   to change the <code>main</code> function you have been given,
+or to change the type <code>struct float_components</code> provided,
+or to change <code>float_bits</code>' prototype (its return type and argument types).
+
+</p></li><li><p>
+<em>iff</em> stands for <q>if and only if</q>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest float_bits </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_float_bits float_bits.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Multiply A Float by 2048 Using Bit Operations</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Your task is to add code to this function in <b>float_2048.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// float_2048 is given the bits of a float f as a uint32_t</span>
+<span class="c1">// it uses bit operations and + to calculate f * 2048</span>
+<span class="c1">// and returns the bits of this value as a uint32_t</span>
+<span class="c1">//</span>
+<span class="c1">// if the result is too large to be represented as a float +inf or -inf is returned</span>
+<span class="c1">//</span>
+<span class="c1">// if f is +0, -0, +inf or -inf, or Nan it is returned unchanged</span>
+<span class="c1">//</span>
+<span class="c1">// float_2048 assumes f is not a denormal number</span>
+<span class="c1">//</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="nf">float_2048</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>float_2048</code>
+so that, given a <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">float</a> as a <code>uint32_t</code>,
+it multiplies that value by 2048
+using only bit operations and addition (+),
+and returns the result.
+If, after multiplication,
+the result is too large to be represented as a <code>float</code>,
+return <code>inf</code> if the original <code>float</code> was positive,
+and <code>-inf</code> if it was negative.
+
+</p><p>
+Once your program is working,
+you should see something like:
+
+</p><pre is="tty"><kbd is="sh">./float_2048 1</kbd>
+2048
+<kbd is="sh">./float_2048 3.14159265</kbd>
+6433.98193
+<kbd is="sh">./float_2048 -2.718281828e-20</kbd>
+-5.56704133e-17
+<kbd is="sh">./float_2048 1e38</kbd>
+inf
+<kbd is="sh">./float_2048 -1e37</kbd>
+-inf
+<kbd is="sh">./float_2048 inf</kbd>
+inf
+<kbd is="sh">./float_2048 -inf</kbd>
+-inf
+<kbd is="sh">./float_2048 nan</kbd>
+nan
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make float_2048'</span>
+</pre>
+
+<aside class="hint">
+<p>
+Some of the functions from the previous exercise may be useful.
+</p><p>
+Adding 11 to the exponent
+is the same as multiplying by 2048,
+but you will need to check
+this doesn't make the exponent
+too large for a float.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+<code>float_2048</code> takes and returns a <code>uint32_t</code>
+that encode a single-precision floating-point number.
+You can assume the supplied <code>float</code> is not <a href="https://en.wikipedia.org/wiki/Denormal_number">denormal</a>.
+
+</p></li><li><p>
+You may define and call additional functions if you wish.
+
+</p></li><li><p>
+If you wish to use the functions you wrote in the
+<em>float_bits</em> exercise, you should copy your implementations
+of those functions into <code>float_2048.c</code>.
+
+</p></li><li><p>
+You are not permitted
+   to call any functions from the C library,
+or to perform floating-point operations,
+or to use variables of type <code>float</code> or <code>double</code>,
+or to use multiplication or division.
+
+</p></li><li><p>
+You are not permitted
+   to change the <code>main</code> function you have been given,
+or to change <code>float_2048</code>' prototype (its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest float_2048 </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_float_2048 float_2048.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Compare Floats Using Bit Operations</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Your task is to add code to this function in <b>float_less.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// float_less is given the bits of 2 floats bits1, bits2 as a uint32_t</span>
+<span class="c1">// and returns 1 if bits1 &lt; bits2, 0 otherwise</span>
+<span class="c1">// 0 is return if bits1 or bits2 is Nan</span>
+<span class="c1">// only bit operations and integer comparisons are used</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="nf">float_less</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bits1</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bits2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>float_less</code>,
+which takes the bits of two <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">float</a>s
+as the type <code>uint32_t</code>,
+and returns 1 if
+the value of the first <code>float</code> is less than the second,
+and 0 otherwise.
+It should do this using bit operations and integer comparisons.
+
+</p><p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">./float_less 1 2</kbd>
+float_less(1, 2) returned 1 which is correct
+float_less(2, 1) returned 0 which is correct
+<kbd is="sh">./float_less -3.14159265 -2.718281828e-20</kbd>
+float_less(-3.14159274, -2.7182819e-20) returned 1 which is correct
+float_less(-2.7182819e-20, -3.14159274) returned 0 which is correct
+<kbd is="sh">./float_less -inf inf</kbd>
+float_less(-inf, inf) returned 1 which is correct
+float_less(inf, -inf) returned 0 which is correct
+<kbd is="sh">./float_less -0 0</kbd>
+float_less(-0, 0) returned 0 which is correct
+float_less(0, -0) returned 0 which is correct
+<kbd is="sh">./float_less NaN inf</kbd>
+float_less(nan, inf) returned 0 which is correct
+float_less(inf, nan) returned 0 which is correct
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make float_less'</span>
+</pre>
+
+<aside class="hint">
+<p>
+The functions you wrote earlier in this lab may be useful.
+</p><p>
+Consider each of the cases carefully.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+<code>float_less</code> should return an <code>int</code>, either 0 or 1.
+
+</p></li><li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You can assume the supplied <code>float</code>s are not
+in <a href="https://en.wikipedia.org/wiki/Denormal_number">denormal</a> form.
+
+</p></li><li><p>
+You are not permitted
+   to call any functions from the C library,
+or to perform floating-point operations,
+or to use variables of type <code>float</code> or <code>double</code>,
+or to use multiplication or division.
+
+</p></li><li><p>
+You are not permitted
+   to change the <code>main</code> function you have been given,
+or to change <code>float_less</code>' prototype (its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest float_less </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_float_less float_less.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Print A Float Using Only putchar and puts</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Your task is to add code to this function in <b>float_print.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// float_print is given the bits of a float as a uint32_t</span>
+<span class="c1">// it prints out the float in the same format as "%.9g\n"</span>
+<span class="c1">// using only putchar &amp; puts</span>
+<span class="c1">//</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">float_print</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+The function <code>float_print</code> takes a <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">float</a> as a <code>uint32_t</code>.
+Add code to it that prints its value
+as a decimal, in <code>"%.9g"</code> format,
+using only <cite>putchar(3)</cite> or <cite>puts(3)</cite>.
+You cannot use any other functions,
+such as <cite>printf(3)</cite>.
+
+</p><p>
+Once your implementation is working,
+you should see things like:
+
+</p><pre is="tty"><kbd is="sh">./float_print 1</kbd>
+1
+<kbd is="sh">./float_print 3.14159265</kbd>
+3.14159274
+<kbd is="sh">./float_print -2.718281828e-20</kbd>
+-2.7182819e-20
+<kbd is="sh">./float_print 1.7e38</kbd>
+1.69999998e+38
+<kbd is="sh">./float_print inf</kbd>
+inf
+<kbd is="sh">./float_print -inf</kbd>
+-inf
+<kbd is="sh">./float_print nan</kbd>
+nan
+</pre>
+
+<p>
+Use <cite>make(1)</cite> to build your code:
+</p><pre is="tty"><kbd is="sh">make</kbd>    <span class="comment"># or 'make float_print'</span>
+</pre>
+
+<aside class="hint">
+<p>
+Some of the functions from the previous exercises may be useful.
+
+
+
+
+</p><p>
+You may find reading some of these papers helpful:
+
+</p><ul>
+<li><p>
+</p><div class="mx-2 float-right text-right">
+<small>doi:10.1145/103162.103163</small><br/>
+<a class="btn btn-sm btn-warning" href="http://er1.library.unsw.edu.au/er/cgi-bin/eraccess.cgi?url=https://dx.doi.org/10.1145/103162.103163">UNSW</a>
+<a class="btn btn-sm btn-outline-primary" href="https://dx.doi.org/10.1145/103162.103163">dx.doi</a>
+</div>
+David Goldberg's
+<q>What Every Computer Scientist Should Know About Floating-Point Numbers</q>,
+from ACM Computing Surveys, March 1991;
+
+</li><li><p>
+</p><div class="mx-2 float-right text-right">
+<small>doi:10.1145/93548.93557</small><br/>
+<a class="btn btn-sm btn-warning" href="http://er1.library.unsw.edu.au/er/cgi-bin/eraccess.cgi?url=https://dx.doi.org/10.1145/93548.93557">UNSW</a>
+<a class="btn btn-sm btn-outline-primary" href="https://dx.doi.org/10.1145/93548.93557">dx.doi</a>
+</div>
+William D. Clinger's
+<q>How to Read Floating-Point Numbers Accurately</q>,
+from the proceedings of the 1990 ACM Conference on
+Programming Language Design and Implementation; and
+
+</li><li><p>
+</p><div class="mx-2 float-right text-right">
+<small>doi:10.1145/93542.93559</small><br/>
+<a class="btn btn-sm btn-warning" href="http://er1.library.unsw.edu.au/er/cgi-bin/eraccess.cgi?url=https://dx.doi.org/10.1145/93542.93559">UNSW</a>
+<a class="btn btn-sm btn-outline-primary" href="https://dx.doi.org/10.1145/93542.93559">dx.doi</a>
+</div>
+Guy L. Steele and Jon L. White's
+<q>How to Print Floating-Point Numbers Accurately</q>,
+also from the proceedings of the 1990 ACM Conference on
+Programming Language Design and Implementation.
+</li></ul>
+
+<p>
+(Thanks to the <a href="https://www.library.unsw.edu.au/">UNSW Library</a>,
+you have access to a vast range of resources from
+the <a href="https://www.acm.org/">ACM</a>
+<a href="https://dl.acm.org/">Digital Library</a>,
+and dozens of other phenomenal academic sources!)
+</p></aside>
+
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You can assume the supplied <code>float</code> is not in
+<a href="https://en.wikipedia.org/wiki/Denormal_number">denormal</a> form.
+
+</p></li><li><p>
+You are not permitted
+   to call any functions from the C library,
+or to perform floating-point operations,
+or to use variables of type <code>float</code> or <code>double</code>.
+
+</p></li><li><p>
+You are not permitted
+   to change the <code>main</code> function you have been given,
+or to change <code>float_print</code>'s prototype (its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest float_print </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab07_float_print float_print.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 02 April 12:00 (midday)</strong> (2024-04-02 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  8  Tuesday  12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

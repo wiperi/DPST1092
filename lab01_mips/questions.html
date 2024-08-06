@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 01
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 01 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/01/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Laboratory</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 01
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>to refamiliarise yourself with C</li>
+
+<li>to practice interacting with files and standard I/O</li>
+
+<li>to practice interacting with command-line arguments</li>
+
+<li>to explore implementing recursive functions</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab01</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab01</kbd>
+<kbd is="sh">cd lab01</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab01</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Remove All Vowels from STDIN</h3></header>
+    
+
+
+
+
+
+
+
+
+
+Write a C program <code>no_vowels.c</code> which reads characters from its input
+and writes the same characters to its output, except it does not write vowels.
+<p>
+Your program should stop only at the end of input.
+</p><p>
+<code>no_vowels.c</code> must only use:
+<br/>
+<cite>scanf(3)</cite> to read one character at a time from stdin.
+<br/>
+<cite>printf(3)</cite> to print one character at a time to stdout.
+
+</p><p>
+Once you have <code>no_vowels.c</code> working correctly it should behave as follows:
+
+</p><pre is="tty"><kbd is="sh">./no_vowels</kbd>
+<kbd>Hello, World!</kbd>
+Hll, Wrld!
+<span class="eof"></span>
+<kbd is="sh">echo "Peter Piper picked a peck of pickled peppers." &gt; input</kbd>
+<kbd is="sh">./no_vowels &lt; input</kbd>
+Ptr Ppr pckd  pck f pckld ppprs.
+<kbd is="sh">./no_vowels</kbd>
+<kbd>Andrew is the LiC of COMP1521</kbd>
+ndrw s th LC f CMP1521
+<kbd>Are you saying 'Boo' or 'Boo-Urns'?</kbd>
+r y syng 'B' r 'B-rns'?
+<kbd>In this house, we obey the laws of thermodynamics!</kbd>
+n ths hs, w by th lws f thrmdynmcs!
+<span class="eof"></span>
+<kbd is="sh"></kbd>
+</pre>
+
+<aside class="hint">
+<p>
+    The above input/output example uses shell redirection, which allows you to use files
+    as the input and/or output of commands.
+</p>
+<p>
+    The <code>echo</code> program outputs the command-line arguments it is given:
+</p>
+<pre is="tty"><kbd is="sh">echo "Peter Piper picked a peck of pickled peppers."</kbd>
+Peter Piper picked a peck of pickled peppers.
+</pre>
+<p>
+    By adding <code>&gt; input</code> to the command, the output will instead be 'redirected'
+    to the file <code>input</code>.
+</p>
+<pre is="tty"><kbd is="sh">echo "Peter Piper picked a peck of pickled peppers." &gt; input</kbd>
+</pre>
+<p>
+    The above command creates a file called <code>input</code> with the contents
+    <code>Peter Piper picked a peck of pickled peppers</code>. This is not a feature of
+    <code>echo</code>, it works for any program.
+</p>
+<p>
+    The <code>&lt;</code> syntax does the opposite: it uses the contents of an existing
+    file as the input of a program:
+</p>
+<pre is="tty"><kbd is="sh">./no_vowels &lt; input</kbd>
+</pre>
+<p>
+    The above command runs <code>./no_vowels</code>, but rather than getting input
+    from the terminal, it uses the contents of the file <code>input</code>.
+</p>
+<p>
+    Note that all of this redirection is handled by the shell; you do not need to write
+    any code in this lab to support redirection.
+</p>
+<p>
+
+</p>
+</aside>
+
+<aside class="hint">
+<pre is="tty"><kbd is="sh">man 3 scanf</kbd>
+<kbd is="sh">man 3 printf</kbd>
+</pre>
+</aside>
+
+<aside class="hint">
+<p>
+    To compile your code you can use the following command:
+</p>
+<pre is="tty"><kbd is="sh">dcc no_vowels.c -o no_vowels</kbd>
+</pre>
+<p>
+    If you are working on your own computer you can use either of the following commands:
+</p>
+<pre is="tty"><kbd is="sh">gcc no_vowels.c -o no_vowels</kbd>
+<kbd is="sh">clang no_vowels.c -o no_vowels</kbd>
+</pre>
+<p>
+    You can also use the <code>Makefile</code> provided.
+</p>
+<pre is="tty"><kbd is="sh">make no_vowels</kbd>
+</pre>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+    You can assume a vowel is one of the ASCII values 'a', 'e', 'i', 'o', 'u' and their uppercase equivalents 'A', 'E', 'I', 'O', 'U'.<br/>
+</p></li>
+
+<li><p>
+    You should not make any assumptions on the number of characters supplied to your program.
+</p></li>
+
+<li><p>
+    Your program can only read input using <code>scanf("%c")</code>
+</p></li>
+
+<li><p>
+    Your program can only write output using <code>printf("%c")</code>
+</p></li>
+
+<li><p>
+    Appart from when reading input and writing output, you may use any other C functions you like.
+</p></li>
+
+</ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest no_vowels </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_no_vowels no_vowels.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Transform All Uppercase letters to Lowercase</h3></header>
+    
+
+
+
+
+
+
+
+
+
+Write a C program <code>no_uppercase.c</code> which reads characters from its input
+and writes the same characters to its output, any upper case letters are replaced
+by their  as lower case equivalent.
+<p>
+Your program should stop only at the end of input.
+</p><p>
+Add code to <code>no_uppercase.c</code> so that,
+given text on stdin, any uppercase letters are printed as lowercase to stdout.
+
+</p><p>
+<code>no_uppercase.c</code> must only use:
+<br/>
+<cite>getchar(3)</cite> to read one character at a time from stdin.
+<br/>
+<cite>putchar(3)</cite> to print one character at a time to stdout.
+
+</p><p>
+Once you have <code>no_uppercase.c</code> working correctly it should behave as follows:
+</p><pre is="tty"><kbd is="sh">./no_uppercase</kbd>
+<kbd>ABC</kbd>
+abc
+<kbd>ABCabc123</kbd>
+abcabc123
+<kbd>123!@#</kbd>
+123!@#
+<kbd>Hello, World!</kbd>
+hello, world!
+<kbd>Andrew is the LiC of COMP1521</kbd>
+andrew is the lic of comp1521
+<span class="eof"></span>
+</pre>
+
+<pre is="tty"><kbd is="sh">echo "Peter Piper picked a peck of pickled peppers." &gt; input</kbd>
+<kbd is="sh">./no_uppercase &lt; input</kbd>
+peter piper picked a peck of pickled peppers.
+<kbd is="sh"></kbd>
+</pre>
+
+<aside class="hint">
+<pre is="tty"><kbd is="sh">man 3 getchar</kbd>
+<kbd is="sh">man 3 putchar</kbd>
+<kbd is="sh">man 3 isupper</kbd>
+<kbd is="sh">man 3 tolower</kbd>
+<kbd is="sh">man 7 ascii</kbd>
+</pre>
+</aside>
+
+<aside class="hint">
+<p>
+    To compile your code you can use the following command:
+</p>
+<pre is="tty"><kbd is="sh">dcc no_uppercase.c -o no_uppercase</kbd>
+</pre>
+<p>
+    If you are working on your own computer you can use either of the following commands:
+</p>
+<pre is="tty"><kbd is="sh">gcc no_uppercase.c -o no_uppercase</kbd>
+<kbd is="sh">clang no_uppercase.c -o no_uppercase</kbd>
+</pre>
+<p>
+    You can also use the <code>Makefile</code> provided.
+</p>
+<pre is="tty"><kbd is="sh">make no_uppercase</kbd>
+</pre>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+    You should not make any assumptions on the number of characters supplied to your program.
+</p></li>
+
+<li><p>
+    Your program can only read input using <code>getchar()</code>
+</p></li>
+
+<li><p>
+    Your program can only write output using <code>putchar()</code>
+</p></li>
+
+<li><p>
+    Appart from when reading input and writing output, you may use any other C functions you like.
+</p></li>
+
+</ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest no_uppercase </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_no_uppercase no_uppercase.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Remove Uneven Lines of Input</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Add code to <code>no_odd_lines.c</code> so that,
+given text on stdin, only print lines with an even number of characters to stdout.
+Note that the newline character is included in a line's character count.
+
+</p><p>
+<code>no_odd_lines.c</code> must only use:
+<br/>
+<cite>fgets(3)</cite> to read one line at a time from stdin.
+<br/>
+<cite>fputs(3)</cite> to print one line at a time to stdout.
+
+</p><p>
+Once you have <code>no_odd_lines.c</code> working correctly it should behave as follows:
+</p><pre is="tty"><kbd is="sh">./no_odd_lines</kbd>
+<kbd>Hello, World</kbd>
+<kbd>Hello, World!</kbd>
+Hello, World!
+<kbd>Angela is the LiC of COMP1521.</kbd>
+<kbd>Angela is the LiC of COMP1521, and Xavier is the admin.</kbd>
+Angela is the LiC of COMP1521, and Xavier is the admin.
+<span class="eof"></span>
+<kbd is="sh">echo "Peter Piper picked a peck of pickled peppers." &gt; input</kbd>
+<kbd is="sh">echo "A peck of pickled peppers Peter Piper picked." &gt;&gt; input</kbd>
+<kbd is="sh">echo "If Peter Piper picked a peck of pickled peppers," &gt;&gt; input</kbd>
+<kbd is="sh">echo "Where's the peck of pickled peppers Peter Piper picked?" &gt;&gt; input</kbd>
+<kbd is="sh">./no_odd_lines &lt; input</kbd>
+Peter Piper picked a peck of pickled peppers.
+A peck of pickled peppers Peter Piper picked.
+Where's the peck of pickled peppers Peter Piper picked?
+<kbd is="sh"></kbd>
+</pre>
+
+<aside class="hint">
+The <code>&gt;&gt;</code> syntax is in the example above is another form of
+redirection. The output of the command (in this case <code>echo</code>) is
+<i>appended</i> to the end of the file if that file already exists, whereas
+with <code>&gt;</code> if the file already exists its contents are replaced.
+</aside>
+
+<aside class="hint">
+<pre is="tty"><kbd is="sh">man 3 fgets</kbd>
+<kbd is="sh">man 3 fputs</kbd>
+<kbd is="sh">man 3 strlen</kbd>
+<kbd is="sh">man 3 stdin</kbd>
+<kbd is="sh">man 3 stdout</kbd>
+</pre>
+</aside>
+
+<aside class="hint">
+<p>
+    To compile your code you can use the following command:
+</p>
+<pre is="tty"><kbd is="sh">dcc no_odd_lines.c -o no_odd_lines</kbd>
+</pre>
+<p>
+    If you are working on your own computer you can use either of the following commands:
+</p>
+<pre is="tty"><kbd is="sh">gcc no_odd_lines.c -o no_odd_lines</kbd>
+<kbd is="sh">clang no_odd_lines.c -o no_odd_lines</kbd>
+</pre>
+<p>
+    You can also use the <code>Makefile</code> provided.
+</p>
+<pre is="tty"><kbd is="sh">make no_odd_lines</kbd>
+</pre>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+    The <a href="https://en.wikipedia.org/wiki/Newline">newline</a> character(s) should be included in your count of characters.
+</p></li>
+
+<li><p>
+    You can assume each line contains at most 1024 characters, including the newline character(s).
+</p></li>
+
+<li><p>
+    Your program can only read input using <code>fgets()</code>
+</p></li>
+
+<li><p>
+    Your program can only write output using <code>fputs()</code>
+</p></li>
+
+<li><p>
+    Appart from when reading input and writing output, you may use any other C functions you like.
+</p></li>
+
+</ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest no_odd_lines </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_no_odd_lines no_odd_lines.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Pretty Print Command Line Arguments</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Add code to <code>my_args.c</code> so that,
+given <em>0 or more</em> command line arguments,
+the command line arguments are "pretty printed".
+
+</p><p>
+In this case, "pretty printing" simply means to follow the format shown in the example below.
+
+</p><p>
+Once you have <code>my_args.c</code> working correctly it should behave as follows:
+</p><pre is="tty"><kbd is="sh">./my_args</kbd>
+Program name: ./my_args
+There are no other arguments
+<kbd is="sh">../lab01/my_args</kbd>
+Program name: ../lab01/my_args
+There are no other arguments
+<kbd is="sh">./my_args hello world</kbd>
+Program name: ./my_args
+There are 2 arguments:
+	Argument 1 is "hello"
+	Argument 2 is "world"
+<kbd is="sh">./my_args "hello world" 1 2 3 4 5</kbd>
+Program name: ./my_args
+There are 6 arguments:
+	Argument 1 is "hello world"
+	Argument 2 is "1"
+	Argument 3 is "2"
+	Argument 4 is "3"
+	Argument 5 is "4"
+	Argument 6 is "5"
+<kbd is="sh">mv my_args list_args</kbd>
+<kbd is="sh">./list_args</kbd>
+Program name: ./list_args
+There are no other arguments
+</pre>
+
+<aside class="hint">
+	<p>
+		As a reminder, we can use <code>int argc</code> in order to determine the number of command-line arguments that were passed to the program, and
+		<code>char *argv[]</code> to access the command-line arguments themselves, as an array of strings.
+	</p><p>
+		You can use a format string like <code>"\tArgument %d is \"%s\"\n"</code> to print each argument.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest my_args </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_my_args my_args.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Statistical Analysis of Command Line Arguments</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Add code to <code>arg_stats.c</code> so that,
+given <em>1 or more</em> command line arguments,
+it prints the minimum and maximum values,
+the sum and product of all the values,
+and the mean of all the values.
+The mean should be rounded towards zero.
+
+</p><p>
+Once you have <code>arg_stats.c</code> working correctly it should behave as follows:
+</p><pre is="tty"><kbd is="sh">./arg_stats</kbd>
+Usage: ./arg_stats NUMBER [NUMBER ...]
+<kbd is="sh">./arg_stats 1</kbd>
+MIN:  1
+MAX:  1
+SUM:  1
+PROD: 1
+MEAN: 1
+<kbd is="sh">./arg_stats 1 2 3 4 5 6 7 8 9</kbd>
+MIN:  1
+MAX:  9
+SUM:  45
+PROD: 362880
+MEAN: 5
+<kbd is="sh">./arg_stats 9 8 7 6 1 2 3 5 4</kbd>
+MIN:  1
+MAX:  9
+SUM:  45
+PROD: 362880
+MEAN: 5
+<kbd is="sh">./arg_stats 1 9 1 9 1 9</kbd>
+MIN:  1
+MAX:  9
+SUM:  30
+PROD: 729
+MEAN: 5
+<kbd is="sh"></kbd>
+</pre>
+
+<aside class="hint">
+<pre is="tty"><kbd is="sh">man 3 atoi</kbd>
+</pre>
+</aside>
+
+<aside class="note">
+    You can assume that all command-line arguments are valid integers (positive or negative).
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest arg_stats </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_arg_stats arg_stats.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>(Dis)Proving the Collatz Conjecture</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Add code to <code>collatz.c</code> that take a single positive integer
+as a command-line argument and prints the
+ <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">collatz chain</a>
+for that number.
+</p><p>
+This is how the collatz chain is calculated:
+</p><p>
+If the current number is <code>1</code>, the series terminates.
+<br/>
+If the current number is <b>ODD</b>, then multiply by 3 and add 1 to get the next number.
+<br/>
+If the current number is <b>EVEN</b>, then divide by 2 to get the next number.
+
+</p><aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You must implement <code>collatz.c</code> using a <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive function</a>.
+</p></li><li><p>
+</p></li></ul>
+</aside>
+
+
+<figure class="text-center">
+<img alt="collatz function defined in modular arithmetic notation" src="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/collatz/collatz_rule.svg"/>
+</figure>
+<p>
+Once you have <code>collatz.c</code> working correctly it should behave as follows:
+</p><pre is="tty"><kbd is="sh">./collatz</kbd>
+Usage: ./collatz NUMBER
+<kbd is="sh">./collatz 1</kbd>
+1
+<kbd is="sh">./collatz 12</kbd>
+12
+6
+3
+10
+5
+16
+8
+4
+2
+1
+<kbd is="sh">./collatz 10</kbd>
+10
+5
+16
+8
+4
+2
+1
+<kbd is="sh"></kbd>
+</pre>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest collatz </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_collatz collatz.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Calculating the Fibonacci Sequence The (Not So) Fast Way</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Add code to <code>fibonacci.c</code> so that,
+given a line of input containing a natural number,
+the corresponding <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci number</a> is printed.
+</p><p>
+This is how you obtain your Fibonacci number:
+</p><p>
+Starting with 0 and 1:
+<br/>
+Add the preceding two Fibonacci numbers together to get the current Fibonacci number:
+
+</p><figure class="text-center">
+<img alt="fibonacci function define in modular arithmetic notation" src="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/fibonacci/fibonacci_rule_0.svg"/>
+</figure>
+<figure class="text-center">
+<img alt="fibonacci function define in modular arithmetic notation" src="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/fibonacci/fibonacci_rule_1.svg"/>
+</figure>
+
+<aside class="note">
+<ul class="list-unstyled">
+  <li> You must implement <code>fibonacci.c</code> using a <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive function</a>.
+  </li><li> <code>fibonacci.c</code> should continue reading input and outputting answers until it receives EOF.
+  </li><li> <code>fibonacci.c</code> doesn't need to calculate any values larger than the 30th Fibonacci number.
+</li></ul>
+</aside>
+
+<p>
+Once you have <code>fibonacci.c</code> working correctly it should behave as follows - note that <strong>bolded lines</strong>
+  represent sample user input to the program, and the other lines represent the expected output.
+  That is, an input of <strong>2</strong> prints 1, because 1 is the second Fibonacci number,
+  and an input of <strong>9</strong> prints 34, because 34 is the ninth Fibonacci number.
+</p><pre is="tty"><kbd is="sh">./fibonacci</kbd>
+<kbd>0</kbd>
+0
+<kbd>1</kbd>
+1
+<kbd>2</kbd>
+1
+<kbd>5</kbd>
+5
+<kbd>9</kbd>
+34
+<span class="eof"></span>
+<kbd is="sh"></kbd>
+</pre>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You can assume the largest integer entered will be 30.
+</p></li><li><p>
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest fibonacci </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_fibonacci fibonacci.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Do You MIPS me?</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a MIPS assembler program <code>bad_pun.s</code>,
+which is equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// A simple C program that attempts to be punny</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"Well, this was a MIPStake!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy bad_pun.s</kbd>
+Well, this was a MIPStake!
+</pre>
+
+
+<aside class="hint">
+<p>
+The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/mips_basics/#i_love_mips.s">i_love_mips.s</a>
+lecture example would make a good starting point.
+
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest bad_pun </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_bad_pun bad_pun.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Cheating in maths class</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a MIPS assembler program <code>gaussian_sum.s</code>,
+which is equivalent to this C program:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// A simple C program that calculates the Gaussian sum between two numbers</span>
+<span class="c1">// Written 12/2/2022</span>
+<span class="c1">// by Dylan Brotherston (d.brotherston@unsw.edu.au)</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">number1</span><span class="p">,</span><span class="w"> </span><span class="n">number2</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter first number: "</span><span class="p">);</span>
+<span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"Enter second number: "</span><span class="p">);</span>
+<span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number2</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">gaussian_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">number2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">number1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">number1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">number2</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"The sum of all numbers between %d and %d (inclusive) is: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">number1</span><span class="p">,</span><span class="w"> </span><span class="n">number2</span><span class="p">,</span><span class="w"> </span><span class="n">gaussian_sum</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy gaussian_sum.s</kbd>
+Enter first number: 1
+Enter second number: 100
+The sum of all numbers between 1 and 100 (inclusive) is: 5050
+<kbd is="sh">1521 mipsy gaussian_sum.s</kbd>
+Enter first number: 1
+Enter second number: 1000
+The sum of all numbers between 1 and 1000 (inclusive) is: 500500
+<kbd is="sh">1521 mipsy gaussian_sum.s</kbd>
+Enter first number: 10
+Enter second number: 13
+The sum of all numbers between 10 and 13 (inclusive) is: 46
+</pre>
+
+<aside class="hint">
+
+<p>
+You can assume that the first number is always smaller than or equal to the second number
+
+</p><p>
+You can assume that all input and calculated values can fit in 32-bits
+
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest gaussian_sum </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab01_gaussian_sum gaussian_sum.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Tuesday 27 February 12:00 (midday)</strong> (2024-02-27 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  3 Tuesday  12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

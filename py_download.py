@@ -34,7 +34,7 @@ def download_file(url, dest_folder, extention=None):
         # Make sure the file does not already exist
         suffix = 1
         while os.path.exists(file_path):
-            new_filename = filename.split(".")[0] + f"_({suffix})." + filename.split(".")[1]
+            new_filename = filename.split(".")[0] + f"_{suffix}." + filename.split(".")[1]
             suffix += 1
             file_path = os.path.join(dest_folder, new_filename)
 

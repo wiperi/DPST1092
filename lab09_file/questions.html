@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 09
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 09 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/09/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/09/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 09
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>learning how to retrieve environment variables</li>
+
+<li>learning how to access file metadata via stat</li>
+
+<li>learning how to use file metadata</li>
+
+<li>practicing file operations generally</li>
+
+<li>understand make's core operation</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab09</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab09</kbd>
+<kbd is="sh">cd lab09</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab09</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Print Select Bytes from a File</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+Write a C program, <code>print_select_bytes.c</code>, which is given a filename and one or more positions as command line arguments.
+It should print the byte that is located at each given position within the file.
+It should print each byte in decimal, two digit hex, and (if possible) the character itself.
+
+</p><p>
+Follow the output format below.
+
+</p><p>
+Do not read the entire file - use <cite>fseek(3)</cite> to move around the file.
+
+
+</p><pre is="tty"><kbd is="sh">dcc print_select_bytes.c -o print_select_bytes</kbd>
+<kbd is="sh">./print_select_bytes lorem-ipsum.txt 0 1 2 3 4</kbd>
+76 - 0x4C - 'L'
+111 - 0x6F - 'o'
+114 - 0x72 - 'r'
+101 - 0x65 - 'e'
+109 - 0x6D - 'm'
+<kbd is="sh">./print_select_bytes lorem-ipsum.txt 542 361 840 232 97 546 1612 2508 96 85 1382</kbd>
+116 - 0x74 - 't'
+101 - 0x65 - 'e'
+117 - 0x75 - 'u'
+10 - 0x0A
+101 - 0x65 - 'e'
+108 - 0x6C - 'l'
+32 - 0x20 - ' '
+111 - 0x6F - 'o'
+116 - 0x74 - 't'
+114 - 0x72 - 'r'
+116 - 0x74 - 't'
+</pre>
+
+<aside class="hint">
+<p>
+The <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/files/#fseek.c">fseek.c</a> lecture example shows an example of using <cite>fseek(3)</cite>.
+</p><p>
+The number of bytes in a file will not fit in an <em>int</em>.
+</p><p>
+You may find the format string "%02X" useful for printing the hexadecimal values.
+</p><p>
+You may find the <cite>isprint(3)</cite> function useful to determine whether to print the given byte.
+</p></aside>
+
+<aside class="note">
+<p>
+You can assume only ordinary files (not directories, links, ...) are specified as arguments.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest print_select_bytes </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab09_print_select_bytes print_select_bytes.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 15 April 12:00 (midday)</strong> (2024-04-15 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Find the First Invalid UTF-8 Byte</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+You have been given <code>invalid_utf8_byte.c</code>,
+which contains a C function <code>invalid_utf8_byte</code>,
+that takes a string and returns 42.
+
+</p><p>
+Add code to the function <code>invalid_utf8_byte</code> so that,
+given a string containing one or more invalid UTF-8 sequences,
+it returns the index of the first unexpected byte in the string,
+and -1 if the string if the string contains no invalid UTF-8 sequences.
+
+</p><p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">unzip invalid_utf8_byte_examples.zip</kbd>
+(several lines of output)
+<kbd is="sh">xxd invalid_utf8_byte_examples/hello_world.txt</kbd>
+00000000: 6865 6c6c 6f20 776f 726c 64              hello world
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/hello_world.txt</kbd>
+No invalid bytes found.
+<kbd is="sh">xxd invalid_utf8_byte_examples/bad_hello_world.txt</kbd>
+00000000: 6865 6c6c 6fa1 776f 726c 64              hello.world
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/bad_hello_world.txt</kbd>
+Invalid byte found at index 5.
+<kbd is="sh">xxd invalid_utf8_byte_examples/too_few_continuation_bytes.txt</kbd>
+00000000: f09f 98                                  ...
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/too_few_continuation_bytes.txt</kbd>
+Invalid byte found at index 3.
+<kbd is="sh">xxd invalid_utf8_byte_examples/too_many_continuation_bytes.txt</kbd>
+00000000: f09f 98b3 98                             .....
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/too_many_continuation_bytes.txt</kbd>
+Invalid byte found at index 4.
+<kbd is="sh">xxd invalid_utf8_byte_examples/valid_with_emoji.txt</kbd>
+00000000: 796f 7520 6172 6520 646f 696e 6720 6772  you are doing gr
+00000010: 6561 7420 f09f 918d f09f 918d f09f 918d  eat ............
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/valid_with_emoji.txt</kbd>
+No invalid bytes found.
+<kbd is="sh">xxd invalid_utf8_byte_examples/invalid_with_emoji.txt</kbd>
+00000000: 7468 6973 f0a1 3923 7374 7269 6e67 a269  this..9#string.i
+00000010: 73e7 8936 6e6f 74a0 646f 696e 67c2 c273  s..6not.doing..s
+00000020: 6fa0 6772 6561 74f1 3242 a068 6f77 6576  o.great.2B.howev
+00000030: 6572 20f0 9f98 ad91                      er .....
+<kbd is="sh">./invalid_utf8_byte &lt; invalid_utf8_byte_examples/invalid_with_emoji.txt</kbd>
+Invalid byte found at index 6.
+</pre>
+
+Further example inputs are provided in the <code>invalid_utf8_byte_examples.zip</code> archive.
+
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+    The provided string may be of any length.
+
+</p></li><li><p>
+    The provided string will not contain any null bytes, apart from the terminating null byte.
+
+</p></li><li><p>
+<code>invalid_utf8_byte_main.c</code> includes a <code>main</code> function to help you test your code.<br/>
+You <b>may not</b> change the provided <code>invalid_utf8_byte_main.c</code> file.
+
+</p></li><li><p>
+If the final codepoint in the string is incomplete, you should return the index
+of the null terminator at the end of the string.
+
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest invalid_utf8_byte </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab09_invalid_utf8_byte invalid_utf8_byte.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 15 April 12:00 (midday)</strong> (2024-04-15 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Append to a Diary File</h3></header>
+    
+
+
+
+
+
+
+
+
+
+We wish to maintain a simple diary in the file <code>$HOME/.diary</code>
+<p>
+Write a C program, <code>diary.c</code>, which appends 1 line to <code>$HOME/.diary</code>.
+</p><p>
+The line should be its command-line arguments separated by a space followed by a '\n'.
+</p><p>
+<code>$HOME</code> represents the <code>HOME</code> environment variable. This means you will need to retrieve
+the value of the environment variable, join it with the name of the file we wish to open and then use the resulting
+pathname in order to open it.
+
+</p><p>
+<code>diary.c</code> should print nothing on stdout.  It should only append to <code>$HOME/.diary</code>.
+
+</p><pre is="tty"><kbd is="sh">dcc diary.c -o diary</kbd>
+<kbd is="sh">./diary Lisa</kbd>
+<kbd is="sh">cat $HOME/.diary</kbd>
+Lisa
+<kbd is="sh">./diary in this house</kbd>
+<kbd is="sh">./diary we obey the laws of thermodynamics</kbd>
+<kbd is="sh">cat $HOME/.diary</kbd>
+Lisa
+in this house
+we obey the laws of thermodynamics
+</pre>
+
+<aside class="hint">
+<p>
+You will need to use <cite>getenv(3)</cite> in order to retrieve the value of the <code>HOME</code> environment variable.
+</p><p>
+The lecture example <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/code/processes/#getstatus.c">getstatus.c</a> shows how to get the value of an environment variable.
+</p><p>
+<cite>snprintf(3)</cite> is a convenient function for constructing the pathname of the diary file.
+</p></aside>
+
+<aside class="note">
+<p>
+You should use string operations instead of <cite>chdir(3)</cite> in this activity.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest diary </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab09_diary diary.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 15 April 12:00 (midday)</strong> (2024-04-15 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>ls -ld</h3></header>
+    
+
+
+
+
+
+
+
+
+
+We need <a href="https://en.wikipedia.org/wiki/Clean_room_design">clean room implementation</a> of the standard Unix program <em>ls</em>.
+<p>
+Write a C program, <code>lsld.c</code>, which is given zero or more pathnames as command line arguments
+produces exactly the same output as <em>ls -ld</em> given the same pathnames as arguments.
+</p><p>
+Except  <em>ls -ld</em> sorts its output lines.  You do not have to match this.
+</p><p>
+Follow the output format below.
+
+</p><pre is="tty"><kbd is="sh">dcc lsld.c -o lsld</kbd>
+<kbd is="sh">ls -ld lsld.c lsld file_sizes.c file_sizes /home/cs1521/public_html</kbd>
+drwxr-xr-x 6 cs1511   cs1511      128 Sep 16 08:02 /home/cs1521/public_html
+-rwxr-xr-x 1 z5555555 z5555555 116744 Nov  2 13:00 file_sizes
+-rw-r--r-- 1 z5555555 z5555555    604 Nov  2 12:58 file_sizes.c
+-rwxr-xr-x 1 z5555555 z5555555 222672 Nov  2 13:00 lsld
+-rw-r--r-- 1 z5555555 z5555555   2934 Nov  2 12:59 lsld.c
+<kbd is="sh">./lsld lsld.c lsld file_sizes.c file_sizes /home/cs1521/public_html</kbd>
+-rw-r--r-- 1 z5555555 z5555555   2934 Nov  2 12:59 lsld.c
+-rwxr-xr-x 1 z5555555 z5555555 222672 Nov  2 13:00 lsld
+-rw-r--r-- 1 z5555555 z5555555    604 Nov  2 12:58 file_sizes.c
+-rwxr-xr-x 1 z5555555 z5555555 116744 Nov  2 13:00 file_sizes
+drwxr-xr-x 6 cs1511   cs1511      128 Sep 16 08:02 /home/cs1521/public_html
+</pre>
+
+
+<aside class="hint">
+The functions <a href="http://man7.org/linux/man-pages/man3/getpwuid_r.3.html"><code>getpwuid_r</code></a> and <a href="http://man7.org/linux/man-pages/man3/getgrgid_r.3.html"><code>getgrgid_r</code></a> may be useful.
+</aside>
+
+
+<aside class="note">
+Your solution must be in C only.
+<p>
+You are not permitted to run external programs.  You are not permitted to use  system, popen, posix_spawn, fork or exec.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest lsld </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab09_lsld lsld.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 15 April 12:00 (midday)</strong> (2024-04-15 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  10 Monday   12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>

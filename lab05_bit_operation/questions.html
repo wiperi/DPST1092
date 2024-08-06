@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+
+    <title>
+        COMP1521 24T1 —
+        
+Week 05
+Laboratory
+Exercises
+
+    </title><link href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/" rel="canonical"/>
+
+    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" rel="stylesheet"/>
+    <link href="/~cs1521/24T1/flask.cgi/static/course.css?209251709113250.4505193=" rel="stylesheet"/>
+
+    <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="/~cs1521/24T1/flask.cgi/static/course.js?101671706691885.9098315="></script>
+
+    <link href="/~cs1521/24T1/flask.cgi/static/favicon.ico?21571706691885.9138317=" rel="icon" type="image/png"/>
+
+    <!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> -->
+
+    <!-- MathJax. -->
+    <script async="yes" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/latest.js?config=TeX-MML-AM_CHTML"></script>
+
+    
+    
+
+    
+        <style>
+            body {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='220px'><text x='0' y='15' fill='red' font-size='20' opacity='0.2'>  [OLD - 24T1]  </text></svg>");
+            }
+        </style>
+    
+</head>
+<body class="d-flex flex-column" style="min-height: 100vh;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark no-print" id="header-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/">
+            COMP1521 - 24T1
+        </a>
+        <button aria-controls="navmenu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right" data-target="#navmenu" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mr-auto">
+                
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/outline/">
+                                Outline
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/timetable/">
+                                Timetable
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/resources/forum.html">
+                                Forum
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">
+                                Submissions
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item active">
+                            <a class="nav-link" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/assignments/ass2/index.html">
+                                Assignment 2
+                            </a>
+                        </li>
+                    
+                    
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="week-selector" role="button">
+    Week 05 <span class="caret"></span>
+  </a>
+  <div aria-labelledby="week-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/01/questions">Week 01</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/02/questions">Week 02</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/03/questions">Week 03</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/04/questions">Week 04</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Week 05</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/07/questions">Week 07</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/08/questions">Week 08</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/09/questions">Week 09</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/10/questions">Week 10</a>
+  </div>
+</li>
+
+
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+    
+        
+        
+        
+        
+    
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="tlb-selector" role="button">
+    Laboratory <span class="caret"></span>
+  </a>
+  <div aria-labelledby="tlb-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/tut/05/questions">Tutorial</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Laboratory</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/test/05/questions">Weekly Test</a>
+  </div>
+</li>
+
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+
+
+<li class="nav-item active dropdown">
+  <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="qa-selector" role="button">
+    Exercises <span class="caret"></span>
+  </a>
+  <div aria-labelledby="qa-selector" class="dropdown-menu">
+  
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/questions">Exercises</a>
+    <a class="dropdown-item" href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/answers">Sample Solutions</a>
+  </div>
+</li>
+
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+<main aria-label="Content" class="container" style="flex: 1; padding-top: 4rem;">
+    
+
+        <header>
+            
+                <h1 class="text-center">
+Week 05
+Laboratory
+Exercises
+</h1>
+            
+        </header>
+
+        
+<div class="tutlab lab">
+
+
+
+
+<section class="">
+    <header><h3>Objectives</h3></header>
+    
+
+<ul>
+
+<li>to practice using C's bitwise operations</li>
+
+<li>to understand how integer values are represented</li>
+
+<li>to practice manipulating dynamic memory</li>
+
+<li>to explore working with binary-coded decimal values</li>
+
+<li>to explore arbitrary precision integer arithmetic</li>
+
+</ul>
+
+
+    </section>
+
+
+
+<section class="">
+    <header><h3>Preparation</h3></header>
+    
+
+
+<p>
+Before the lab you should re-read the relevant lecture slides and their accompanying examples.
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Getting Started</h3></header>
+    
+
+
+Set up for the lab by
+creating a new directory called <code>lab05</code> and changing to this directory.
+
+<pre is="tty"><kbd is="sh">mkdir lab05</kbd>
+<kbd is="sh">cd lab05</kbd>
+</pre>
+
+
+
+<p>
+
+There are some provided files for this lab which you can fetch with this command:
+
+</p><pre is="tty"><kbd is="sh">1521 fetch lab05</kbd>
+</pre>
+
+<p>
+If you're not working at CSE,
+you can download the provided files
+as a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/provided.zip">zip file</a>
+or a <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/lab/05/provided.tar">tar file</a>.
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Convert 16 Binary Digits to A Signed Number</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/sixteen_in/files.cp/sixteen_in.c">sixteen_in.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/sixteen_in/files.cp/sixteen_in.c sixteen_in.c</kbd>
+
+</pre>
+
+
+
+
+<p>
+Your task is to add code to this function in <b>sixteen_in.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">//</span>
+<span class="c1">// given a string of binary digits ('1' and '0')</span>
+<span class="c1">// return the corresponding signed 16 bit integer</span>
+<span class="c1">//</span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="nf">sixteen_in</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">bits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>sixteen_in</code> so that,
+given a sixteen-character string containing
+an ASCII positional representation of a binary number,
+it returns the corresponding signed integer.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./sixteen_in 0000000000000000</kbd>
+0
+<kbd is="sh">./sixteen_in 1111111111111111</kbd>
+-1
+<kbd is="sh">./sixteen_in 0011001100110011</kbd>
+13107
+<kbd is="sh">./sixteen_in 1111000011110000</kbd>
+-3856
+</pre>
+
+<aside class="hint">
+<p>
+Write a loop which, for each character,
+sets the appropriate bit of
+a <code>int16_t</code>-type result variable,
+using the bitwise operators <code>|</code> and <code>&lt;&lt;</code>.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+<code>sixteen_in</code> can assume
+it is given a string of exactly sixteen characters,
+and every character is either <code>'0'</code> or <code>'1'</code>.
+
+</p></li><li><p>
+You may define and call your own functions, if you wish.
+
+</p></li><li><p>
+You are not permitted to call any functions from the C library.
+
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function you have been given, or
+to change <code>sixteen_in</code>'s prototype
+(its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest sixteen_in </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_sixteen_in sixteen_in.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Convert a 16-bit Signed Number to Binary Digits</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/sixteen_out/files.cp/sixteen_out.c">sixteen_out.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/sixteen_out/files.cp/sixteen_out.c sixteen_out.c</kbd>
+
+</pre>
+
+
+
+
+<p>
+Your task is to add code to this function in <b>sixteen_out.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// given a signed 16 bit integer</span>
+<span class="c1">// return a null-terminated string of 16 binary digits ('1' and '0')</span>
+<span class="c1">// storage for string is allocated using malloc</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">sixteen_out</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>sixteen_out</code> so that,
+given a 16-bit signed integer it returns a string
+containing sixteen binary digits (<code>'0'</code> or <code>'1'</code>).
+For example:
+
+</p><pre is="tty"><kbd is="sh">./sixteen_out 0</kbd>
+0000000000000000
+<kbd is="sh">./sixteen_out -1</kbd>
+1111111111111111
+<kbd is="sh">./sixteen_out 13107</kbd>
+0011001100110011
+<kbd is="sh">./sixteen_out -3856</kbd>
+1111000011110000
+</pre>
+
+<aside class="hint">
+<p>
+Write a loop which, for each bit
+(determined using the bitwise operators <code>&amp;</code> and <code>&lt;&lt;</code>)
+sets the corresponding character in the string
+to a <code>'0'</code> or <code>'1'</code>.
+This should be structurally very similar to <code>sixteen_in</code>.
+
+</p><p>
+<code>sixteen_out</code> returns a string,
+whose storage space must be allocated using <cite>malloc(3)</cite>.
+A string is a NUL-terminated character array;
+remember to allocate enough space for all the characters
+<em>and</em> the terminating NUL byte.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+
+<code>sixteen_out</code> can assume its input is
+a value between 32767 and -32768 inclusive.
+
+</p></li><li><p>
+You may define and call your own functions, if you wish.
+
+</p></li><li><p>
+You are not permitted to call any functions from the C library,
+other than <cite>malloc(3)</cite>.
+
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function you have been given, or
+to change <code>sixteen_out</code>'s prototype
+(its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest sixteen_out </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_sixteen_out sixteen_out.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Convert a 2 digit BCD Value to an Integer</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/bcd/files.cp/bcd.c">bcd.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/bcd/files.cp/bcd.c bcd.c</kbd>
+
+</pre>
+
+
+
+
+<p>
+Your task is to add code to this function in <b>bcd.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// given a  BCD encoded value between 0 .. 99</span>
+<span class="c1">// return corresponding integer</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">bcd</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">bcd_value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>bcd</code> so that,
+given a 2 digit <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">Binary-Coded Decimal</a> (<abbr>BCD</abbr>) value,
+it returns the corresponding integer.
+
+</p><p>
+In binary-coded decimal format,
+each byte holds 1 decimal value (0 to 9),
+so each byte contains 1 decimal digit.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./bcd 0x07</kbd>
+7
+<kbd is="sh">./bcd 0x0102</kbd>             <span class="comment"># note: 0x0102 == 258 decimal</span>
+12
+<kbd is="sh">./bcd 0x0402</kbd>             <span class="comment"># note: 0x0402 == 1026 decimal</span>
+42
+</pre>
+
+<aside class="hint">
+<p>
+Use the bitwise operators
+<code>&amp;</code> and <code>&gt;&gt;</code>
+to extract each <abbr>BCD</abbr> digit.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+<code>bcd</code> should return an integer value between 0 and 99 inclusive.
+
+</p></li><li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You are not permitted to call any functions from the C library.
+
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function you have been given, or
+to change <code>bcd</code>'s prototype (its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest bcd </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_bcd bcd.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+
+
+<section class="exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Exercise — individual:
+    </small><br/>Convert an 8 digit Packed BCD Value to an Integer</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/packed_bcd/files.cp/packed_bcd.c">packed_bcd.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/packed_bcd/files.cp/packed_bcd.c packed_bcd.c</kbd>
+
+</pre>
+
+
+
+
+<p>
+Your task is to add code to this function in <b>packed_bcd.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="c1">// given a packed BCD encoded value between 0 .. 99999999</span>
+<span class="c1">// return the corresponding integer</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="nf">packed_bcd</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">packed_bcd_value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>packed_bcd</code>
+so that, given an eight-digit <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">packed binary-coded decimal</a> value,
+it returns the corresponding integer.
+
+</p><p>
+In packed binary-coded decimal format,
+each 4 bits holds 1 decimal value (0 to 9),
+so each byte contains 2 decimal digits.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./packed_bcd 0x42</kbd>         <span class="comment"># note: 0x42 == 66 decimal</span>
+42
+<kbd is="sh">./packed_bcd 0x9999</kbd>       <span class="comment"># note: 0x9999 == 39321 decimal</span>
+9999
+<kbd is="sh">./packed_bcd 0x42424242</kbd>   <span class="comment"># note: 0x42424242 == 1111638594 decimal</span>
+42424242
+</pre>
+
+<aside class="hint">
+<p>
+Write a loop which extracts each <abbr>BCD</abbr> digit
+using the bitwise operators <code>&amp;</code> and <code>&gt;&gt;</code>.
+</p></aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+<code>packed_bcd</code> should return an integer value between 0 and 99999999 inclusive.
+
+</p></li><li><p>
+You may define and call your own functions if you wish.
+
+</p></li><li><p>
+You are not permitted to call any functions from the C library.
+
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function you have been given, or
+to change <code>packed_bcd</code>'s prototype
+(its return type and argument types).
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest packed_bcd </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_packed_bcd packed_bcd.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Add 2 Arbitrary Length BCD Values</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/bcd_add/files.cp/bcd_add.c">bcd_add.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/bcd_add/files.cp/bcd_add.c bcd_add.c</kbd>
+
+</pre>
+
+
+
+
+<p>
+Your task is to add code to this function in <b>bcd_add.c</b>:
+
+
+</p><div class="highlight"><pre><span></span><span class="n">big_bcd_t</span><span class="w"> </span><span class="o">*</span><span class="nf">bcd_add</span><span class="p">(</span><span class="n">big_bcd_t</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">big_bcd_t</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// PUT YOUR CODE HERE</span>
+
+<span class="p">}</span>
+</pre></div>
+
+
+
+
+
+<p>
+Add code to the function <code>bcd_add</code> so that,
+given 2 arbitrary length <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">binary-coded decimal</a> numbers,
+it returns their sum.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./bcd_add 123456789123456789 123456789123456789</kbd>
+246913578246913578
+<kbd is="sh">./bcd_add 999999999999999999 1</kbd>
+1000000000000000000
+<kbd is="sh">./bcd_add 777777777777777777777777777777777777 888888888888888888888888888888888888</kbd>
+1666666666666666666666666666666666665
+<kbd is="sh">./bcd_add 987654321987654321987654321 98765987659876598765</kbd>
+987654420753641981864253086
+</pre>
+
+
+<aside class="hint">
+<p>
+Use <cite>realloc(3)</cite> if you need to grow an array.
+</p><p>
+You will be working with pointers to <code>struct</code>s
+with a field that is a pointer to an array.
+It would be wise to revise pointers, structs, typedefs, arrays,
+and dynamic memory allocation.
+The <a href="https://www.youtube.com/playlist?list=PLbSaCpDlfd6qHRp1RVAB1kpRJ9zoQYuwV">relevant videos in this playlist</a> may help.
+</p><p>
+You can use Python (for example)
+to check what the sum of any two integers is:
+
+</p><pre is="tty"><kbd is="sh">python3 -i</kbd>
+Python 3.7.3 (default, Apr  3 2019, 05:39:12)
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+<kbd data-prompt="&gt;&gt;&gt;">123456789123456789 + 123456789123456789</kbd>
+246913578246913578
+</pre>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You may define and call your own functions, if you wish.
+</p></li><li><p>
+You are not permitted to call any functions from the C library,
+other than <cite>malloc(3)</cite>, <cite>calloc(3)</cite> and <cite>realloc(3)</cite>.
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function,
+to change any other functions you have been given,
+to change the type <code>big_bcd_t</code>, or
+to change the return type or argument types of <code>bcd_add</code>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest bcd_add </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_bcd_add bcd_add.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>MIPS NUXI</h3></header>
+    
+
+
+
+
+
+
+
+
+
+<p>
+We have two 32 bit values  which the bytes have placed in an unknown order.
+
+</p><p>
+Fortunately we know the 4 bytes of the first value
+originally contained the ASCII values <code>"UNIX"</code>,
+and the two values were shuffled in an identical manner.
+
+</p><p>
+<abbr>e.g.</abbr> if the first value was <code>"IXUN"</code>,
+and the second value was <code>"PSMI"</code>,
+then the second value correctly ordered would be <code>"MIPS"</code>.
+
+</p><p>
+Write a MIPS program <code>nuxi.s</code> which read the two values and prints
+the second value with its bytes correctly ordered.
+
+</p><p>
+For example:
+
+</p><pre is="tty"><kbd is="sh">1521 mipsy nuxi.s</kbd>
+<kbd>1481199189
+-2023406815
+</kbd>-2023406815
+<kbd is="sh">1521 mipsy nuxi.s</kbd>
+<kbd>1431193944
+-2023406815
+</kbd>558065031
+<kbd is="sh">1521 mipsy nuxi.s</kbd>
+<kbd>1230525774
+-559038737
+</kbd>-1377898562
+<kbd is="sh">1521 mipsy nuxi.s</kbd>
+<kbd>1229871189
+305419896
+</kbd>1444033656
+</pre>
+
+<aside class="hint">
+<p>
+This challenge should not require the use of any bitwise operations.
+</p><p>
+A major part of this challenge is understanding the problem.
+You should get started by printing the signed integers above in hexadecimal,
+and try to match up the first input with the letters <code>UNIX</code> on the ASCII table,
+and see how their shuffling has effected the second input.
+</p></aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest nuxi </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_nuxi nuxi.s</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+ 
+
+
+
+
+
+
+
+    
+
+
+
+<section class="exercise challenge-exercise">
+    <header><h3><small style="font-variant: small-caps; text-transform: lowercase;">Challenge Exercise — individual:
+    </small><br/>Subtract, Multiply and Divide 2 Arbitrary Length BCD Values</h3></header>
+    
+
+
+
+
+
+
+
+
+
+
+
+<p>
+Download <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/activities/bcd_arithmetic/files.cp/bcd_arithmetic.c">bcd_arithmetic.c</a>,
+
+or copy it to your CSE account using the following command:
+
+
+</p><pre is="tty">
+<kbd is="sh">cp -n /web/cs1521/24T1/activities/bcd_arithmetic/files.cp/bcd_arithmetic.c bcd_arithmetic.c</kbd>
+
+</pre>
+
+
+
+<p>
+Add code to the functions
+<code>bcd_add</code>,
+<code>bcd_subtract</code>,
+<code>bcd_multiply</code>, and
+<code>bcd_divide</code> so that,
+given two arbitrary-length <a href="https://en.wikipedia.org/wiki/Binary-coded_decimal">binary-coded decimal</a> (<abbr>BCD</abbr>) numbers,
+they return the result of
+the corresponding arithmetic operation.
+For example:
+
+</p><pre is="tty"><kbd is="sh">./bcd_arithmetic 1123456789123456789 - 1123456789123456788</kbd>
+1
+<kbd is="sh">./bcd_arithmetic 123456789123456789 '*' 123456789123456789</kbd>
+15241578780673678515622620750190521
+<kbd is="sh">./bcd_arithmetic 15241578780673678515622620750190521 / 123456789123456789</kbd>
+123456789123456789
+<kbd is="sh">./bcd_arithmetic 123456789 '*' 987654321 +  987654321 / 1234</kbd>
+121932631113435637
+<kbd is="sh">./bcd_arithmetic 14 / 5</kbd>
+2
+</pre>
+
+<aside class="hint">
+<p>
+The code you are given already handles '+', '-', '*', and '/',
+and calls
+<code>bcd_add</code>,
+<code>bcd_subtract</code>,
+<code>bcd_multiply</code>, and
+<code>bcd_divide</code> respectively.
+You don't need to understand this code to do the exercises,
+though you will find it interesting to read.
+You only need to implement the four arithmetic functions.
+
+</p><p>
+Use <cite>realloc(3)</cite> to grow an array.
+
+</p><p>
+You could use Python (for example)
+to check what the value of an expression is,
+(though you don't need to quote the <code>*</code>,
+and you need to use <code>//</code> to get integer division):
+
+</p><pre is="tty"><kbd is="sh">python3 -i</kbd>
+Python 3.7.3 (default, Apr  3 2019, 05:39:12)
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+<kbd data-prompt="&gt;&gt;&gt;">123456789 * 987654321 + 987654321 // 1234</kbd>
+121932631113435637
+</pre>
+</aside>
+
+<aside class="note">
+<ul class="list-unstyled">
+<li><p>
+You can assume the results of subtraction are non-negative.
+
+</p></li><li><p>
+You can assume that divisors will be non-zero.
+
+</p></li><li><p>
+Integer division should yield only
+the integer part of the result.
+In other words, truncate towards zero; do not round.
+
+</p></li><li><p>
+You may define and call your own functions, if you wish.
+
+</p></li><li><p>
+You are not permitted to call any functions from the C library,
+other than <cite>malloc(3)</cite>, <cite>calloc(3)</cite> and <cite>realloc(3)</cite>.
+
+</p></li><li><p>
+You are not permitted
+to change the <code>main</code> function,
+to change any other functions you have been given,
+to change the type <code>big_bcd_t</code>, or
+to change the return type or argument types of
+<code>bcd_add</code>,
+<code>bcd_subtract</code>,
+<code>bcd_multiply</code>, or
+<code>bcd_divide</code>.
+</p></li></ul>
+</aside>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<p>
+When you think your program is working,
+you can use <code>autotest</code>
+to run some simple automated tests:
+
+</p><pre is="tty" style="white-space: normal"><kbd is="sh">1521 autotest bcd_arithmetic </kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+When you are finished working on this exercise,
+
+you must
+
+submit your work by running <code>give</code>:
+
+</p><pre is="tty"><kbd is="sh">give cs1521 lab05_bcd_arithmetic bcd_arithmetic.c</kbd>
+</pre>
+
+<p>
+
+You must run <code>give</code>
+
+before <strong>Monday 25 March 12:00 (midday)</strong> (2024-03-25 12:00:00)
+to obtain the marks for this lab exercise.
+
+
+Note that this is an individual exercise,
+the work you submit with <code>give</code> must be entirely your own.
+
+
+
+
+
+
+
+    </p></section>
+
+
+
+
+
+<section class="">
+    <header><h3>Submission</h3></header>
+    
+
+
+When you are finished each exercises make sure you submit your work by running <code>give</code>.
+<p>
+You can run <code>give</code> multiple times.
+Only your last submission will be marked.
+</p><p>
+Don't submit any exercises you haven't attempted.
+</p><p>
+If you are working at home, you may find it more convenient
+to upload your work via
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/give.php">give's web interface</a>.
+</p><p>
+Remember you have until
+
+<b>Week  7 Monday   12:00:00 (midday)</b>
+
+to submit your work without receiving a late penalty.
+</p><p>
+You cannot obtain marks by e-mailing your code to tutors or lecturers.
+</p><p>
+You check the files you have submitted <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">here</a>.
+</p><p>
+Automarking will be run by the lecturer several days after the submission deadline,
+using test cases different to those <code>autotest</code> runs for you.
+(Hint: do your own testing as well as running <code>autotest</code>.)
+</p><p>
+After automarking is run by the lecturer
+you can <a href="https://cgi.cse.unsw.edu.au/~cs1521/24T1/student/">view your results here</a>.
+The resulting mark will also be available
+<a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>.
+
+</p><h4>Lab Marks</h4>
+<p>
+When all components of a lab  are automarked you should be able to view the
+the marks <a href="https://cgi.cse.unsw.edu.au/~give/Student/sturec.php">via give's web interface</a>
+or by running this command on a CSE machine:
+
+</p><pre is="tty"><kbd is="sh">1521 classrun -sturec</kbd>
+</pre>
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+
+</div>
+
+
+    
+</main>
+<footer class="mt-3 pt-3 bg-dark text-center no-print">
+    <p class="text-muted">
+        <strong>COMP1521 24T1: Computer Systems Fundamentals</strong>
+        is brought to you by <br/>
+        the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a><br/>
+        at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br/>
+        For all enquiries, please email the class account at
+        <a href="mailto:cs1521@cse.unsw.edu.au">cs1521@cse.unsw.edu.au</a><br/>
+
+        <small>CRICOS Provider 00098G</small>
+    </p>
+
+    
+</footer>
+
+
+</body></html>
